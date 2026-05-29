@@ -1,16 +1,25 @@
-## Hi there 👋
+# CodiflyTech Website
 
-<!--
-**CodiflyTech/CodiflyTech** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Professional landing page for CodiflyTech, a brand by **ARUMA PRODUCTS PRIVATE LIMITED**.
 
-Here are some ideas to get you started:
+## Features
+- **Modern UI**: Glassmorphism design with interactive SVG backgrounds.
+- **Performance**: Vanilla JS and CSS for lightning-fast load times.
+- **Forms**: Integrated with Web3Forms and Firebase Firestore.
+- **SEO Ready**: Optimized metadata, `sitemap.xml`, and `robots.txt`.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Deployment (GitHub Pages)
+
+This project is configured for deployment on GitHub Pages.
+
+### Custom Domain
+- Domain: `codiflytech.com`
+- Configuration: Managed via the `CNAME` file and GitHub repository settings.
+
+### Preparation
+1. Ensure `js/config.js` has a valid Firebase API Key.
+2. Push the code to the `main` branch.
+3. In GitHub Settings -> Pages, select the `main` branch as the source.
+
+## License
+© 2026 ARUMA PRODUCTS PRIVATE LIMITED. All rights reserved.
