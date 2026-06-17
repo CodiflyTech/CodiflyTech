@@ -836,6 +836,185 @@
       outline: 2px solid var(--color-primary);
       outline-offset: 4px;
     }
+
+    /* -------------------------------------------------------------
+       Responsiveness & Device Specific Overrides
+       ------------------------------------------------------------- */
+
+    /* Mobile & Tablet Sidebar Menu (Horizontal sticky nav scrollbar) */
+    @media (max-width: 1023px) {
+      .section-container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .sidebar-wrapper {
+        position: sticky;
+        top: 88px;
+        z-index: 40;
+        width: 100%;
+        margin-bottom: 8px;
+      }
+
+      .sidebar-menu {
+        position: relative;
+        top: 0;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 8px 16px;
+        gap: 8px;
+        border-radius: 9999px;
+        border: 1px solid var(--border-color);
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        scrollbar-width: none; /* Hide scrollbar for Firefox */
+      }
+
+      .sidebar-menu::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for Chrome/Safari */
+      }
+
+      .sidebar-header,
+      .sidebar-meta {
+        display: none; /* Hide headings and metadata in mobile sticky bar */
+      }
+
+      .sidebar-link {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        background: transparent;
+        border-radius: 9999px;
+        border: 1px solid transparent;
+      }
+
+      .sidebar-link.active {
+        border-left: none;
+        padding-left: 16px;
+        background: rgba(37, 99, 235, 0.08);
+      }
+    }
+
+    /* Small Screens (Narrow phones, iPhone SE, etc.) */
+    @media (max-width: 480px) {
+      .header-wrapper {
+        top: 12px;
+        padding: 0 12px;
+      }
+
+      .header-inner {
+        padding: 0 12px;
+        height: 48px;
+      }
+
+      .header-logo img {
+        height: 24px;
+      }
+
+      .header-actions {
+        gap: 8px;
+      }
+
+      .nav-link {
+        font-size: 0.8rem;
+      }
+
+      .btn-primary-gradient {
+        padding: 6px 14px;
+        font-size: 0.75rem;
+      }
+
+      .section-wrapper {
+        padding: 90px 0 32px 0;
+      }
+
+      .sidebar-wrapper {
+        top: 68px; /* aligns below shorter header */
+      }
+
+      .legal-card {
+        padding: 20px 16px;
+        border-radius: 1.5rem;
+      }
+
+      .legal-section-title {
+        font-size: 1.4rem;
+      }
+
+      .legal-section-title svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .legal-subsection h4 {
+        font-size: 1.1rem;
+      }
+
+      .officer-box {
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .officer-val, 
+      .officer-val-link, 
+      .officer-val-address {
+        font-size: 0.9rem;
+      }
+      
+      .officer-val-link,
+      .officer-val-address {
+        word-break: break-all;
+        overflow-wrap: break-word;
+      }
+
+      .data-table th, 
+      .data-table td {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+      }
+
+      .checklist-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+
+    /* Alignments for Mobile Footer */
+    @media (max-width: 639px) {
+      .footer-brand-col {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-logo {
+        justify-content: center;
+      }
+
+      .footer-links-col {
+        align-items: center;
+        text-align: center;
+      }
+
+      .duns-tag {
+        align-self: center;
+      }
+    }
+
+    /* Extra small screen title scaling */
+    @media (max-width: 400px) {
+      .legal-title {
+        font-size: 1.75rem;
+      }
+
+      .legal-subtitle {
+        font-size: 0.95rem;
+      }
+    }
   </style>
 </head>
 
@@ -1302,12 +1481,13 @@
     document.addEventListener('DOMContentLoaded', () => {
       const links = document.querySelectorAll('.sidebar-link');
       const sections = document.querySelectorAll('.legal-card');
+      const menu = document.querySelector('.sidebar-menu');
 
       window.addEventListener('scroll', () => {
         let current = '';
         sections.forEach(section => {
           const sectionTop = section.offsetTop;
-          if (pageYOffset >= sectionTop - 150) {
+          if (window.pageYOffset >= sectionTop - 180) {
             current = section.getAttribute('id');
           }
         });
@@ -1316,6 +1496,17 @@
           link.classList.remove('active');
           if (link.getAttribute('href') === `#${current}`) {
             link.classList.add('active');
+            
+            // Auto scroll sidebar menu horizontally on mobile/tablet devices
+            if (window.innerWidth < 1024 && menu) {
+              const linkOffset = link.offsetLeft;
+              const menuWidth = menu.offsetWidth;
+              const linkWidth = link.offsetWidth;
+              menu.scrollTo({
+                left: linkOffset - (menuWidth / 2) + (linkWidth / 2),
+                behavior: 'smooth'
+              });
+            }
           }
         });
       });
