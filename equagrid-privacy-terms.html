@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal & Compliance | EquaGrid: Math Logic</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Official Legal and Compliance documentation for EquaGrid: Math Logic mobile game. View the Privacy Policy, Terms of Service, and Google Play Data Safety declarations.">
+  <meta name="keywords" content="EquaGrid, Math Logic, Privacy Policy, Terms of Service, Terms and Conditions, Data Safety Form, CodiflyTech, ARUMA PRODUCTS PRIVATE LIMITED, GDPR, COPPA">
+  <meta name="author" content="ARUMA PRODUCTS PRIVATE LIMITED">
+  <link rel="icon" type="image/svg+xml" href="./logo/favicon.svg">
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* -------------------------------------------------------------
+       EquaGrid: Math Logic Legal Hub (Embedded Premium Stylesheet)
+       ------------------------------------------------------------- */
+    :root {
+      --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+      /* Color Palette */
+      --color-bg-base: #fafafa;
+      --color-bg-alt: #fcfcfc;
+      --color-text-main: #171717;
+      --color-text-muted: #525252;
+      --color-text-light: #737373;
+      --color-text-dark: #0a0a0a;
+
+      /* Accents */
+      --color-primary: #2563eb;
+      --color-primary-hover: #1d4ed8;
+      --color-secondary: #4f46e5;
+      --color-success: #16a34a;
+      --color-info: #0891b2;
+
+      /* Borders and Glass */
+      --border-color: rgba(229, 229, 229, 0.8);
+      --glass-bg: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+
+      /* Transitions */
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-fast: all 0.2s ease;
+    }
+
+    /* Resets & Base Styles */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg-base);
+      color: var(--color-text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Layout Containers */
+    .app-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 10;
+      width: 100%;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Interactive Background Effects */
+    .interactive-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-blob-1 {
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 600px;
+      height: 600px;
+      background-color: #bae6fd; /* sky-200 */
+      opacity: 0.15;
+      border-radius: 50%;
+      filter: blur(100px);
+      animation: float-blob-1 25s infinite alternate ease-in-out;
+    }
+
+    .bg-blob-2 {
+      position: absolute;
+      bottom: -10%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background-color: #f3e8ff; /* purple-200 */
+      opacity: 0.15;
+      border-radius: 50%;
+      filter: blur(120px);
+      animation: float-blob-2 25s infinite alternate ease-in-out;
+    }
+
+    @keyframes float-blob-1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(80px, 60px) scale(1.1); }
+    }
+
+    @keyframes float-blob-2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-80px, -60px) scale(1.1); }
+    }
+
+    .static-dot-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(17, 24, 39, 0.04) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+
+    /* Glassmorphic Header Styling */
+    .header-wrapper {
+      position: fixed;
+      top: 20px;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .header-container {
+      width: 100%;
+      max-width: 1024px;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      border-radius: 9999px;
+      padding: 2px 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 56px;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logo img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      transition: var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--color-text-dark);
+    }
+
+    .btn-primary-gradient {
+      padding: 10px 20px;
+      border-radius: 9999px;
+      background: var(--color-text-dark);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: var(--transition-smooth);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary-gradient:hover {
+      background: #000000;
+      transform: translateY(-1px);
+    }
+
+    /* Main Grid for Document Layout */
+    .section-wrapper {
+      position: relative;
+      z-index: 10;
+      padding: 120px 0 64px 0;
+      width: 100%;
+    }
+
+    .section-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    @media (min-width: 1024px) {
+      .section-container {
+        grid-template-columns: 280px 1fr;
+        padding: 0 24px;
+      }
+    }
+
+    /* Hero header spans full width on mobile, and grid column on desktop */
+    .hero-span-full {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .legal-badge {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      border: 1px solid rgba(229, 229, 229, 1);
+      background: #ffffff;
+      color: var(--color-text-muted);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .legal-badge svg {
+      width: 14px;
+      height: 14px;
+      margin-right: 6px;
+      color: var(--color-primary);
+    }
+
+    .legal-title {
+      font-size: 2.25rem;
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      color: var(--color-text-dark);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .legal-subtitle {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+
+    @media (min-width: 768px) {
+      .legal-title {
+        font-size: 3.25rem;
+      }
+    }
+
+    /* Sticky Sidebar Navigation */
+    .sidebar-wrapper {
+      position: relative;
+    }
+
+    .sidebar-menu {
+      position: sticky;
+      top: 100px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 1.5rem;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    }
+
+    .sidebar-header {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--color-text-light);
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgba(230, 230, 230, 0.8);
+      padding-bottom: 8px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      transition: var(--transition-fast);
+    }
+
+    .sidebar-link svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      transition: var(--transition-fast);
+    }
+
+    .sidebar-link:hover {
+      color: var(--color-text-dark);
+      background: rgba(240, 240, 240, 0.8);
+    }
+
+    .sidebar-link.active {
+      color: var(--color-primary);
+      background: rgba(37, 99, 235, 0.06);
+      border-left: 3px solid var(--color-primary);
+      padding-left: 11px;
+    }
+
+    .sidebar-meta {
+      margin-top: 16px;
+      border-top: 1px solid rgba(230, 230, 230, 0.8);
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .meta-item {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+      line-height: 1.4;
+    }
+
+    .meta-item strong {
+      color: var(--color-text-dark);
+    }
+
+    /* Content Cards */
+    .content-area {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .legal-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 2rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      line-height: 1.625;
+      font-weight: 500;
+    }
+
+    @media (min-width: 640px) {
+      .legal-card {
+        padding: 40px;
+        font-size: 1.05rem;
+      }
+    }
+
+    .legal-section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--color-text-dark);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .legal-section-title svg {
+      width: 28px;
+      height: 28px;
+      color: var(--color-primary);
+    }
+
+    .legal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .legal-subsection {
+      text-align: left;
+    }
+
+    .legal-subsection-border {
+      padding-top: 24px;
+      border-top: 1px solid rgba(230, 230, 230, 0.6);
+    }
+
+    .legal-subsection h4 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--color-text-dark);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .legal-subsection h5 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    .legal-subsection p {
+      margin-bottom: 16px;
+    }
+
+    .legal-subsection p:last-child {
+      margin-bottom: 0;
+    }
+
+    .legal-subsection a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition-fast);
+    }
+
+    .legal-subsection a:hover {
+      text-decoration: underline;
+      color: var(--color-primary-hover);
+    }
+
+    .legal-list-bullet {
+      list-style: disc;
+      padding-left: 24px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .legal-list-numbered {
+      list-style: decimal;
+      padding-left: 24px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .legal-strong {
+      color: var(--color-text-dark);
+      font-weight: 600;
+    }
+
+    /* Grievance Officer details box */
+    .officer-box {
+      background-color: rgba(248, 249, 250, 0.95);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      border: 1px solid rgba(230, 230, 230, 0.8);
+      margin-top: 16px;
+    }
+
+    .officer-field {
+      display: block;
+    }
+
+    .officer-label {
+      color: var(--color-text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .officer-val {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+    }
+
+    .officer-val-link {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .officer-val-link:hover {
+      text-decoration: underline;
+    }
+
+    .officer-val-address {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--color-text-main);
+      line-height: 1.45;
+    }
+
+    /* Dashboard Compliance Table (Part 3) */
+    .compliance-dashboard {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .dashboard-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--color-primary);
+      width: fit-content;
+    }
+
+    .dashboard-title-sub {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    .data-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: #ffffff;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .data-table th {
+      background-color: rgba(248, 249, 250, 0.9);
+      color: var(--color-text-dark);
+      font-weight: 700;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(230, 230, 230, 0.5);
+      color: var(--color-text-muted);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .badge-status.success {
+      background-color: rgba(22, 163, 74, 0.1);
+      color: var(--color-success);
+    }
+
+    .badge-status.warning {
+      background-color: rgba(220, 38, 38, 0.1);
+      color: var(--color-text-dark);
+      border: 1px solid rgba(220, 38, 38, 0.15);
+    }
+
+    .badge-status.neutral {
+      background-color: rgba(115, 115, 115, 0.1);
+      color: var(--color-text-light);
+    }
+
+    /* Play Console Questions Quick Cards */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .checklist-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .checklist-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .checklist-card-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--color-text-light);
+    }
+
+    .checklist-card-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-primary);
+    }
+
+    .checklist-card-desc {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-top: auto;
+    }
+
+    /* Footer Layout */
+    .footer-wrapper {
+      background-color: #171717;
+      color: #d4d4d4;
+      padding: 40px 0;
+      border-top: 1px solid #262626;
+      z-index: 10;
+      position: relative;
+      margin-top: auto;
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .footer-container {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .footer-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    @media(min-width: 640px) {
+      .footer-grid {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+    }
+
+    .footer-brand-col {
+      max-width: 480px;
+    }
+
+    .footer-logo {
+      height: 40px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-logo img {
+      height: 100%;
+      width: auto;
+    }
+
+    .footer-section-header {
+      font-size: 0.75rem;
+      color: #a3a3a3;
+      margin-bottom: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .footer-legal-text {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #a3a3a3;
+    }
+
+    .footer-legal-text span {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .footer-legal-subtext {
+      color: #737373;
+      font-size: 0.75rem;
+      margin-top: 6px;
+      display: block;
+    }
+
+    .footer-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-link-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-link-item {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #a3a3a3;
+      text-decoration: none;
+      transition: var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .footer-link-item:hover {
+      color: #ffffff;
+    }
+
+    .footer-copy-info p {
+      font-size: 0.75rem;
+      color: #737373;
+      line-height: 1.5;
+    }
+
+    .duns-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 12px;
+      align-self: start;
+    }
+
+    .duns-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #888888;
+      letter-spacing: 0.1em;
+    }
+
+    .duns-divider {
+      width: 1px;
+      height: 10px;
+      background-color: #404040;
+    }
+
+    .duns-number {
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: #ffffff;
+      letter-spacing: 0.05em;
+    }
+
+    /* Accessibility visible focus outline */
+    :focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Premium Animated Background Blobs and Dot Matrix -->
+  <div class="interactive-bg" aria-hidden="true">
+    <div class="bg-blob-1"></div>
+    <div class="bg-blob-2"></div>
+    <div class="static-dot-grid"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Header Navigation Section -->
+    <div class="header-wrapper">
+      <header class="header-container">
+        <div class="header-inner">
+          <div class="header-logo">
+            <a href="./index.html">
+              <img src="./logo/CodiflyLogo.svg" alt="CodiflyTech Logo" width="140" height="46" decoding="async">
+            </a>
+          </div>
+          <nav class="header-actions" aria-label="Top Level Navigation">
+            <a href="./index.html" class="nav-link">Home</a>
+            <a href="./index.html#contact" class="btn-primary-gradient">Contact Us</a>
+          </nav>
+        </div>
+      </header>
+    </div>
+
+    <!-- Main Content Grid -->
+    <main class="main-content">
+      <section class="section-wrapper">
+        <div class="section-container">
+
+          <!-- Main Top Header -->
+          <div class="hero-span-full">
+            <div class="legal-badge">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span>Legal & Compliance Hub</span>
+            </div>
+            <h1 class="legal-title">EquaGrid: Math Logic</h1>
+            <p class="legal-subtitle">Full App Disclosures, Terms of Service, and Store Compliance Data</p>
+          </div>
+
+          <!-- Sticky Sidebar Navigation Grid -->
+          <aside class="sidebar-wrapper">
+            <nav class="sidebar-menu" aria-label="Legal Directory">
+              <h3 class="sidebar-header">Sections</h3>
+              <a href="#privacy-policy" class="sidebar-link active" id="link-privacy">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+                <span>1. Privacy Policy</span>
+              </a>
+              <a href="#terms-of-service" class="sidebar-link" id="link-terms">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+                <span>2. Terms of Service</span>
+              </a>
+              <a href="#data-safety" class="sidebar-link" id="link-safety">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                </svg>
+                <span>3. Data Safety Form</span>
+              </a>
+
+              <div class="sidebar-meta">
+                <div class="meta-item">Developer: <strong>ARUMA PRODUCTS PRIVATE LIMITED</strong></div>
+                <div class="meta-item">App Version: <strong>1.0.0</strong></div>
+                <div class="meta-item">Effective Date: <strong>June 2026</strong></div>
+              </div>
+            </nav>
+          </aside>
+
+          <!-- Document Content Area -->
+          <div class="content-area">
+
+            <!-- PART 1: PRIVACY POLICY -->
+            <section id="privacy-policy" class="legal-card" aria-labelledby="privacy-heading">
+              <h2 id="privacy-heading" class="legal-section-title">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+                <span>Part 1: Privacy Policy</span>
+              </h2>
+
+              <div class="legal-body">
+                <div class="legal-subsection">
+                  <p class="legal-effective-date"><strong>Effective Date:</strong> June 2026</p>
+                  <p>
+                    <span class="legal-strong">ARUMA PRODUCTS PRIVATE LIMITED</span> ("we," "us," or "our") operates the 
+                    <span class="legal-strong">EquaGrid: Math Logic</span> mobile application (the "Service"). This page informs you of our 
+                    policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you 
+                    have associated with that data.
+                  </p>
+                  <p>
+                    We are dedicated to safeguarding your privacy and ensuring your data safety. This document outlines how we comply with 
+                    Google Play's Developer Policies, the General Data Protection Regulation (GDPR), the Children's Online Privacy Protection 
+                    Act (COPPA), and the Digital Personal Data Protection (DPDP) Act of India.
+                  </p>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>1. Introduction</h4>
+                  <p>
+                    We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose information 
+                    when you use the EquaGrid: Math Logic application. By downloading or playing the game, you acknowledge and agree to 
+                    the practices described in this policy.
+                  </p>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>2. Data Collection</h4>
+                  <p>
+                    To support game mechanics, resolve crashes, and serve advertisements, we collect and process specific classes of information:
+                  </p>
+                  <ul class="legal-list-bullet">
+                    <li>
+                      <span class="legal-strong">Automatically Collected Data:</span> Through integrated third-party SDKs (such as AdMob and Firebase Analytics), 
+                      we may automatically collect your Advertising ID (GAID), IP address, and technical device metadata.
+                    </li>
+                    <li>
+                      <span class="legal-strong">Game Progress:</span> We store level progress, star ratings, mistakes count, and virtual currency balances 
+                      (coins/hints) locally on your device (via Room database) and via encrypted cloud backups.
+                    </li>
+                    <li>
+                      <span class="legal-strong">Financial Data:</span> Purchase history and transaction tokens for In-App Purchases are processed 
+                      securely via Google Play Billing. We do not store or collect credit card numbers or other payment methods.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>3. Third-Party Services</h4>
+                  <p>
+                    The Service integrates third-party tools that may collect personal information used to identify you. These services process 
+                    your data according to their respective privacy policies:
+                  </p>
+                  <ul class="legal-list-bullet">
+                    <li>
+                      <span class="legal-strong"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Play Services</a>:</span> 
+                      Facilitates achievements, leaderboards, and cloud backup synchronization.
+                    </li>
+                    <li>
+                      <span class="legal-strong"><a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener noreferrer">Google Ad Manager / AdMob</a>:</span> 
+                      Delivers banner, interstitial, and rewarded video advertisements.
+                    </li>
+                    <li>
+                      <span class="legal-strong"><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer">Firebase Analytics</a>:</span> 
+                      Tracks general application stability, usage patterns, and diagnostic logs.
+                    </li>
+                    <li>
+                      <span class="legal-strong"><a href="https://support.google.com/googleplay/android-developer/answer/10787469" target="_blank" rel="noopener noreferrer">Google Play Billing</a>:</span> 
+                      Manages transactions and restores user entitlements securely.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>4. Children’s Privacy</h4>
+                  <p>
+                    This game is intended for a general audience. We do not knowingly collect personal information from children under 13. 
+                    If you are a parent or guardian and believe your child has provided us with personal data, please contact us immediately. 
+                    If we discover that we have inadvertently collected data from a child under 13 without verified parental consent, we will take 
+                    immediate steps to delete that information from our active databases.
+                  </p>
+                  <p>
+                    In addition, if the game's targeting audience is configured to include children, we conform to the Google Play Families Policies 
+                    by using Families Self-Certified Ads SDK settings and applying the appropriate tag for child-directed treatment to prevent 
+                    unauthorized tracking.
+                  </p>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>5. Data Deletion & Rights</h4>
+                  <p>
+                    You have the right to request access to, correction of, or the permanent deletion of your personal data.
+                  </p>
+                  <p>
+                    Users may request the deletion of their accounts and associated play data by contacting us directly at our support email 
+                    address below. Upon verified request, we will purge all data from our active databases and inform integrated processors to do the same.
+                  </p>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>6. Indian DPDP Act Compliance & Grievance Redressal</h4>
+                  <p>
+                    Pursuant to the Digital Personal Data Protection (DPDP) Act of India, ARUMA PRODUCTS PRIVATE LIMITED acts as the Data Fiduciary 
+                    for Indian users. We have designated a Grievance Officer to address questions, consent withdrawals, and complaints:
+                  </p>
+
+                  <div class="officer-box">
+                    <div class="officer-field">
+                      <span class="officer-label">Name</span>
+                      <span class="officer-val">Lakhyajit Hazarika</span>
+                    </div>
+                    <div class="officer-field">
+                      <span class="officer-label">Designation</span>
+                      <span class="officer-val">Founder, Director & Grievance Officer</span>
+                    </div>
+                    <div class="officer-field">
+                      <span class="officer-label">Email</span>
+                      <a href="mailto:support@codiflytech.com" class="officer-val-link">support@codiflytech.com</a>
+                    </div>
+                    <div class="officer-field">
+                      <span class="officer-label">Registered Office Address</span>
+                      <span class="officer-val-address">
+                        C/O Ashok Kr Borah, 062, Jelehua, Ahatguri, Glt, Golaghat, Assam, 785614, India
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>7. Contact Us</h4>
+                  <p>
+                    For questions regarding this policy or to request data erasure:
+                  </p>
+                  <ul class="legal-list-bullet">
+                    <li>By email: <a href="mailto:support@codiflytech.com">support@codiflytech.com</a></li>
+                    <li>By visiting our support contact forms: <a href="./index.html#contact" target="_blank">codiflytech.com#contact</a></li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- PART 2: TERMS AND CONDITIONS -->
+            <section id="terms-of-service" class="legal-card" aria-labelledby="terms-heading">
+              <h2 id="terms-heading" class="legal-section-title">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+                <span>Part 2: Terms and Conditions (Terms of Service)</span>
+              </h2>
+
+              <div class="legal-body">
+                <div class="legal-subsection">
+                  <p class="legal-effective-date"><strong>Effective Date:</strong> June 2026</p>
+                  <p>
+                    Please read these Terms and Conditions ("Terms", "Terms of Service") carefully before downloading or using 
+                    the EquaGrid: Math Logic mobile application operated by ARUMA PRODUCTS PRIVATE LIMITED.
+                  </p>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>1. Acceptance of Terms</h4>
+                  <p>
+                    By downloading, installing, or using the application, you agree to be bound by these Terms. If you do not agree 
+                    to these Terms, you must immediately delete the application and cease all access to the Service.
+                  </p>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>2. License</h4>
+                  <p>
+                    We grant you a personal, non-exclusive, non-transferable, revocable license to download and play the app on compatible 
+                    devices solely for your personal, non-commercial entertainment purposes. You agree not to reverse-engineer, modify, or 
+                    redistribute the app binary.
+                  </p>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>3. Virtual Items (Coins & Hints)</h4>
+                  <p>
+                    The game features virtual items including "Coins" and "Hints" that can be earned in-game or purchased.
+                  </p>
+                  <ul class="legal-list-bullet">
+                    <li>Virtual items are licensed to you under a limited right and have no real-world monetary value.</li>
+                    <li>They cannot be sold, transferred, or exchanged for real-world currency or cash.</li>
+                    <li>Virtual items are non-refundable and all allocations are final.</li>
+                    <li>We reserve the absolute right to manage, modify, or delete virtual items at our sole discretion without notice or liability.</li>
+                  </ul>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>4. In-App Purchases (IAP)</h4>
+                  <p>
+                    Purchases of virtual items or "Remove Ads" options are processed securely via Google Play Billing. You are responsible 
+                    for all fees, internet connection rates, and taxes incurred through your Google Account. All sales are final, and refunds 
+                    will be governed by Google Play’s official refund policy.
+                  </p>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>5. Advertisements</h4>
+                  <p>
+                    The application displays advertisements supplied by third-party ad networks (AdMob/AdManager). By using the application, 
+                    you consent to the displaying of these ads. Users may opt to disable interstitial and banner ads via a one-time In-App 
+                    Purchase of our "Remove Ads" package.
+                  </p>
+                </div>
+
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>6. Limitation of Liability</h4>
+                  <p>
+                    The application is provided on an "As Is" and "As Available" basis without warranties of any kind. 
+                    <span class="legal-strong">ARUMA PRODUCTS PRIVATE LIMITED</span> and its directors, employees, or partners shall not be 
+                    liable for any direct, indirect, incidental, or consequential damages resulting from the downloading, using, or inability 
+                    to use the application, including data loss or device malfunction.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- PART 3: DATA SAFETY FORM ANSWERS -->
+            <section id="data-safety" class="legal-card" aria-labelledby="safety-heading">
+              <h2 id="safety-heading" class="legal-section-title">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                </svg>
+                <span>Part 3: Data Safety Form Answers</span>
+              </h2>
+
+              <div class="legal-body compliance-dashboard">
+                <div class="legal-subsection">
+                  <p>
+                    Developers submitting apps to the Google Play Store must fill out the Data Safety section. Below are the exact answers 
+                    derived from our app's dependencies and source code. Use these options when completing the questionnaire in the 
+                    Google Play Console:
+                  </p>
+                </div>
+
+                <div class="legal-subsection">
+                  <div class="dashboard-badge">Console Settings</div>
+                  <h5 class="dashboard-title-sub">Section: Data collection and security</h5>
+                  
+                  <div class="checklist-grid">
+                    <div class="checklist-card">
+                      <span class="checklist-card-label">App Collects Data?</span>
+                      <span class="checklist-card-value">Yes</span>
+                      <span class="checklist-card-desc">We gather usage metadata & IDs.</span>
+                    </div>
+                    <div class="checklist-card">
+                      <span class="checklist-card-label">Encrypted in Transit?</span>
+                      <span class="checklist-card-value">Yes</span>
+                      <span class="checklist-card-desc">All connections use HTTPS protocols.</span>
+                    </div>
+                    <div class="checklist-card">
+                      <span class="checklist-card-label">Deletion Request?</span>
+                      <span class="checklist-card-value">Yes</span>
+                      <span class="checklist-card-desc">Users can request data deletion.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="legal-subsection">
+                  <div class="dashboard-badge">Data Mapping</div>
+                  <h5 class="dashboard-title-sub">Section: Data Types Declarations</h5>
+                  
+                  <div class="data-table-wrapper">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>Category</th>
+                          <th>Data Type</th>
+                          <th>Collected</th>
+                          <th>Shared</th>
+                          <th>Primary Purpose</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="legal-strong">Financial Info</td>
+                          <td>Purchase History</td>
+                          <td><span class="badge-status success">Yes</span></td>
+                          <td><span class="badge-status neutral">No</span></td>
+                          <td>App Functionality (Restoring purchases)</td>
+                        </tr>
+                        <tr>
+                          <td class="legal-strong">App Activity</td>
+                          <td>Other Actions (Clicks)</td>
+                          <td><span class="badge-status success">Yes</span></td>
+                          <td><span class="badge-status warning">Yes</span></td>
+                          <td>Analytics & Game Balancing</td>
+                        </tr>
+                        <tr>
+                          <td class="legal-strong">App Info</td>
+                          <td>Crash logs & Diagnostics</td>
+                          <td><span class="badge-status success">Yes</span></td>
+                          <td><span class="badge-status warning">Yes</span></td>
+                          <td>Analytics & App Stability</td>
+                        </tr>
+                        <tr>
+                          <td class="legal-strong">Device IDs</td>
+                          <td>Device or other IDs</td>
+                          <td><span class="badge-status success">Yes</span></td>
+                          <td><span class="badge-status warning">Yes</span></td>
+                          <td>Advertising & Analytics (GAID)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="legal-subsection">
+                  <div class="dashboard-badge">Processing Details</div>
+                  <h5 class="dashboard-title-sub">Section: Data Usage Settings (For all data types)</h5>
+                  <ul class="legal-list-bullet">
+                    <li><span class="legal-strong">Is this data processed ephemerally?</span> No, progress and tokens are saved locally and stored on backend database.</li>
+                    <li><span class="legal-strong">Is this data required or optional?</span> Required (The app requires data processing to facilitate saving levels, delivering ads, and restoring purchase history).</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer-wrapper">
+      <div class="footer-container">
+        <div class="footer-grid">
+
+          <!-- Brand Column -->
+          <div class="footer-brand-col">
+            <div class="footer-logo">
+              <img src="./logo/CodiflyLogoWhite.svg" alt="CodiflyTech Logo White" width="140" height="46" loading="lazy" decoding="async">
+            </div>
+            <div class="footer-brand-details">
+              <h4 class="footer-section-header">Legal Entity</h4>
+              <p class="footer-legal-text">
+                CodiflyTech is a brand owned and operated by <span>ARUMA PRODUCTS PRIVATE LIMITED</span>.
+                <br>
+                <span class="footer-legal-subtext">Registered Address: C/O Ashok Kr Borah, 062, Jelehua, Ahatguri, Glt, Golaghat, Assam, 785614, India.</span>
+              </p>
+              <div class="duns-tag">
+                <span class="duns-label">D-U-N-S</span>
+                <span class="duns-divider"></span>
+                <span class="duns-number">767608046</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Links Column -->
+          <div class="footer-links-col">
+            <div class="footer-link-group">
+              <h4 class="footer-section-header">Company</h4>
+              <a href="./index.html#contact" class="footer-link-item">Contact Us</a>
+              <a href="./privacy.html" class="footer-link-item">Privacy Policy</a>
+              <a href="./terms.html" class="footer-link-item">Terms of Service</a>
+              <a href="./deletion-request.html" class="footer-link-item">Data Deletion</a>
+            </div>
+            <div class="footer-copy-info" style="margin-top: 16px;">
+              <p>© 2026 ARUMA PRODUCTS PRIVATE LIMITED. All rights reserved.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Client-side navigation helper for active links highlight -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('.sidebar-link');
+      const sections = document.querySelectorAll('.legal-card');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          if (pageYOffset >= sectionTop - 150) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        links.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
