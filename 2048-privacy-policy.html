@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy & Data Safety Policy | 2048 Match the Number</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Read the Privacy Policy and Data Safety disclosures for the mobile app '2048 Match the Number' by CodiflyTech. Learn about our local-only data practices.">
+  <meta name="keywords" content="2048 Match the Number, Privacy Policy, Data Safety, CodiflyTech, COPPA, Data Rights, Local Storage">
+  <meta name="author" content="ARUMA PRODUCTS PRIVATE LIMITED">
+  <link rel="icon" type="image/svg+xml" href="./logo/favicon.svg">
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* -------------------------------------------------------------
+       2048 Match the Number Legal Hub (Warm Premium Stylesheet)
+       ------------------------------------------------------------- */
+    :root {
+      --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+      /* Warm 2048 Theme Color Palette */
+      --color-bg-base: #faf8f5;
+      --color-bg-alt: #fdfbf7;
+      --color-text-main: #242220;
+      --color-text-muted: #57534e;
+      --color-text-light: #78716c;
+      --color-text-dark: #1c1917;
+
+      /* Game-themed Accents (Sunset Gold & Orange) */
+      --color-primary: #ea580c; /* Orange-600 (classic tile merging accent) */
+      --color-primary-hover: #c2410c; /* Orange-700 */
+      --color-secondary: #eab308; /* Yellow-500 (gold tile accent) */
+      --color-secondary-hover: #ca8a04; /* Yellow-600 */
+      --color-success: #16a34a;
+      --color-info: #d97706; /* Amber-600 */
+
+      /* Borders and Glassmorphism */
+      --border-color: rgba(231, 229, 228, 0.8);
+      --glass-bg: rgba(255, 253, 250, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.6);
+      --glass-shadow: 0 12px 40px rgba(120, 113, 108, 0.04);
+
+      /* Transitions */
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-fast: all 0.2s ease;
+    }
+
+    /* Resets & Base Styles */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg-base);
+      color: var(--color-text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Layout Containers */
+    .app-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 10;
+      width: 100%;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Interactive Background Effects */
+    .interactive-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-blob-1 {
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 600px;
+      height: 600px;
+      background-color: #fed7aa; /* orange-200 */
+      opacity: 0.18;
+      border-radius: 50%;
+      filter: blur(100px);
+      animation: float-blob-1 25s infinite alternate ease-in-out;
+    }
+
+    .bg-blob-2 {
+      position: absolute;
+      bottom: -10%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background-color: #fef08a; /* yellow-200 */
+      opacity: 0.18;
+      border-radius: 50%;
+      filter: blur(120px);
+      animation: float-blob-2 25s infinite alternate ease-in-out;
+    }
+
+    @keyframes float-blob-1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(80px, 60px) scale(1.1); }
+    }
+
+    @keyframes float-blob-2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-80px, -60px) scale(1.1); }
+    }
+
+    .static-dot-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(120, 113, 108, 0.05) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+
+    /* Glassmorphic Header Styling */
+    .header-wrapper {
+      position: fixed;
+      top: 20px;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .header-container {
+      width: 100%;
+      max-width: 1024px;
+      background: rgba(255, 253, 250, 0.45);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 10px 30px rgba(120, 113, 108, 0.04);
+      border-radius: 9999px;
+      padding: 2px 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 56px;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logo img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      transition: var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--color-text-dark);
+    }
+
+    .btn-primary-gradient {
+      padding: 10px 20px;
+      border-radius: 9999px;
+      background: var(--color-text-dark);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: var(--transition-smooth);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary-gradient:hover {
+      background: #000000;
+      transform: translateY(-1px);
+    }
+
+    /* Main Grid for Document Layout */
+    .section-wrapper {
+      position: relative;
+      z-index: 10;
+      padding: 120px 0 64px 0;
+      width: 100%;
+    }
+
+    .section-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    @media (min-width: 1024px) {
+      .section-container {
+        grid-template-columns: 280px 1fr;
+        padding: 0 24px;
+      }
+    }
+
+    /* Hero header spans full width on mobile, and grid column on desktop */
+    .hero-span-full {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .legal-badge {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--color-text-muted);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .legal-badge svg {
+      width: 14px;
+      height: 14px;
+      margin-right: 6px;
+      color: var(--color-primary);
+    }
+
+    .legal-title {
+      font-size: 2.25rem;
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      color: var(--color-text-dark);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .legal-subtitle {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+
+    /* Sticky Sidebar Navigation */
+    .sidebar-wrapper {
+      position: relative;
+    }
+
+    .sidebar-menu {
+      position: sticky;
+      top: 100px;
+      background: rgba(255, 253, 250, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 1.5rem;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(120, 113, 108, 0.02);
+    }
+
+    .sidebar-header {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--color-text-light);
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgba(231, 229, 228, 0.8);
+      padding-bottom: 8px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      transition: var(--transition-fast);
+    }
+
+    .sidebar-link svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      transition: var(--transition-fast);
+    }
+
+    .sidebar-link:hover {
+      color: var(--color-text-dark);
+      background: rgba(245, 243, 240, 0.8);
+    }
+
+    .sidebar-link.active {
+      color: var(--color-primary);
+      background: rgba(234, 88, 12, 0.06);
+      border-left: 3px solid var(--color-primary);
+      padding-left: 11px;
+    }
+
+    .sidebar-meta {
+      margin-top: 16px;
+      border-top: 1px solid rgba(231, 229, 228, 0.8);
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .meta-item {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+      line-height: 1.4;
+    }
+
+    .meta-item strong {
+      color: var(--color-text-muted);
+    }
+
+    /* Content Cards */
+    .content-area {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .legal-card {
+      background: rgba(255, 253, 250, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 2rem;
+      box-shadow: 0 20px 50px rgba(120, 113, 108, 0.03);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      line-height: 1.625;
+      font-weight: 500;
+    }
+
+    @media (min-width: 640px) {
+      .legal-card {
+        padding: 40px;
+        font-size: 1.05rem;
+      }
+    }
+
+    .legal-section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--color-text-dark);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .legal-section-title svg {
+      width: 28px;
+      height: 28px;
+      color: var(--color-primary);
+    }
+
+    .legal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .legal-subsection {
+      text-align: left;
+    }
+
+    .legal-subsection-border {
+      padding-top: 24px;
+      border-top: 1px solid rgba(231, 229, 228, 0.6);
+    }
+
+    .legal-subsection h4 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--color-text-dark);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .legal-subsection h5 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    .legal-subsection p {
+      margin-bottom: 16px;
+    }
+
+    .legal-subsection p:last-child {
+      margin-bottom: 0;
+    }
+
+    .legal-subsection a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition-fast);
+    }
+
+    .legal-subsection a:hover {
+      text-decoration: underline;
+      color: var(--color-primary-hover);
+    }
+
+    .legal-list-bullet {
+      list-style: disc;
+      padding-left: 24px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .legal-list-numbered {
+      list-style: decimal;
+      padding-left: 24px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .legal-strong {
+      color: var(--color-text-dark);
+      font-weight: 600;
+    }
+
+    /* Compliance Dashboard Elements */
+    .compliance-dashboard {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .dashboard-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: rgba(234, 88, 12, 0.08);
+      color: var(--color-primary);
+      width: fit-content;
+    }
+
+    .dashboard-title-sub {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    .data-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: #ffffff;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .data-table th {
+      background-color: rgba(250, 248, 245, 0.95);
+      color: var(--color-text-dark);
+      font-weight: 700;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(231, 229, 228, 0.5);
+      color: var(--color-text-muted);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .badge-status.success {
+      background-color: rgba(22, 163, 74, 0.1);
+      color: var(--color-success);
+    }
+
+    .badge-status.warning {
+      background-color: rgba(234, 88, 12, 0.1);
+      color: var(--color-primary);
+      border: 1px solid rgba(234, 88, 12, 0.15);
+    }
+
+    .badge-status.neutral {
+      background-color: rgba(120, 113, 108, 0.1);
+      color: var(--color-text-light);
+    }
+
+    /* Play Console Questions Quick Cards */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .checklist-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .checklist-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 2px 10px rgba(120, 113, 108, 0.01);
+    }
+
+    .checklist-card-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--color-text-light);
+    }
+
+    .checklist-card-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-primary);
+    }
+
+    .checklist-card-desc {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-top: auto;
+    }
+
+    /* Footer Layout */
+    .footer-wrapper {
+      position: relative;
+      z-index: 10;
+      background: #1c1917; /* stone-900 */
+      color: #eae8e6;
+      padding: 64px 0;
+      width: 100%;
+      border-top: 1px solid #2e2a27;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-logo img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .footer-section-header {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #a8a29e;
+      margin-bottom: 8px;
+    }
+
+    .footer-legal-text {
+      font-size: 0.9rem;
+      color: #d6d3d1;
+      line-height: 1.6;
+    }
+
+    .footer-legal-text span {
+      display: block;
+      margin-top: 4px;
+    }
+
+    .footer-legal-subtext {
+      font-size: 0.8rem;
+      color: #a8a29e;
+    }
+
+    .footer-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer-link-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-link-item {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #d6d3d1;
+      transition: var(--transition-fast);
+      width: fit-content;
+    }
+
+    .footer-link-item:hover {
+      color: #ffffff;
+      transform: translateX(2px);
+    }
+
+    .footer-copy-info p {
+      font-size: 0.8rem;
+      color: #78716c;
+      line-height: 1.4;
+    }
+
+    .duns-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 12px;
+      align-self: start;
+    }
+
+    .duns-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #a8a29e;
+      letter-spacing: 0.1em;
+    }
+
+    .duns-divider {
+      width: 1px;
+      height: 10px;
+      background-color: #44403c;
+    }
+
+    .duns-number {
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: #ffffff;
+      letter-spacing: 0.05em;
+    }
+
+    /* Accessibility visible focus outline */
+    :focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 4px;
+    }
+
+    /* -------------------------------------------------------------
+       Responsiveness & Device Specific Overrides
+       ------------------------------------------------------------- */
+
+    /* Mobile & Tablet Sidebar Menu (Horizontal sticky nav scrollbar) */
+    @media (max-width: 1023px) {
+      .section-container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .sidebar-wrapper {
+        position: sticky;
+        top: 88px;
+        z-index: 40;
+        width: 100%;
+        margin-bottom: 8px;
+      }
+
+      .sidebar-menu {
+        position: relative;
+        top: 0;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 8px 16px;
+        gap: 8px;
+        border-radius: 9999px;
+        border: 1px solid var(--border-color);
+        background: rgba(255, 253, 250, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 8px 30px rgba(120, 113, 108, 0.04);
+        scrollbar-width: none; /* Hide scrollbar for Firefox */
+      }
+
+      .sidebar-menu::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for Chrome/Safari */
+      }
+
+      .sidebar-header,
+      .sidebar-meta {
+        display: none; /* Hide headings and metadata in mobile sticky bar */
+      }
+
+      .sidebar-link {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        background: transparent;
+        border-radius: 9999px;
+        border: 1px solid transparent;
+      }
+
+      .sidebar-link.active {
+        border-left: none;
+        padding-left: 16px;
+        background: rgba(234, 88, 12, 0.08);
+      }
+    }
+
+    /* Small Screens (Narrow phones, iPhone SE, etc.) */
+    @media (max-width: 480px) {
+      .header-wrapper {
+        top: 12px;
+        padding: 0 12px;
+      }
+
+      .header-inner {
+        padding: 0 12px;
+        height: 48px;
+      }
+
+      .header-logo img {
+        height: 24px;
+      }
+
+      .header-actions {
+        gap: 8px;
+      }
+
+      .nav-link {
+        font-size: 0.8rem;
+      }
+
+      .btn-primary-gradient {
+        padding: 6px 14px;
+        font-size: 0.75rem;
+      }
+
+      .section-wrapper {
+        padding: 90px 0 32px 0;
+      }
+
+      .sidebar-wrapper {
+        top: 68px; /* aligns below shorter header */
+      }
+
+      .legal-card {
+        padding: 20px 16px;
+        border-radius: 1.5rem;
+      }
+
+      .legal-section-title {
+        font-size: 1.4rem;
+      }
+
+      .legal-section-title svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .legal-subsection h4 {
+        font-size: 1.15rem;
+      }
+
+      .data-table th,
+      .data-table td {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+      }
+
+      .checklist-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Premium Animated Background Blobs and Dot Matrix -->
+  <div class="interactive-bg" aria-hidden="true">
+    <div class="bg-blob-1"></div>
+    <div class="bg-blob-2"></div>
+    <div class="static-dot-grid"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Header Navigation Section -->
+    <div class="header-wrapper">
+      <header class="header-container">
+        <div class="header-inner">
+          <div class="header-logo">
+            <a href="./index.html">
+              <img src="./logo/CodiflyLogo.svg" alt="CodiflyTech Logo" width="140" height="46" decoding="async">
+            </a>
+          </div>
+          <nav class="header-actions" aria-label="Top Level Navigation">
+            <a href="./index.html" class="nav-link">Home</a>
+            <a href="./index.html#contact" class="btn-primary-gradient">Contact Us</a>
+          </nav>
+        </div>
+      </header>
+    </div>
+
+    <!-- Main Content Grid -->
+    <main class="main-content">
+      <section class="section-wrapper">
+        <div class="section-container">
+
+          <!-- Main Top Header -->
+          <div class="hero-span-full">
+            <div class="legal-badge">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+              </svg>
+              <span>Legal & Store Compliance</span>
+            </div>
+            <h1 class="legal-title">2048 Match the Number</h1>
+            <p class="legal-subtitle">Privacy Policy & Google Play Data Safety Disclosures</p>
+          </div>
+
+          <!-- Sticky Sidebar Navigation Grid -->
+          <aside class="sidebar-wrapper">
+            <nav class="sidebar-menu" aria-label="Legal Directory">
+              <h3 class="sidebar-header">Sections</h3>
+              <a href="#data-safety" class="sidebar-link active" id="link-safety">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39 0.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                </svg>
+                <span>1. Data Safety Form</span>
+              </a>
+              <a href="#privacy-policy" class="sidebar-link" id="link-privacy">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+                <span>2. Privacy Policy</span>
+              </a>
+
+              <div class="sidebar-meta">
+                <div class="meta-item">Developer: <strong>CodiflyTech</strong></div>
+                <div class="meta-item">App: <strong>2048 Match the Number</strong></div>
+                <div class="meta-item">Last Updated: <strong>July 2026</strong></div>
+              </div>
+            </nav>
+          </aside>
+
+          <!-- Document Content Area -->
+          <div class="content-area">
+
+            <!-- PART 1: GOOGLE PLAY STORE DATA SAFETY FORM -->
+            <section id="data-safety" class="legal-card" aria-labelledby="safety-heading">
+              <h2 id="safety-heading" class="legal-section-title">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39 0.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                </svg>
+                <span>Part 1: Quick Data Safety Summary</span>
+              </h2>
+
+              <div class="legal-body">
+                <div class="legal-subsection">
+                  <p>
+                    This section mirrors the information shown on the Google Play Store to provide full transparency regarding data collection, sharing, and security in <strong>2048 Match the Number</strong>.
+                  </p>
+
+                  <div class="dashboard-badge">Google Play Declarations</div>
+                  <h5 class="dashboard-title-sub">Section: App Data Privacy Parameters</h5>
+
+                  <div class="checklist-grid">
+                    <div class="checklist-card">
+                      <span class="checklist-card-label">Data Collection</span>
+                      <span class="checklist-card-value" style="color: var(--color-success)">No</span>
+                      <span class="checklist-card-desc">This app does not collect any user data.</span>
+                    </div>
+                    <div class="checklist-card">
+                      <span class="checklist-card-label">Data Sharing</span>
+                      <span class="checklist-card-value" style="color: var(--color-success)">No</span>
+                      <span class="checklist-card-desc">No data is shared with third parties.</span>
+                    </div>
+                    <div class="checklist-card">
+                      <span class="checklist-card-label">Data in Transit</span>
+                      <span class="checklist-card-value" style="color: var(--color-text-light)">N/A</span>
+                      <span class="checklist-card-desc">No data is transmitted from the device.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="legal-subsection">
+                  <div class="dashboard-badge">Full Form Table</div>
+                  <h5 class="dashboard-title-sub">Data Safety Detail Map</h5>
+
+                  <div class="data-table-wrapper">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>Question</th>
+                          <th>Answer</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="legal-strong">Data Collection</td>
+                          <td><span class="badge-status success">No</span> – This app does not collect any user data.</td>
+                        </tr>
+                        <tr>
+                          <td class="legal-strong">Data Sharing</td>
+                          <td><span class="badge-status success">No</span> – No data is shared with third parties.</td>
+                        </tr>
+                        <tr>
+                          <td class="legal-strong">Data in Transit</td>
+                          <td><span class="badge-status neutral">N/A</span> – No data is transmitted from the device.</td>
+                        </tr>
+                        <tr>
+                          <td class="legal-strong">Data Deletion</td>
+                          <td><span class="badge-status warning">Yes</span> – Users can delete all game data within the app settings.</td>
+                        </tr>
+                        <tr>
+                          <td class="legal-strong">Account Creation</td>
+                          <td><span class="badge-status success">No</span> – No account is required to use this app.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- PART 2: COMPREHENSIVE PRIVACY POLICY -->
+            <section id="privacy-policy" class="legal-card" aria-labelledby="privacy-heading">
+              <h2 id="privacy-heading" class="legal-section-title">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+                <span>Part 2: Comprehensive Privacy Policy</span>
+              </h2>
+
+              <div class="legal-body">
+
+                <!-- 1. Introduction -->
+                <div class="legal-subsection">
+                  <h4>Introduction</h4>
+                  <p>
+                    At <strong>2048 Match the Number</strong>, we believe that your privacy is a priority. This Privacy Policy describes how we handle information in our mobile application. Our app is designed to be a "local-only" experience, meaning your data stays where it belongs: on your device.
+                  </p>
+                </div>
+
+                <!-- 2. Information Collection and Use -->
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>Information Collection and Use</h4>
+                  <p>
+                    We do not collect, store, or transmit any personally identifiable information (PII).
+                  </p>
+                  <ul class="legal-list-bullet">
+                    <li>
+                      <span class="legal-strong">No Personal Info:</span> We do not ask for or collect names, emails, addresses, or phone numbers.
+                    </li>
+                    <li>
+                      <span class="legal-strong">No Tracking:</span> We do not use advertising IDs, analytics IDs, or any tracking SDKs.
+                    </li>
+                    <li>
+                      <span class="legal-strong">No Media Access:</span> We do not access your photos, files, camera, or microphone.
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- 3. Local Data Storage -->
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>Local Data Storage</h4>
+                  <p>
+                    To provide core gameplay features, the app stores small amounts of data locally on your device using Android DataStore. This includes:
+                  </p>
+                  <ul class="legal-list-bullet">
+                    <li>
+                      <span class="legal-strong">Game State:</span> Your current tile positions so you can resume your game.
+                    </li>
+                    <li>
+                      <span class="legal-strong">High Scores:</span> Your personal best scores and "Best Tile" statistics.
+                    </li>
+                    <li>
+                      <span class="legal-strong">User Preferences:</span> Your choice regarding haptic feedback (vibration).
+                    </li>
+                  </ul>
+                  <p>
+                    <span class="legal-strong">Note:</span> This data is never uploaded to a server. If you clear the app cache or uninstall the app, this data is permanently removed.
+                  </p>
+                </div>
+
+                <!-- 4. App Permissions -->
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>App Permissions</h4>
+                  <p>
+                    We only request permissions that are essential for gameplay:
+                  </p>
+                  <ul class="legal-list-bullet">
+                    <li>
+                      <span class="legal-strong">Haptic Feedback (Vibration):</span> To provide tactile response when you merge tiles.
+                    </li>
+                    <li>
+                      <span class="legal-strong">Internet Access:</span> Included as a standard Android library requirement, but no user data is ever uploaded or downloaded.
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- 5. Third-Party Services -->
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>Third-Party Services</h4>
+                  <p>Our app does not contain:</p>
+                  <ul class="legal-list-bullet">
+                    <li>Third-party advertisements.</li>
+                    <li>Third-party analytics (like Firebase or Google Analytics).</li>
+                    <li>Social media integrations.</li>
+                  </ul>
+                </div>
+
+                <!-- 6. Children’s Privacy -->
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>Children’s Privacy</h4>
+                  <p>
+                    <strong>2048 Match the Number</strong> is a math-based puzzle game suitable for all ages. We do not knowingly collect any personal information from children. Because we do not collect any data, we are fully compliant with the Children’s Online Privacy Protection Act (COPPA) and international privacy laws.
+                  </p>
+                </div>
+
+                <!-- 7. Data Deletion Rights -->
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>Data Deletion Rights</h4>
+                  <p>
+                    You have the absolute right to manage and delete your data.
+                  </p>
+                  <ol class="legal-list-numbered">
+                    <li>
+                      <span class="legal-strong">In-App Reset:</span> You can use the "Reset Statistics" button in the Stats screen or "Restart" in Settings to clear your scores.
+                    </li>
+                    <li>
+                      <span class="legal-strong">Uninstallation:</span> Uninstalling the app from your device will automatically delete all locally stored game data.
+                    </li>
+                  </ol>
+                </div>
+
+                <!-- 8. Changes to This Policy -->
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>Changes to This Policy</h4>
+                  <p>
+                    We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this page periodically for any changes.
+                  </p>
+                </div>
+
+                <!-- 9. Contact Us -->
+                <div class="legal-subsection legal-subsection-border">
+                  <h4>Contact Us</h4>
+                  <p>
+                    If you have any questions or suggestions about our Privacy Policy, please contact us at: 
+                    <a href="mailto:support@codiflytech.com">support@codiflytech.com</a>.
+                  </p>
+                </div>
+
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer-wrapper">
+      <div class="footer-container">
+        <div class="footer-grid">
+          
+          <!-- Column 1: Brand & Registration details -->
+          <div class="footer-brand-col">
+            <div class="footer-logo">
+              <img src="./logo/CodiflyLogo.svg" alt="CodiflyTech Logo" width="168" height="56" loading="lazy">
+            </div>
+            <div class="footer-brand-details">
+              <h4 class="footer-section-header">Legal Entity</h4>
+              <p class="footer-legal-text">
+                ARUMA PRODUCTS PRIVATE LIMITED
+                <span class="footer-legal-subtext">Registered Address: C/O Ashok Kr Borah, 062, Jelehua, Ahatguri, Glt, Golaghat, Assam, 785614, India.</span>
+              </p>
+              
+              <div class="duns-tag">
+                <span class="duns-label">D-U-N-S</span>
+                <span class="duns-divider"></span>
+                <span class="duns-number">767608046</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Navigation Links -->
+          <div class="footer-links-col">
+            <div class="footer-link-group">
+              <h4 class="footer-section-header">Company</h4>
+              <a href="./index.html#contact" class="footer-link-item">Contact Us</a>
+              <a href="./privacy.html" class="footer-link-item">Privacy Policy</a>
+              <a href="./terms.html" class="footer-link-item">Terms of Service</a>
+              <a href="./deletion-request.html" class="footer-link-item">Data Deletion</a>
+            </div>
+
+            <div class="footer-copy-info" style="margin-top: 16px;">
+              <p>© 2026 CodiflyTech. All rights reserved.</p>
+              <p style="margin-top: 4px; font-size: 0.75rem;">CodiflyTech is a brand fully owned and operated by ARUMA PRODUCTS PRIVATE LIMITED.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Client-side navigation helper for active links highlight -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('.sidebar-link');
+      const sections = document.querySelectorAll('.legal-card');
+      const menu = document.querySelector('.sidebar-menu');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          if (window.pageYOffset >= sectionTop - 180) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        links.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+            
+            // Auto scroll sidebar menu horizontally on mobile/tablet devices
+            if (window.innerWidth < 1024 && menu) {
+              const linkOffset = link.offsetLeft;
+              const menuWidth = menu.offsetWidth;
+              const linkWidth = link.offsetWidth;
+              menu.scrollTo({
+                left: linkOffset - (menuWidth / 2) + (linkWidth / 2),
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
