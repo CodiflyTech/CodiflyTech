@@ -30,4 +30,10 @@
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
+   <url>
+    <loc>https://codiflytech.com/2048-privacy-policy.html</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
