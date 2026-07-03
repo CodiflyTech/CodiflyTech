@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2048 Match the Number — Coming Soon to Google Play</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="A hyper-addictive, sleek mobile math logic puzzle game by Codifly Tech where players merge numbers to reach the ultimate tile. Coming soon to the Google Play Store.">
+  <meta name="keywords" content="2048 Match the Number, Codifly Tech, Mobile Game, Math Puzzle, Logic Game, Google Play, Aruma Products Private Limited">
+  <meta name="author" content="Aruma Products Private Limited">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./logo/favicon.svg">
+  
+  <!-- Google Fonts: Outfit for headlines, Inter for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- CSS Reset & Custom Properties --- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    :root {
+      --font-display: 'Outfit', sans-serif;
+      --font-sans: 'Inter', sans-serif;
+      
+      /* Dark Theme Gaming Palette */
+      --bg-base: #0b0f19;
+      --bg-surface: #131b2e;
+      --bg-surface-hover: #1e2942;
+      --primary: #f97316; /* 2048 Theme Orange */
+      --primary-glow: rgba(249, 115, 22, 0.15);
+      --secondary: #eab308; /* Yellow/Gold Accent */
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dark: #0f172a;
+      
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-color-glow: rgba(249, 115, 22, 0.3);
+      
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-fast: all 0.2s ease;
+    }
+    
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    /* --- Glowing Background Blobs --- */
+    .bg-glow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .bg-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(140px);
+      opacity: 0.12;
+    }
+    
+    .bg-blob-orange {
+      top: -10%;
+      right: -5%;
+      width: 500px;
+      height: 500px;
+      background: var(--primary);
+      animation: pulse-blob-1 15s infinite alternate ease-in-out;
+    }
+    
+    .bg-blob-yellow {
+      bottom: 10%;
+      left: -10%;
+      width: 600px;
+      height: 600px;
+      background: var(--secondary);
+      animation: pulse-blob-2 20s infinite alternate ease-in-out;
+    }
+    
+    @keyframes pulse-blob-1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-50px, 40px) scale(1.15); }
+    }
+    @keyframes pulse-blob-2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, -50px) scale(1.1); }
+    }
+    
+    /* --- Layout Container --- */
+    .app-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* --- Header Navigation --- */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .brand-logo img {
+      height: 38px;
+      display: block;
+      transition: var(--transition-fast);
+    }
+    
+    .brand-logo:hover img {
+      opacity: 0.85;
+    }
+    
+    .back-home-link {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-fast);
+    }
+    
+    .back-home-link:hover {
+      color: var(--text-main);
+    }
+    
+    /* --- Hero Section --- */
+    .hero {
+      padding: 80px 0 60px 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .game-logo-wrapper {
+      margin-bottom: 28px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .game-logo-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 24px;
+      box-shadow: 0 0 40px var(--primary-glow);
+      z-index: -1;
+      animation: pulse-glow 3s infinite ease-in-out;
+    }
+    
+    .game-logo {
+      width: 128px;
+      height: 128px;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid var(--border-color-glow);
+      display: block;
+      transition: var(--transition-smooth);
+    }
+    
+    .game-logo-wrapper:hover .game-logo {
+      transform: translateY(-4px) scale(1.02);
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+    
+    .hero-tag {
+      font-family: var(--font-display);
+      color: var(--primary);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      max-width: 800px;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    
+    .hero-title span {
+      background: linear-gradient(135deg, var(--text-main) 40%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .hero-description {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 620px;
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+    
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary) 0%, #ea580c 100%);
+      color: #ffffff;
+      padding: 16px 32px;
+      border-radius: 9999px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.35);
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .cta-btn:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(249, 115, 22, 0.45);
+    }
+    
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #22c55e;
+      border-radius: 50%;
+      display: inline-block;
+      position: relative;
+    }
+    
+    .pulse-dot::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: #22c55e;
+      animation: pulse-ring 1.5s infinite;
+    }
+    
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2.8); opacity: 0; }
+    }
+    
+    /* --- About Section --- */
+    .about {
+      padding: 60px 0;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    
+    .section-subtitle {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    
+    .feature-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 32px;
+      border-radius: 20px;
+      transition: var(--transition-smooth);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(249, 115, 22, 0.25);
+      background: var(--bg-surface-hover);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(249, 115, 22, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    /* --- Screenshot Section --- */
+    .screenshots {
+      padding: 60px 0;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    /* Custom Responsive Carousel Layout */
+    .gallery-container {
+      width: 100%;
+      overflow-x: auto;
+      padding: 10px 0 24px 0;
+      cursor: grab;
+      scroll-behavior: smooth;
+      display: flex;
+      gap: 20px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary) rgba(255,255,255,0.05);
+    }
+    
+    .gallery-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    .gallery-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+    }
+    
+    .gallery-container::-webkit-scrollbar-thumb {
+      background: rgba(249, 115, 22, 0.3);
+      border-radius: 10px;
+      transition: var(--transition-fast);
+    }
+    
+    .gallery-container::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+    
+    .screenshot-item {
+      flex: 0 0 260px;
+      scroll-snap-align: center;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+    
+    @media(min-width: 768px) {
+      .screenshot-item {
+        flex: 0 0 280px;
+      }
+    }
+    
+    .screenshot-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: var(--transition-smooth);
+      object-fit: cover;
+    }
+    
+    .screenshot-item:hover {
+      transform: scale(1.02) translateY(-4px);
+      border-color: var(--border-color-glow);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    
+    /* --- Footer --- */
+    footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border-color);
+      padding: 48px 0 32px 0;
+      background: rgba(11, 15, 25, 0.8);
+      backdrop-filter: blur(12px);
+    }
+    
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    
+    .footer-branding {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .footer-corporate {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 800px;
+    }
+    
+    .footer-corporate strong {
+      color: var(--text-main);
+    }
+    
+    .footer-meta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 36px;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 24px;
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    
+    .footer-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: var(--transition-fast);
+    }
+    
+    .footer-link:hover {
+      color: var(--primary);
+    }
+    
+    .copyright-text {
+      font-size: 0.8rem;
+      color: rgba(148, 163, 184, 0.6);
+      margin-left: auto;
+    }
+    
+    @media (max-width: 768px) {
+      .footer-meta-grid {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      
+      .copyright-text {
+        margin-left: 0;
+      }
+      
+      .hero {
+        padding: 60px 0 40px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Ambient Glows -->
+  <div class="bg-glow-container" aria-hidden="true">
+    <div class="bg-blob bg-blob-orange"></div>
+    <div class="bg-blob bg-blob-yellow"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header Navigation -->
+    <header>
+      <div class="brand-logo">
+        <a href="./index.html">
+          <img src="./logo/CodiflyLogoWhite.svg" alt="Codifly Tech Logo" width="140" height="46">
+        </a>
+      </div>
+      <a href="./index.html" class="back-home-link">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>Back to Home</span>
+      </a>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="game-logo-wrapper">
+          <img src="./logo/logo_2048.png" alt="2048 Match the Number App Icon" class="game-logo">
+        </div>
+        <p class="hero-tag">Official Announcement</p>
+        <h1 class="hero-title">
+          2048 Match the Number — <span>Coming Soon to Google Play</span>
+        </h1>
+        <p class="hero-description">
+          A hyper-addictive, sleek mobile math logic puzzle game where players merge numbers to reach the ultimate tile.
+        </p>
+        <button class="cta-btn" type="button" aria-label="Game is currently under active development">
+          <span class="pulse-dot"></span>
+          <span>Under Active Development</span>
+        </button>
+      </section>
+
+      <!-- About Section -->
+      <section class="about" id="about">
+        <div class="section-header">
+          <h2 class="section-title">About the Game</h2>
+          <p class="section-subtitle">
+            Codifly Tech is crafting a premium, logic-driven mobile puzzle experience built for casual gamers and hardcore strategists alike.
+          </p>
+        </div>
+        
+        <div class="features-grid">
+          <!-- Feature 1: Animations -->
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3>Smooth Animations</h3>
+            <p>Experience ultra-fluid mechanical slide merges, visual score pops, and high-framerate tile transitions that make every move incredibly satisfying.</p>
+          </div>
+
+          <!-- Feature 2: Challenges -->
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3>Daily Challenges</h3>
+            <p>Log in daily for fresh grid setups, restricted-move scenarios, and competitive targets to test your math and logical bounds every single day.</p>
+          </div>
+
+          <!-- Feature 3: Logic Levels -->
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+            <h3>Brain-Teasing Logic</h3>
+            <p>Advance through meticulously structured game modes with varying grid sizes (3x3, 4x4, 5x5) designed to stretch your spatial memory and arithmetic foresight.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gameplay Screenshots Section -->
+      <section class="screenshots" id="screenshots">
+        <div class="section-header">
+          <h2 class="section-title">Gameplay Preview</h2>
+          <p class="section-subtitle">Sneak peek at the clean user interface, vibrant theme colors, and polished logical board designs.</p>
+        </div>
+        
+        <div class="gallery-container" id="gallery" aria-label="Game Screenshots Gallery">
+          <div class="screenshot-item">
+            <img src="./logo/1.png" alt="2048 Match the Number Gameplay Screenshot 1" loading="lazy">
+          </div>
+          <div class="screenshot-item">
+            <img src="./logo/2.png" alt="2048 Match the Number Gameplay Screenshot 2" loading="lazy">
+          </div>
+          <div class="screenshot-item">
+            <img src="./logo/3.png" alt="2048 Match the Number Gameplay Screenshot 3" loading="lazy">
+          </div>
+          <div class="screenshot-item">
+            <img src="./logo/4.png" alt="2048 Match the Number Gameplay Screenshot 4" loading="lazy">
+          </div>
+          <div class="screenshot-item">
+            <img src="./logo/5.png" alt="2048 Match the Number Gameplay Screenshot 5" loading="lazy">
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Legal & Compliance Footer -->
+  <footer>
+    <div class="app-container">
+      <div class="footer-inner">
+        <div class="footer-branding">
+          <div class="footer-corporate">
+            Codifly Tech is owned and operated by <strong>Aruma Products Private Limited</strong>.
+            <br>
+            <strong>CIN:</strong> U10790AS2024PTC027228
+            <br>
+            <strong>Registered Address:</strong> C/O ASHOK KR BORAH, 062, JELEHUA, Ahatguri, Glt, Golaghat - 785614, Assam
+          </div>
+        </div>
+        
+        <div class="footer-meta-grid">
+          <nav class="footer-links" aria-label="Legal Documents & Declarations">
+            <a href="./2048-privacy-policy.html#privacy-policy" class="footer-link">Privacy Policy</a>
+            <a href="./2048-privacy-policy.html#data-safety" class="footer-link">Google Play Data Safety Disclosures</a>
+          </nav>
+          <div class="copyright-text">
+            &copy; 2026 Aruma Products Private Limited. All rights reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Simple Drag-to-Scroll Script for Gallery on Desktop -->
+  <script>
+    const slider = document.getElementById('gallery');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.style.cursor = 'grabbing';
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.style.cursor = 'grab';
+    });
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.style.cursor = 'grab';
+    });
+    slider.addEventListener('mousemove', (e) => {
+      if(!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2; // scroll speed multiplier
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  </script>
+</body>
+</html>
