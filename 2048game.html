@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2048 Match the Number — Coming Soon to Google Play</title>
+  <title>2048 Match the Number — Now Available on Google Play</title>
   
   <!-- SEO & Social Meta Tags -->
-  <meta name="description" content="A hyper-addictive, sleek mobile math logic puzzle game by Codifly Tech where players merge numbers to reach the ultimate tile. Coming soon to the Google Play Store.">
+  <meta name="description" content="A hyper-addictive, sleek mobile math logic puzzle game by Codifly Tech where players merge numbers to reach the ultimate tile. Play it now on the Google Play Store.">
   <meta name="keywords" content="2048 Match the Number, Codifly Tech, Mobile Game, Math Puzzle, Logic Game, Google Play, Aruma Products Private Limited">
   <meta name="author" content="Aruma Products Private Limited">
   
@@ -245,6 +245,7 @@
       gap: 10px;
       background: linear-gradient(135deg, var(--primary) 0%, #ea580c 100%);
       color: #ffffff;
+      text-decoration: none;
       padding: 16px 32px;
       border-radius: 9999px;
       font-family: var(--font-display);
@@ -526,6 +527,24 @@
         padding: 60px 0 40px 0;
       }
     }
+    
+    /* --- Play Store Image Badge Styling --- */
+    .play-store-img-link {
+      display: inline-block;
+      transition: var(--transition-smooth);
+      margin-top: 10px;
+    }
+    
+    .play-store-img-link:hover {
+      transform: translateY(-3px) scale(1.02);
+      filter: drop-shadow(0 8px 20px rgba(249, 115, 22, 0.25));
+    }
+    
+    .play-store-img-badge {
+      height: 52px;
+      width: auto;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -561,15 +580,14 @@
         </div>
         <p class="hero-tag">Official Announcement</p>
         <h1 class="hero-title">
-          2048 Match the Number — <span>Coming Soon to Google Play</span>
+          2048 Match the Number — <span>Now on Google Play</span>
         </h1>
         <p class="hero-description">
           A hyper-addictive, sleek mobile math logic puzzle game where players merge numbers to reach the ultimate tile.
         </p>
-        <button class="cta-btn" type="button" aria-label="Game is currently under active development">
-          <span class="pulse-dot"></span>
-          <span>Under Active Development</span>
-        </button>
+        <a href="https://play.google.com/store/apps/details?id=com.codiflytech.matchnumber" class="play-store-img-link" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+          <img src="./logo/play-store-logo-png.png" alt="Get it on Google Play" class="play-store-img-badge">
+        </a>
       </section>
 
       <!-- About Section -->
