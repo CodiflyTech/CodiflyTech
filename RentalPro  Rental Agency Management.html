@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RentalPro — Rental Agency Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--gl:rgba(255,255,255,.58);--gb:rgba(255,255,255,.75);--hi:rgba(255,255,255,.9);--bg:#f5f6f8;--sf:#fff;--bd:#e4e7ec;--tx:#101828;--mu:#667085;--ac:#0e7c66;--ac2:#0a5f4e;--acs:#e3f4ef;--good:#067647;--goods:#e3f6ec;--warn:#b54708;--warns:#fef0d9;--bad:#b42318;--bads:#fde8e6;--info:#175cd3;--infos:#e5eefc;--r:12px;--sh:0 1px 2px rgba(16,24,40,.05);--sw:248px}
+[data-theme=dark]{--bg:#0b1014;--sf:#151b23;--bd:#2a323d;--tx:#e8ecf1;--mu:#8b97a7;--ac:#34c3a0;--ac2:#5fd6b8;--acs:#12332c;--goods:#10301f;--warns:#3a2a0e;--bads:#3c1714;--infos:#13264a;--good:#52d68a;--warn:#f0a94a;--bad:#f28b82;--info:#7fb0ff;--gl:rgba(24,32,42,.55);--gb:rgba(255,255,255,.1);--hi:rgba(255,255,255,.12)}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;font:14px/1.5 Manrope,system-ui,sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased}
+i[data-lucide],svg.lucide{width:18px;height:18px;stroke-width:1.9;flex:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+h1,h2,h3{margin:0;letter-spacing:-.01em}h1{font-size:22px;font-weight:800}h2{font-size:15px;font-weight:700}h3{font-size:17px;font-weight:700}
+.app{display:flex;min-height:100vh}
+.sidebar{width:var(--sw);background:var(--sf);border-right:1px solid var(--bd);position:fixed;inset:0 auto 0 0;display:flex;flex-direction:column;z-index:30;transition:width .2s,transform .25s}
+.brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;font-weight:800;font-size:18px}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--ac);color:#fff;display:grid;place-items:center}
+#nav{flex:1;overflow:auto;padding:0 10px 10px}
+.ng{font-size:11.5px;font-weight:700;color:var(--mu);padding:16px 10px 6px;letter-spacing:.02em}
+.ni{display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:9px;color:var(--mu);font-weight:600;cursor:pointer;position:relative;white-space:nowrap}
+.ni:hover{background:var(--bg);color:var(--tx)}
+.ni.on{background:var(--acs);color:var(--ac)}.ni.on:before{content:"";position:absolute;left:-10px;top:7px;bottom:7px;width:3px;border-radius:0 3px 3px 0;background:var(--ac)}
+.me{display:flex;gap:10px;align-items:center;padding:12px 16px;border-top:1px solid var(--bd)}
+.mt{display:flex;flex-direction:column;line-height:1.25}.mt small{color:var(--mu)}
+.av{width:34px;height:34px;border-radius:50%;background:var(--acs);color:var(--ac);display:grid;place-items:center;font-weight:800;font-size:12px;flex:none}.av.sm{width:30px;height:30px}
+.main{flex:1;margin-left:var(--sw);min-width:0;transition:margin .2s}
+.collapsed .sidebar{width:68px}.collapsed .main{margin-left:68px}
+.collapsed .bn,.collapsed .ng,.collapsed .ni span,.collapsed .mt{display:none}.collapsed .ng+*{margin-top:0}.collapsed .ni{justify-content:center}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:12px 28px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--bd)}
+.sp{flex:1}
+.ib{width:38px;height:38px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);display:grid;place-items:center;cursor:pointer;position:relative}
+.ib:hover{border-color:var(--ac)}.dot{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--bad);border:2px solid var(--sf)}
+.sr{display:flex;align-items:center;gap:8px;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:0 12px;height:38px;min-width:0}
+.sr input{border:0;background:none;outline:0;width:100%;min-width:140px}.sr:focus-within{border-color:var(--ac)}.gs{width:340px}
+select,input[type=text],input[type=number],input[type=date],input[type=email],input[type=tel],input[type=password],textarea{border:1px solid var(--bd);background:var(--sf);border-radius:10px;padding:8px 12px;height:38px;width:100%}
+textarea{height:auto}select{width:auto}.fg select{width:100%}
+.pf{display:flex;gap:4px;align-items:center;border:1px solid var(--bd);background:var(--sf);border-radius:10px;padding:3px 8px 3px 4px;cursor:pointer}
+.dd{position:relative}.menu{display:none;position:absolute;right:0;top:46px;background:var(--sf);border:1px solid var(--bd);border-radius:12px;box-shadow:0 12px 32px rgba(16,24,40,.14);min-width:210px;padding:6px;z-index:40}
+.dd.open .menu{display:block}.menu a{display:block;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}.menu a:hover{background:var(--bg)}
+#view{padding:26px 28px 60px;max-width:1500px;animation:fi .25s}@keyframes fi{from{opacity:.4}to{opacity:1}}
+.ph{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}.ph p{margin:2px 0 0;color:var(--mu)}.pa{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 14px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s}
+.btn:hover{border-color:var(--ac)}.btn.pri{background:var(--ac);border-color:var(--ac);color:#fff}.btn.pri:hover{background:var(--ac2)}.btn.dng{background:var(--bad);border-color:var(--bad);color:#fff}.btn.ghost{background:transparent}.btn.sm{height:30px;padding:0 10px;font-size:13px}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh);padding:18px;min-width:0}
+.ch{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}.ch small{color:var(--mu)}
+.grid{display:grid;gap:16px;margin-bottom:16px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g21{grid-template-columns:2fr 1fr}.g2{grid-template-columns:1fr 1fr}.g6{grid-template-columns:repeat(6,1fr)}
+.kpi{display:flex;flex-direction:column;gap:8px}.kpi .kt{display:flex;justify-content:space-between;color:var(--mu);font-weight:600}.kpi .ki{width:34px;height:34px;border-radius:9px;background:var(--acs);color:var(--ac);display:grid;place-items:center}
+.kpi .kv{font-size:26px;font-weight:800;letter-spacing:-.02em}.kpi .kd{font-size:12.5px;color:var(--mu)}.up{color:var(--good);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tb{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}.tb .sr{width:260px}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:620px}th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--bd);white-space:nowrap}
+th{font-size:12.5px;color:var(--mu);font-weight:700;background:color-mix(in srgb,var(--bg) 60%,var(--sf));cursor:pointer;user-select:none}th.ns{cursor:default}
+tr:last-child td{border-bottom:0}tbody tr:hover{background:color-mix(in srgb,var(--bg) 55%,transparent)}
+td.ac{text-align:right;width:1%}td.ac .btn{margin-left:4px}.empty{padding:36px;text-align:center;color:var(--mu)}
+.pg{display:flex;justify-content:space-between;align-items:center;margin-top:12px;color:var(--mu);flex-wrap:wrap;gap:8px}.pg div{display:flex;gap:4px}
+.pg button{min-width:32px;height:32px;border-radius:8px;border:1px solid var(--bd);background:var(--sf);cursor:pointer}.pg button.on{background:var(--ac);border-color:var(--ac);color:#fff}.pg button:disabled{opacity:.4;cursor:default}
+.b{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:700}.b.good{background:var(--goods);color:var(--good)}.b.warn{background:var(--warns);color:var(--warn)}.b.bad{background:var(--bads);color:var(--bad)}.b.info{background:var(--infos);color:var(--info)}.b.mute{background:var(--bg);color:var(--mu)}
+.star{color:#f5a524}
+.seg{display:inline-flex;border:1px solid var(--bd);border-radius:10px;padding:3px;background:var(--bg)}.seg button{border:0;background:none;padding:4px 12px;border-radius:7px;cursor:pointer;font-weight:700;color:var(--mu)}.seg button.on{background:var(--sf);color:var(--tx);box-shadow:var(--sh)}
+.cw{position:relative;height:290px}
+.bar{height:8px;border-radius:9px;background:var(--bg);overflow:hidden}.bar i{display:block;height:100%;background:var(--ac);border-radius:9px;transition:width .6s}
+.list{display:flex;flex-direction:column}.li{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--bd);align-items:flex-start}.li:last-child{border:0}.li .ki{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none}.li small{color:var(--mu);display:block}.li.unread b:after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ac);margin-left:7px}
+.ki.good{background:var(--goods);color:var(--good)}.ki.warn{background:var(--warns);color:var(--warn)}.ki.bad{background:var(--bads);color:var(--bad)}.ki.info{background:var(--infos);color:var(--info)}
+.vg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}.vc{cursor:pointer;padding:0;overflow:hidden;transition:transform .15s,border-color .15s}.vc:hover{transform:translateY(-2px);border-color:var(--ac)}
+.vimg{height:150px;position:relative;overflow:hidden;background:var(--bg);display:flex;align-items:center;justify-content:center}.vimg img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}.vc:hover .vimg img{transform:scale(1.06)}.vimg i,.vimg svg{width:46px;height:46px;stroke-width:1.4}
+.vb{padding:14px 16px;display:flex;flex-direction:column;gap:6px}.vb .row{display:flex;justify-content:space-between;align-items:center;color:var(--mu);font-size:13px}.vb .row b{color:var(--tx)}
+.map{position:relative;border:1px solid var(--bd);border-radius:12px;overflow:hidden;background:#eef2ef;height:340px}.map.big{height:560px}
+[data-theme=dark] .map{background:#17201d}
+.map svg.bg{position:absolute;inset:0;width:100%;height:100%}
+.mk{position:absolute;transform:translate(-50%,-100%);transition:left 2.2s linear,top 2.2s linear;cursor:pointer;display:flex;flex-direction:column;align-items:center}
+.mk span{background:var(--tx);color:var(--sf);font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:6px;margin-bottom:2px;white-space:nowrap}
+.mk i,.mk svg{width:28px;height:28px;background:var(--ac);color:#fff;border-radius:50% 50% 50% 0;padding:5px;transform:rotate(-45deg)}.mk.sel{z-index:3}.mk.sel i,.mk.sel svg{background:var(--warn)}
+.pop{position:absolute;left:14px;bottom:14px;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;box-shadow:0 8px 24px rgba(16,24,40,.15);width:250px;font-size:13px;z-index:5}.pop[hidden]{display:none}
+.trk{display:grid;grid-template-columns:1fr 330px;gap:16px}.trk .side{max-height:560px;overflow:auto}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.cal>div{background:var(--sf);min-height:96px;padding:6px;font-size:12px;min-width:0}.cal .h{min-height:0;font-weight:700;color:var(--mu);text-align:center;padding:8px}.cal .td{background:var(--acs)}.cal .o{opacity:.45}
+.chip{display:block;background:var(--infos);color:var(--info);border-radius:5px;padding:1px 6px;margin-top:3px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.chip.g{background:var(--goods);color:var(--good)}.chip.w{background:var(--warns);color:var(--warn)}.chip.r{background:var(--bads);color:var(--bad)}
+.mb{position:fixed;inset:0;background:rgba(16,24,40,.5);display:grid;place-items:center;z-index:60;padding:16px;overflow:auto}.mb:empty{display:none}
+.md{background:var(--sf);border-radius:16px;padding:22px;width:100%;max-height:92vh;overflow:auto;animation:pop .18s}@keyframes pop{from{transform:scale(.97);opacity:0}}
+.md h3{margin-bottom:14px}.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fg label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:13px}.fg .full{grid-column:1/-1}
+.ma{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.err{color:var(--bad);font-weight:600;margin-top:10px;min-height:0}
+.sum{margin-top:14px;background:var(--acs);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.sum small{display:block;color:var(--mu)}.sum b{font-size:15px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--bd);margin-bottom:16px;overflow:auto}.tabs button{border:0;background:none;padding:9px 14px;font-weight:700;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}.tabs button.on{color:var(--ac);border-color:var(--ac)}
+.kv2{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}.kv2 small{color:var(--mu);display:block}.kv2 b{font-weight:600}
+#toasts{position:fixed;right:20px;bottom:20px;display:flex;flex-direction:column;gap:8px;z-index:90}
+.toast{background:var(--tx);color:var(--sf);padding:11px 16px;border-radius:10px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);animation:pop .2s;display:flex;gap:8px;align-items:center}
+.sw{position:relative;width:38px;height:22px;flex:none}.sw input{opacity:0;position:absolute;inset:0;margin:0;cursor:pointer;z-index:1}.sw i{position:absolute;inset:0;background:var(--bd);border-radius:99px;transition:.15s}.sw i:after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.15s}.sw input:checked+i{background:var(--ac)}.sw input:checked+i:after{left:19px}
+.rl{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--bd);gap:12px}.rl small{color:var(--mu);display:block}
+.inv{font-size:13.5px}.inv .ih{display:flex;justify-content:space-between;margin-bottom:18px}.inv table{min-width:0}.inv .tot{text-align:right;margin-top:12px}.inv .tot div{padding:2px 0}
+details{border-bottom:1px solid var(--bd);padding:12px 0}summary{font-weight:700;cursor:pointer}details p{color:var(--mu);margin:8px 0 0}
+.scrim{display:none}
+@media(max-width:1100px){.g4,.g6{grid-template-columns:repeat(2,1fr)}.g21,.g2,.trk{grid-template-columns:1fr}.g3{grid-template-columns:1fr 1fr}}
+@media(max-width:820px){.sidebar{transform:translateX(-100%);width:var(--sw)!important}.sb-open .sidebar{transform:none;box-shadow:0 0 40px rgba(0,0,0,.25)}.sb-open .scrim{display:block;position:fixed;inset:0;background:rgba(16,24,40,.4);z-index:25}
+.main,.collapsed .main{margin-left:0}.collapsed .bn,.collapsed .ng,.collapsed .ni span,.collapsed .mt{display:revert}.top{padding:10px 14px}.gs{width:auto;flex:1}.gs input{min-width:0}.sp{display:none}#view{padding:18px 14px 50px}#branchSel{max-width:110px}}
+@media(max-width:560px){.g4,.g3,.g6{grid-template-columns:1fr}.fg,.sum,.kv2{grid-template-columns:1fr}.tb{gap:6px}.tb .sr{width:100%}.tb select,.tb .btn{flex:1;justify-content:center}.cal>div{min-height:54px;padding:2px}.chip{font-size:9.5px;padding:0 4px}.mb{padding:10px;align-items:flex-end}.md{width:100%;border-radius:20px 20px 0 0;max-height:85vh;padding:16px}.vg{grid-template-columns:1fr}.ph h1{font-size:18px}.ph{margin-bottom:14px;gap:8px}}
+@media(max-width:380px){.top{padding:8px 8px;gap:4px}#view{padding:12px 8px 40px}.btn{padding:0 10px;font-size:12px;height:34px}}
+@media print{.sidebar,.top,.pa,#toasts,.no-print,#view{display:none!important}.main{margin:0}.mb{position:static;background:none;padding:0}.md{max-height:none;box-shadow:none;max-width:none!important}body{background:#fff}#view.keep{display:block!important}.ma{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== Light theme default + liquid glass ===== */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(640px 420px at 12% 8%,rgba(14,124,102,.26),transparent 70%),radial-gradient(560px 420px at 88% 14%,rgba(59,130,246,.22),transparent 70%),radial-gradient(640px 520px at 62% 100%,rgba(217,130,43,.18),transparent 70%),radial-gradient(420px 320px at 0% 80%,rgba(139,92,246,.14),transparent 70%)}
+[data-theme=dark] body::before{opacity:.55}
+.sidebar,.top,.card,.md,.menu,.pop,.toast,.btn,.sr,select,input[type=text],input[type=number],input[type=date],input[type=email],input[type=tel],input[type=password],textarea,.ib,.pf,.seg,.tw,.vc,.cal,.sum{-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%)}
+.sidebar,.top,.card,.md,.menu,.pop{background:var(--gl);border:1px solid var(--gb);box-shadow:inset 0 1px 0 var(--hi),inset 0 -1px 0 rgba(255,255,255,.12),0 10px 34px rgba(16,24,40,.09)}
+.top{border-width:0 0 1px;border-radius:0;box-shadow:inset 0 -1px 0 var(--gb)}.sidebar{border-width:0 1px 0 0;border-radius:0 20px 20px 0;margin:0}
+.card{border-radius:18px;position:relative}
+.card::before,.md::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 38%,rgba(255,255,255,0) 70%,rgba(255,255,255,.18) 100%);opacity:.7}
+[data-theme=dark] .card::before,[data-theme=dark] .md::before{opacity:.12}
+.md{position:relative;border-radius:22px}.md>*{position:relative}.card>*{position:relative}
+.btn,.sr,select,input[type=text],input[type=number],input[type=date],input[type=email],input[type=tel],input[type=password],textarea,.ib,.pf,.seg{background:var(--gl);border-color:var(--gb);box-shadow:inset 0 1px 0 var(--hi)}
+.btn.pri{background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 88%,#fff),var(--ac));box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 6px 16px color-mix(in srgb,var(--ac) 35%,transparent)}.btn.dng{box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.btn:active{transform:scale(.98)}
+.tw{background:rgba(255,255,255,.18);border-color:var(--gb)}[data-theme=dark] .tw{background:rgba(255,255,255,.03)}
+th{background:rgba(255,255,255,.28)}[data-theme=dark] th{background:rgba(255,255,255,.05)}
+td,th,.li,.rl,.tabs,details{border-color:color-mix(in srgb,var(--bd) 70%,transparent)}
+.ni.on{background:color-mix(in srgb,var(--ac) 14%,var(--hi));box-shadow:inset 0 1px 0 var(--hi)}.ni:hover{background:rgba(255,255,255,.45)}[data-theme=dark] .ni:hover{background:rgba(255,255,255,.07)}
+.seg button.on{background:var(--hi);box-shadow:var(--sh),inset 0 1px 0 #fff}
+.mb{background:rgba(16,24,40,.28);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.vc{background:var(--gl)}.vimg{background:hsl(var(--h) 45% 92%/.7)}
+.cal{background:rgba(255,255,255,.25)}.cal>div{background:rgba(255,255,255,.4)}.cal .td{background:color-mix(in srgb,var(--ac) 18%,transparent)}
+[data-theme=dark] .cal>div{background:rgba(255,255,255,.04)}
+.map{border-color:var(--gb);box-shadow:inset 0 1px 0 var(--hi)}
+.toast{background:rgba(16,24,40,.78);color:#fff;border:1px solid rgba(255,255,255,.18)}
+.sum{background:color-mix(in srgb,var(--ac) 12%,rgba(255,255,255,.4))}
+.sidebar{margin:10px 0 10px 10px;inset:0 auto 0 0;height:calc(100vh - 20px);border-width:1px;border-radius:22px}
+.main{margin-left:calc(var(--sw) + 10px)}.collapsed .main{margin-left:78px}
+.top{margin:10px 18px 0;border-width:1px;border-radius:18px;top:10px}
+@media(max-width:820px){.main,.collapsed .main{margin-left:0}.sidebar{margin:0;height:100vh;border-radius:0 22px 22px 0}.top{margin:8px 10px 0}}
+@media print{body::before{display:none}*{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}.card,.md{background:#fff!important;box-shadow:none!important}.card::before,.md::before{display:none}}
+@supports not (backdrop-filter:blur(1px)){.sidebar,.top,.card,.md,.menu,.pop{background:var(--sf)}}
+@media(prefers-reduced-transparency:reduce){.sidebar,.top,.card,.md,.menu,.pop,.btn,.sr,select,input,.ib,.pf,.seg{background:var(--sf);backdrop-filter:none;-webkit-backdrop-filter:none}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <div class="brand"><span class="logo"><i data-lucide="key-round"></i></span><span class="bn">RentalPro</span></div>
+    <nav id="nav"></nav>
+    <div class="me"><span class="av">AS</span><span class="mt"><b>Anika Sen</b><small>Super Admin</small></span></div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="main">
+    <header class="top">
+      <button class="ib" id="menuBtn" aria-label="Toggle sidebar"><i data-lucide="panel-left"></i></button>
+      <div class="sr gs"><i data-lucide="search"></i><input id="gsearch" placeholder="Search this page…" aria-label="Global search"></div>
+      <span class="sp"></span>
+      <select id="branchSel" aria-label="Branch"></select>
+      <button class="ib" id="themeBtn" aria-label="Toggle light/dark theme"><i data-lucide="moon"></i></button>
+      <button class="ib bell" id="bellBtn" aria-label="Notifications"><i data-lucide="bell"></i><span class="dot" id="bellDot"></span></button>
+      <div class="dd" id="profile">
+        <button class="pf" aria-haspopup="true"><span class="av sm">AS</span><i data-lucide="chevron-down"></i></button>
+        <div class="menu">
+          <a data-act="toast:Profile editing is not part of this prototype">My profile</a>
+          <a data-go="settings">Settings</a>
+          <a data-go="roles">Roles &amp; permissions</a>
+          <a data-act="toast:Demo only — there is no sign-in">Sign out</a>
+        </div>
+      </div>
+    </header>
+    <main id="view" tabindex="-1"></main>
+  </div>
+</div>
+<div id="modal-root"></div>
+<div id="toasts" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+'use strict';
+/* ================= Helpers ================= */
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const inr=n=>'₹'+Math.round(+n||0).toLocaleString('en-IN');
+const ic=(n,c='')=>`<i data-lucide="${n}" class="${c}"></i>`;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const refresh=()=>window.lucide&&lucide.createIcons();
+const p2=n=>String(n).padStart(2,'0');
+const TODAY=new Date(2026,10,13);
+const iso=o=>{const x=new Date(TODAY);x.setDate(x.getDate()+o);return `${x.getFullYear()}-${p2(x.getMonth()+1)}-${p2(x.getDate())}`};
+const fdate=s=>s?new Date(s+'T00:00:00').toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}):'—';
+const nDays=(a,b)=>Math.max(1,Math.round((new Date(b)-new Date(a))/864e5));
+const sum=(a,k)=>a.reduce((t,r)=>t+(+r[k]||0),0);
+const TONE={good:['Available','Completed','Paid','Present','Approved','Verified','Valid','Success','Active staff'],info:['Rented','Active','Confirmed','On trip','Refund','Deposit'],warn:['Pending','Reserved','Late','Scheduled','Partial','Expiring','Low stock','In progress','Unpaid','Maintenance'],bad:['Overdue','Cancelled','Rejected','Absent','Failed','Expired','Inactive']};
+const badge=s=>{const t=Object.keys(TONE).find(k=>TONE[k].includes(s))||'mute';return `<span class="b ${t}">${esc(s)}</span>`};
+const phone=i=>`+91 9${8000+i*371%1999} ${10000+i*7919%89999}`;
+let LOG=[];const log=(a,m)=>M.audit.data.unshift({id:M.audit.next(),time:new Date().toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}),user:'Anika Sen',action:a,module:m});
+
+/* ================= Sample data ================= */
+const BRANCHES=['Guwahati HQ','Jorhat','Dibrugarh'];
+const MODELS=[['Mercedes-AMG GT','Sedan','Petrol',4,7500,950],['Volkswagen Polo','Hatchback','Petrol',5,1800,250],['Chevrolet Camaro SS','Sedan','Petrol',4,6500,850],['Ford Expedition SUV','SUV','Diesel',7,4800,650],['Honda CR-V','SUV','Petrol',5,3500,450],['BMW M4 Coupe','Sedan','Petrol',4,8200,1100],['Porsche 911 GT3','Sedan','Petrol',2,12500,1600],['Range Rover Sport','SUV','Diesel',5,9500,1250],['Genesis G80','Sedan','Petrol',5,5400,700],['Audi A6 Sedan','Sedan','Petrol',5,6800,900],['BMW 5 Series','Sedan','Petrol',5,7800,1000],['Mercedes-Benz C-Class','Sedan','Petrol',5,8500,1100],['Audi Q7 SUV','SUV','Petrol',7,9200,1200],['Jeep Wrangler 4x4','SUV','Diesel',5,5200,700],['Volvo XC60 SUV','SUV','Petrol',5,4500,600],['Audi A3 Hatchback','Hatchback','Petrol',5,3200,400],['Ferrari F8 Spider','Sedan','Petrol',2,15000,2000],['Ford Mustang GT','Sedan','Petrol',4,7200,950]];
+const CAR_CAT_IMGS={
+  Sedan:'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80',
+  SUV:'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=600&q=80',
+  MPV:'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80',
+  Hatchback:'https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=600&q=80'
+};
+const CAR_IMGS={
+  'Mercedes-AMG GT':'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80',
+  'Volkswagen Polo':'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80',
+  'Chevrolet Camaro SS':'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80',
+  'Ford Expedition SUV':'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80',
+  'Honda CR-V':'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=600&q=80',
+  'BMW M4 Coupe':'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80',
+  'Porsche 911 GT3':'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80',
+  'Range Rover Sport':'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=600&q=80',
+  'Genesis G80':'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=600&q=80',
+  'Audi A6 Sedan':'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80',
+  'BMW 5 Series':'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=600&q=80',
+  'Mercedes-Benz C-Class':'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=600&q=80',
+  'Audi Q7 SUV':'https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?auto=format&fit=crop&w=600&q=80',
+  'Jeep Wrangler 4x4':'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=600&q=80',
+  'Volvo XC60 SUV':'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=600&q=80',
+  'Audi A3 Hatchback':'https://images.unsplash.com/photo-1541348263662-e08266f92f3a?auto=format&fit=crop&w=600&q=80',
+  'Ferrari F8 Spider':'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=600&q=80',
+  'Ford Mustang GT':'https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=600&q=80'
+};
+const getCarImg=(n,c)=>CAR_IMGS[n]||CAR_CAT_IMGS[c]||CAR_CAT_IMGS.Sedan;
+const VST=['Available','Rented','Rented','Available','Reserved','Maintenance','Rented','Available','Available','Rented','Inactive','Available','Available','Rented','Available','Available','Rented','Maintenance','Available','Rented','Available','Available','Rented','Available'];
+const DRV=['Biren Hazarika','Dipak Nath','Manoj Rabha','Pranjal Saikia','Kabir Ali'];
+const CUS=['Rahul Baruah','Priya Deka','Amit Sharma','Ankita Gogoi','Rajesh Kalita','Neha Bora','Subhajit Das','Mitali Saikia'];
+const mk=(prefix,start)=>{let n=start;return()=>prefix?`${prefix}${++n}`:++n};
+const F=(k,l,t='text',o,x={})=>({k,l,t,o,...x});
+const M={};
+const defMod=(key,o)=>{o.data.forEach((r,i)=>{if(r.id==null)r.id=(o.prefix||'')+(o.start+i+1)});const n=mk(o.prefix||'',o.start+o.data.length);M[key]={...o,next:n,key}};
+
+defMod('vehicles',{title:'Vehicles',one:'vehicle',scoped:1,wide:1,start:0,
+ data:VST.map((st,i)=>{const m=MODELS[i%MODELS.length];return{name:m[0],reg:`AS0${[1,3,6,1,3,6][i%6]}${'ABCDEFGHIJKLMNOPQRSTUVWX'[i]}${'KM'[i%2]}${1000+i*733%9000}`,category:m[1],year:2020+i%5,fuel:m[2],trans:i%3?'Manual':'Automatic',seats:m[3],km:12000+i*7370,daily:m[4],hourly:m[5],status:st,ins:iso([12,60,200,25,300,90,-3,150,45,220,400,18,95,140,80,210,330,15,110,75,290,160,40,195][i]),regExp:iso(300+i*35),branch:BRANCHES[i%3],driver:i%2?DRV[i%5]:'—'}}),
+ fields:[F('name','Vehicle name','select',()=>MODELS.map(m=>m[0])),F('reg','Registration no.'),F('category','Category','select',['Sedan','MPV','SUV','Hatchback']),F('year','Year','number'),F('fuel','Fuel type','select',['Petrol','Diesel','CNG','Electric']),F('trans','Transmission','select',['Manual','Automatic']),F('seats','Seats','number'),F('km','Mileage (km)','number'),F('daily','Daily price (₹)','money'),F('hourly','Hourly price (₹)','money'),F('status','Status','status',['Available','Reserved','Rented','Maintenance','Inactive']),F('ins','Insurance expiry','date'),F('regExp','Registration expiry','date'),F('branch','Branch','select',BRANCHES),F('driver','Assigned driver','select',()=>['—',...DRV])],
+ cols:['name','reg','category','fuel','daily','status','ins','branch']});
+const veh=reg=>M.vehicles.data.find(v=>v.reg===reg);
+const vLabel=reg=>{const v=veh(reg);return v?`${v.name} · ${v.reg}`:reg};
+
+defMod('customers',{title:'Customers',one:'customer',start:0,
+ data:CUS.map((n,i)=>({name:n,phone:phone(i),email:n.toLowerCase().replace(' ','.')+'@mail.in',city:['Guwahati','Jorhat','Dibrugarh','Tezpur'][i%4],licence:`AS${p2(i+1)}2019${10000+i*7331}`,verified:i%4==3?'Pending':'Verified',balance:[0,0,12400,18000,0,5200,0,0][i],rating:4+((i*3)%10)/10})),
+ fields:[F('name','Full name'),F('phone','Phone','tel'),F('email','Email','email'),F('city','City / address'),F('licence','Driving licence no.'),F('verified','Verification','status',['Verified','Pending']),F('balance','Outstanding (₹)','money'),F('rating','Rating (0–5)','rating')],
+ cols:['name','phone','city','licence','verified','balance','rating']});
+
+const mkBk=(i,c,v,d,a,b,st,ex=0)=>({id:'BK-'+(2400+i),customer:c,vehicle:veh(M.vehicles.data[v-1].reg)?.reg,driver:d,pickupLoc:'Guwahati Airport',dropLoc:'Guwahati Airport',pickup:iso(a),ret:iso(b),deposit:5000,extra:ex,advance:4000+i*500,status:st});
+const calcBk=r=>{const v=veh(r.vehicle);r.days=nDays(r.pickup,r.ret);r.price=(v?v.daily:0)*r.days;r.total=r.price+(+r.extra||0);r.balance=Math.max(0,r.total-(+r.advance||0));return r};
+defMod('bookings',{title:'Bookings',one:'booking',wide:1,start:2410,prefix:'BK-',
+ data:[mkBk(1,CUS[0],3,DRV[0],-2,3,'Active'),mkBk(2,CUS[1],5,'—',1,4,'Confirmed'),mkBk(3,CUS[2],2,DRV[1],-6,-1,'Overdue',1500),mkBk(4,CUS[3],6,'—',3,5,'Pending'),mkBk(5,CUS[4],4,DRV[2],-10,-7,'Completed'),mkBk(6,CUS[5],1,'—',6,8,'Confirmed'),mkBk(7,CUS[6],7,DRV[3],-1,2,'Active'),mkBk(8,CUS[7],10,DRV[4],-4,1,'Active',800),mkBk(9,CUS[0],8,'—',-20,-17,'Completed'),mkBk(10,CUS[1],3,'—',5,7,'Confirmed')].map(calcBk),
+ fields:[F('customer','Customer','select',()=>M.customers.data.map(c=>c.name)),F('vehicle','Vehicle','select',()=>M.vehicles.data.filter(v=>v.status!=='Inactive').map(v=>[v.reg,vLabel(v.reg)]),{fmt:v=>{const vo=veh(v);return vo?`<div style="display:flex;align-items:center;gap:8px"><img src="${getCarImg(vo.name,vo.category)}" style="width:32px;height:20px;object-fit:cover;border-radius:4px;flex:none" alt="" onerror="this.style.display='none'"><span>${esc(vLabel(v))}</span></div>`:esc(vLabel(v))}}),F('driver','Driver','select',()=>['—',...DRV]),F('status','Status','status',['Pending','Confirmed','Active','Completed','Cancelled','Overdue']),F('pickupLoc','Pickup location'),F('dropLoc','Drop-off location'),F('pickup','Pickup date','date'),F('ret','Return date','date'),F('deposit','Security deposit (₹)','money'),F('extra','Additional charges (₹)','money'),F('advance','Advance paid (₹)','money'),F('days','Duration','text',0,{auto:1,fmt:v=>v+' day'+(v>1?'s':'')}),F('total','Total (₹)','money',0,{auto:1}),F('balance','Balance (₹)','money',0,{auto:1})],
+ cols:['id','customer','vehicle','pickup','ret','total','balance','status'],
+ calc:calcBk,
+ check(r,old){if(r.ret<r.pickup)return'Return date must be on or after the pickup date.';if(['Cancelled','Completed'].includes(r.status))return;const c=M.bookings.data.find(b=>b!==old&&b.vehicle===r.vehicle&&!['Cancelled','Completed'].includes(b.status)&&b.pickup<=r.ret&&r.pickup<=b.ret);if(c)return`Conflict: ${vLabel(r.vehicle)} is already booked in ${c.id} (${fdate(c.pickup)} – ${fdate(c.ret)}).`},
+ sum:r=>`<div><small>Duration</small><b>${r.days} day(s)</b></div><div><small>Rental</small><b>${inr(r.price)}</b></div><div><small>Total</small><b>${inr(r.total)}</b></div><div><small>Advance</small><b>${inr(r.advance)}</b></div><div><small>Balance</small><b>${inr(r.balance)}</b></div><div><small>Deposit (refundable)</small><b>${inr(r.deposit)}</b></div>`,
+ actions:[{k:'view',l:'View',fn:r=>bookingDetail(r)},{k:'cancel',l:'Cancel',fn:r=>confirmBox(`Cancel booking ${r.id}?`,()=>{r.status='Cancelled';toast('Booking cancelled');log('Cancelled '+r.id,'Bookings');draw('bookings')},'Cancel booking'),show:r=>!['Cancelled','Completed'].includes(r.status)}]});
+
+defMod('trips',{title:'Trips',one:'trip',start:0,wide:1,
+ data:[['Innova Crysta','Biren Hazarika','Guwahati','Shillong',iso(0)+' 08:00','On trip',102,2400],['Scorpio N','Manoj Rabha','Jorhat','Kaziranga',iso(0)+' 09:30','On trip',96,1900],['Swift Dzire','Dipak Nath','Dibrugarh','Tinsukia',iso(1)+' 07:00','Scheduled',45,700],['Ertiga','Kabir Ali','Guwahati','Tezpur',iso(-1)+' 06:30','Completed',180,3100],['Fortuner','Pranjal Saikia','Jorhat','Majuli',iso(2)+' 10:00','Scheduled',20,300],['Hyundai Creta','Biren Hazarika','Guwahati','Sivasagar',iso(-3)+' 05:45','Completed',350,5400]].map(t=>({vehicle:t[0],driver:t[1],from:t[2],to:t[3],depart:t[4],status:t[5],km:t[6],fuel:t[7],notes:''})),
+ fields:[F('vehicle','Vehicle','select',()=>MODELS.map(m=>m[0]),{fmt:v=>{const vo=M.vehicles.data.find(x=>x.name===v)||veh(v);return`<div style="display:flex;align-items:center;gap:8px"><img src="${getCarImg(vo?vo.name:v,vo?vo.category:'Sedan')}" style="width:32px;height:20px;object-fit:cover;border-radius:4px;flex:none" alt="" onerror="this.style.display='none'"><span>${esc(v)}</span></div>`}}),F('driver','Driver','select',DRV),F('from','Start location'),F('to','Destination'),F('depart','Departure (date & time)'),F('km','Distance (km)','number'),F('fuel','Fuel expense (₹)','money'),F('status','Status','status',['Scheduled','On trip','Completed','Cancelled']),F('notes','Trip notes','text',0,{opt:1,full:1})],
+ cols:['vehicle','driver','from','to','depart','km','fuel','status']});
+
+defMod('drivers',{title:'Drivers',one:'driver',start:0,
+ data:DRV.map((n,i)=>({name:n,phone:phone(i+20),licence:`AS0${i+1}2018${20000+i*5113}`,expiry:iso([40,400,-5,700,160][i]),vehicle:['Innova Crysta','Scorpio N','Ertiga','Fortuner','Swift Dzire'][i],trips:120+i*37,dist:24000+i*9100,rating:4.2+i*.15})),
+ fields:[F('name','Full name'),F('phone','Phone','tel'),F('licence','Licence no.'),F('expiry','Licence expiry','date'),F('vehicle','Assigned vehicle','select',()=>MODELS.map(m=>m[0]),{fmt:v=>{const vo=M.vehicles.data.find(x=>x.name===v)||veh(v);return`<div style="display:flex;align-items:center;gap:8px"><img src="${getCarImg(vo?vo.name:v,vo?vo.category:'Sedan')}" style="width:32px;height:20px;object-fit:cover;border-radius:4px;flex:none" alt="" onerror="this.style.display='none'"><span>${esc(v)}</span></div>`}}),F('trips','Total trips','number'),F('dist','Total distance (km)','number'),F('rating','Rating (0–5)','rating')],
+ cols:['name','phone','licence','expiry','vehicle','trips','dist','rating']});
+
+const EMP=[['Anika Sen','Management','General Manager',68000],['Dev Choudhury','Fleet','Fleet Manager',48000],['Ritu Phukan','Finance','Accountant',42000],['Sanjib Gogoi','HR','HR Manager',45000],['Pallavi Das','Bookings','Booking Executive',26000],['Tarun Kakoti','Bookings','Booking Executive',24000],['Hemanta Borah','Maintenance','Workshop Supervisor',34000],['Jyoti Mahanta','Operations','Branch Manager',52000]];
+defMod('employees',{title:'Employees',one:'employee',scoped:1,start:0,
+ data:EMP.map((e,i)=>({name:e[0],dept:e[1],role:e[2],joined:iso(-200-i*180),phone:phone(i+40),branch:BRANCHES[i%3],salary:e[3],status:i==6?'On leave':'Active staff'})),
+ fields:[F('name','Full name'),F('dept','Department','select',['Management','Fleet','Finance','HR','Bookings','Maintenance','Operations']),F('role','Designation'),F('joined','Joining date','date'),F('phone','Phone','tel'),F('branch','Branch','select',BRANCHES),F('salary','Monthly salary (₹)','money'),F('status','Employment status','select',['Active staff','On leave','Resigned'])],
+ cols:['name','dept','role','joined','phone','branch','salary','status']});
+
+defMod('attendance',{title:'Attendance',one:'attendance record',start:0,
+ data:EMP.map((e,i)=>({employee:e[0],date:iso(0),in:['09:02','08:55','09:40','09:00','--','09:12','08:48','09:05'][i],out:['','','','','','','',''][i]||(i==4?'--':'—'),status:i==4?'Absent':i==2?'Late':'Present'})),
+ fields:[F('employee','Employee','select',EMP.map(e=>e[0])),F('date','Date','date'),F('in','Check-in'),F('out','Check-out','text',0,{opt:1}),F('status','Status','status',['Present','Late','Absent'])],
+ cols:['employee','date','in','out','status']});
+
+const calcPay=r=>{r.net=(+r.basic||0)+(+r.allow||0)+(+r.bonus||0)+(+r.ot||0)-(+r.ded||0);return r};
+defMod('payroll',{title:'Payroll',one:'salary record',start:0,
+ data:EMP.map((e,i)=>calcPay({employee:e[0],basic:e[3],allow:Math.round(e[3]*.15),bonus:i%3?0:3000,ot:i%2?1200:0,ded:Math.round(e[3]*.06),status:i<5?'Paid':'Pending'})),
+ fields:[F('employee','Employee','select',EMP.map(e=>e[0])),F('basic','Basic (₹)','money'),F('allow','Allowances (₹)','money'),F('bonus','Bonus (₹)','money'),F('ot','Overtime (₹)','money'),F('ded','Deductions (₹)','money'),F('net','Net salary','money',0,{auto:1}),F('status','Payment status','status',['Paid','Pending'])],
+ cols:['employee','basic','allow','bonus','ot','ded','net','status'],calc:calcPay,
+ sum:r=>`<div><small>Earnings</small><b>${inr(r.net+ +r.ded)}</b></div><div><small>Deductions</small><b>${inr(r.ded)}</b></div><div><small>Net salary</small><b>${inr(r.net)}</b></div>`,
+ actions:[{k:'slip',l:'Slip',fn:r=>slip(r)}]});
+
+defMod('leave',{title:'Leave requests',one:'leave request',start:0,
+ data:[['Pallavi Das','Casual','2026-11-18','2026-11-19',2,'Pending'],['Hemanta Borah','Sick','2026-11-10','2026-11-14',5,'Approved'],['Tarun Kakoti','Earned','2026-12-01','2026-12-05',5,'Pending'],['Ritu Phukan','Casual','2026-10-25','2026-10-25',1,'Rejected']].map(l=>({employee:l[0],type:l[1],from:l[2],to:l[3],days:l[4],status:l[5]})),
+ fields:[F('employee','Employee','select',EMP.map(e=>e[0])),F('type','Leave type','select',['Casual','Sick','Earned','Unpaid']),F('from','From','date'),F('to','To','date'),F('days','Days','number'),F('status','Status','status',['Pending','Approved','Rejected'])],
+ cols:['employee','type','from','to','days','status'],
+ check:r=>r.to<r.from?'"To" date must be after "From" date.':null,
+ actions:['Approved','Rejected'].map(s=>({k:s,l:s==='Approved'?'Approve':'Reject',fn:r=>{r.status=s;toast(`Leave ${s.toLowerCase()} for ${r.employee}`);log(s+' leave','Leave');draw('leave')},show:r=>r.status==='Pending'}))});
+
+defMod('maintenance',{title:'Maintenance',one:'service record',wide:1,start:0,
+ data:[[6,'Clutch repair','Brahmaputra Auto Works',-2,12,18500,'In progress'],[3,'Full service (60,000 km)','Toyota Service Jorhat',-30,150,14200,'Completed'],[2,'Brake pad replacement','Kalita Motors',-12,90,6400,'Completed'],[5,'Inspection','Toyota Service Jorhat',4,180,2500,'Scheduled'],[9,'Tyre replacement','Assam Tyres',6,365,28000,'Scheduled'],[1,'Oil change','Kalita Motors',-45,45,3200,'Completed']].map(m=>({vehicle:M.vehicles.data[m[0]-1].reg,service:m[1],vendor:m[2],date:iso(m[3]),next:iso(m[4]),cost:m[5],status:m[6]})),
+ fields:[F('vehicle','Vehicle','select',()=>M.vehicles.data.map(v=>[v.reg,vLabel(v.reg)]),{fmt:v=>{const vo=veh(v);return vo?`<div style="display:flex;align-items:center;gap:8px"><img src="${getCarImg(vo.name,vo.category)}" style="width:32px;height:20px;object-fit:cover;border-radius:4px;flex:none" alt="" onerror="this.style.display='none'"><span>${esc(vLabel(v))}</span></div>`:esc(vLabel(v))}}),F('service','Service / repair'),F('vendor','Vendor'),F('date','Service date','date'),F('next','Next service','date'),F('cost','Cost (₹)','money'),F('status','Status','status',['Scheduled','In progress','Completed'])],
+ cols:['vehicle','service','vendor','date','next','cost','status']});
+
+defMod('vendors',{title:'Vendors',one:'vendor',start:0,
+ data:[['Kalita Motors','Maintenance','Bhaskar Kalita',148000],['Toyota Service Jorhat','Maintenance','Service desk',212000],['Assam Tyres','Spare parts','Mukul Das',96000],['Indian Oil – Zoo Road','Fuel supplier','Fleet account',384000],['Brahmaputra Auto Works','Maintenance','Rupam Nath',64000]].map((v,i)=>({name:v[0],type:v[1],contact:v[2],phone:phone(i+60),purchases:v[3]})),
+ fields:[F('name','Vendor name'),F('type','Type','select',['Maintenance','Fuel supplier','Spare parts']),F('contact','Contact person'),F('phone','Phone','tel'),F('purchases','Total purchases (₹)','money')],cols:['name','type','contact','phone','purchases']});
+const calcInv=r=>{r.status=+r.qty<=0?'Failed':+r.qty<+r.min?'Low stock':'Valid';return r};
+defMod('inventory',{title:'Inventory',one:'item',start:0,
+ data:[['Engine oil 5W-30 (L)',42,20,'Kalita Motors'],['Brake pads (set)',6,8,'Assam Tyres'],['Wiper blades',14,10,'Assam Tyres'],['Air filters',9,10,'Kalita Motors'],['Car tyres 215/60',4,8,'Assam Tyres']].map(i=>calcInv({item:i[0],qty:i[1],min:i[2],supplier:i[3]})),
+ fields:[F('item','Item'),F('qty','Stock quantity','number'),F('min','Minimum level','number'),F('supplier','Supplier','select',['Kalita Motors','Assam Tyres','Toyota Service Jorhat']),F('status','Stock status','text',0,{auto:1,fmt:v=>v==='Valid'?badge('Paid').replace('Paid','In stock'):v==='Failed'?badge('Failed').replace('Failed','Out of stock'):badge(v)})],cols:['item','qty','min','supplier','status'],calc:calcInv});
+
+const mkTx=(i,c,a,m,t,s)=>({id:'TXN-'+(80100+i),customer:c,date:iso(-i*2),amount:a,method:m,type:t,status:s});
+defMod('transactions',{title:'Transactions',one:'transaction',dk:'date',start:0,prefix:'',
+ data:[[CUS[0],11400,'UPI','Payment','Paid'],[CUS[1],5000,'Card','Deposit','Paid'],[CUS[2],8200,'Cash','Payment','Pending'],[CUS[4],5000,'UPI','Refund','Paid'],[CUS[6],16200,'Bank transfer','Payment','Paid'],[CUS[7],9500,'UPI','Payment','Paid'],[CUS[3],4000,'Card','Payment','Failed'],[CUS[5],7800,'Cash','Payment','Paid'],[CUS[0],5000,'Card','Deposit','Paid'],[CUS[2],12600,'UPI','Payment','Paid'],[CUS[1],6200,'UPI','Payment','Paid'],[CUS[4],21000,'Bank transfer','Payment','Paid']].map((t,i)=>mkTx(i,...t)),
+ fields:[F('customer','Customer','select',()=>M.customers.data.map(c=>c.name)),F('date','Date','date'),F('amount','Amount (₹)','money'),F('method','Payment method','select',['UPI','Card','Cash','Bank transfer'],{flt:1}),F('type','Type','select',['Payment','Deposit','Refund'],{flt:1}),F('status','Status','status',['Paid','Pending','Failed'])],
+ cols:['id','customer','date','amount','method','type','status']});
+M.transactions.data.forEach((r,i)=>r.id='TXN-'+(80100+i));M.transactions.next=(n=>()=>'TXN-'+(80100+ ++n))(M.transactions.data.length);
+
+defMod('expenses',{title:'Expenses',one:'expense',dk:'date',start:0,
+ data:[['Fuel','Diesel – fleet refill',46200],['Maintenance','Clutch repair AS06',18500],['Salaries','November payroll (part)',186000],['Office','Rent – Guwahati HQ',45000],['Fuel','CNG – Ertiga fleet',12800],['Office','Internet & utilities',8400],['Maintenance','Tyres – Creta',28000],['Insurance','Fortuner renewal',42000]].map((e,i)=>({category:e[0],desc:e[1],date:iso(-i*3),amount:e[2],status:i%4==3?'Pending':'Paid'})),
+ fields:[F('category','Category','select',['Fuel','Maintenance','Salaries','Office','Insurance','Marketing'],{flt:1}),F('desc','Description'),F('date','Date','date'),F('amount','Amount (₹)','money'),F('status','Status','status',['Paid','Pending'])],cols:['category','desc','date','amount','status']});
+
+defMod('invoices',{title:'Invoices',one:'invoice',start:0,
+ data:M.bookings.data.slice(0,8).map((b,i)=>({no:'INV-'+(5100+i),customer:b.customer,booking:b.id,date:b.pickup,amount:b.total,status:b.balance==0?'Paid':b.advance>0?'Partial':'Unpaid'})),
+ fields:[F('no','Invoice no.'),F('customer','Customer','select',CUS),F('booking','Booking ID'),F('date','Date','date'),F('amount','Amount (₹)','money'),F('status','Status','status',['Paid','Partial','Unpaid'])],cols:['no','customer','booking','date','amount','status'],
+ actions:[{k:'prev',l:'Preview',fn:r=>invoice(r)}]});
+
+defMod('payments',{title:'Payments',one:'payment',dk:'date',start:0,
+ data:M.transactions.data.filter(t=>t.type==='Payment').map((t,i)=>({receipt:'RC-'+(9100+i),customer:t.customer,date:t.date,amount:t.amount,method:t.method,status:t.status})),
+ fields:[F('receipt','Receipt no.'),F('customer','Customer','select',CUS),F('date','Date','date'),F('amount','Amount (₹)','money'),F('method','Method','select',['UPI','Card','Cash','Bank transfer'],{flt:1}),F('status','Status','status',['Paid','Pending','Failed'])],cols:['receipt','customer','date','amount','method','status']});
+
+defMod('branches',{title:'Branches',one:'branch',start:0,
+ data:[['Guwahati HQ','Jyoti Mahanta',6,420000,310000],['Jorhat','Dev Choudhury',3,210000,150000],['Dibrugarh','Sanjib Gogoi',3,160000,118000]].map((b,i)=>({name:b[0],manager:b[1],vehicles:b[2]*1,staff:[4,2,2][i],revenue:b[3],expenses:b[4]})),
+ fields:[F('name','Branch name'),F('manager','Manager','select',EMP.map(e=>e[0])),F('vehicles','Vehicles','number'),F('staff','Employees','number'),F('revenue','Revenue (₹)','money'),F('expenses','Expenses (₹)','money')],cols:['name','manager','vehicles','staff','revenue','expenses']});
+defMod('packages',{title:'Rental packages',one:'package',start:0,
+ data:[['City hop – 8 hrs / 80 km','Sedan',1800,250,80,12],['Outstation – per day','MPV',2600,350,250,14],['Premium SUV day','SUV',5800,750,250,22],['Wedding / event','Sedan',3200,450,100,15],['Airport transfer','MPV',1500,0,40,12]].map(p=>({name:p[0],cat:p[1],daily:p[2],hourly:p[3],limit:p[4],extra:p[5]})),
+ fields:[F('name','Package name'),F('cat','Category','select',['Sedan','MPV','SUV','Hatchback']),F('daily','Daily rate (₹)','money'),F('hourly','Hourly rate (₹)','money'),F('limit','Included km','number'),F('extra','Extra per km (₹)','money')],cols:['name','cat','daily','hourly','limit','extra']});
+defMod('documents',{title:'Documents',one:'document',start:0,
+ data:[['Insurance policy','Fortuner AS06FK…','Insurance',iso(300)],['Registration certificate','Innova Crysta','RC',iso(250)],['Driving licence','Manoj Rabha','Licence',iso(-5)],['Rental agreement template','Company','Contract',iso(700)],['Pollution certificate','Ertiga','PUC',iso(20)],['Trade licence','Guwahati HQ','Licence',iso(90)]].map(d=>({name:d[0],owner:d[1],type:d[2],expiry:d[3],status:d[3]<iso(0)?'Expired':d[3]<iso(30)?'Expiring':'Valid'})),
+ fields:[F('name','Document name'),F('owner','Belongs to'),F('type','Type','select',['Insurance','RC','Licence','PUC','Contract']),F('expiry','Expiry','date'),F('status','Status','text',0,{auto:1,fmt:badge})],cols:['name','owner','type','expiry','status'],
+ calc:r=>{r.status=r.expiry<iso(0)?'Expired':r.expiry<iso(30)?'Expiring':'Valid'}});
+defMod('audit',{title:'Audit logs',one:'log',add:false,start:0,
+ data:[['Approved leave request','Leave','Anika Sen'],['Created booking BK-2409','Bookings','Pallavi Das'],['Updated vehicle price AS01CK…','Vehicles','Dev Choudhury'],['Exported payroll CSV','Payroll','Ritu Phukan'],['Changed role for Tarun Kakoti','Roles','Anika Sen'],['Marked invoice INV-5103 paid','Invoices','Ritu Phukan']].map((a,i)=>({time:new Date(2026,10,13,10-i,5+i*7).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}),user:a[2],action:a[0],module:a[1]})),
+ fields:[F('time','Time'),F('user','User'),F('action','Action'),F('module','Module')],cols:['time','user','action','module'],noedit:1});
+
+/* ================= UI primitives ================= */
+function toast(msg){const t=document.createElement('div');t.className='toast';t.innerHTML=ic('circle-check')+esc(msg);$('#toasts').append(t);refresh();setTimeout(()=>t.remove(),3200)}
+function modal(html,o={}){const r=$('#modal-root');r.innerHTML=`<div class="mb"><div class="md" style="max-width:${o.w||560}px" role="dialog" aria-modal="true">${html}</div></div>`;refresh();const b=r.firstChild;b.addEventListener('mousedown',e=>{if(e.target===b)closeModal()});b.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeModal()});o.onmount?.($('.md',r))}
+function closeModal(){$('#modal-root').innerHTML=''}
+function confirmBox(msg,cb,label='Delete'){modal(`<h3>Are you sure?</h3><p>${esc(msg)}</p><div class="ma"><button class="btn" data-close>Keep</button><button class="btn dng" id="cfm">${esc(label)}</button></div>`,{w:420,onmount:b=>$('#cfm',b).onclick=()=>{closeModal();cb()}})}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+/* ================= Generic data table ================= */
+const S={},HOSTS={};
+const opts=f=>typeof f.o==='function'?f.o():f.o||[];
+const optVal=o=>Array.isArray(o)?o[0]:o,optLbl=o=>Array.isArray(o)?o[1]:o;
+const cell=(f,r)=>{const v=r[f.k];if(f.fmt)return f.fmt(v,r);if(f.k==='name'&&r.reg&&r.category){const img=getCarImg(r.name,r.category);return`<div style="display:flex;align-items:center;gap:10px"><img src="${img}" style="width:36px;height:24px;object-fit:cover;border-radius:4px;flex:none" alt="" onerror="this.style.display='none'"><b>${esc(v)}</b></div>`}return f.t==='money'?inr(v):f.t==='date'?fdate(v):f.t==='status'?badge(v):f.t==='rating'?`<span class="star">★</span> ${(+v).toFixed(1)}`:f.t==='number'&&f.k.match(/km|dist/)?(+v).toLocaleString('en-IN'):esc(v)};
+let BR='All';const scope=a=>BR==='All'?a:a.filter(r=>r.branch===BR);
+function mount(key,host){const m=M[key];HOSTS[key]=host;const s=S[key]||(S[key]={q:'',sort:'',dir:1,page:1,f:{},from:'',to:''});
+ const fl=m.fields.filter(f=>f.t==='status'||f.flt);
+ host.innerHTML=`<div class="tb"><div class="sr">${ic('search')}<input data-q placeholder="Search ${m.title.toLowerCase()}…" value="${esc(s.q)}" aria-label="Search ${m.title}"></div>${fl.map(f=>`<select data-f="${f.k}" aria-label="${f.l}"><option value="">${f.l}: all</option>${opts(f).map(o=>`<option ${s.f[f.k]===optVal(o)?'selected':''}>${esc(optVal(o))}</option>`).join('')}</select>`).join('')}${m.dk?`<input type="date" data-d="from" style="width:140px" value="${s.from}" aria-label="From date"><input type="date" data-d="to" style="width:140px" value="${s.to}" aria-label="To date">`:''}<span class="sp"></span><button class="btn" data-a="csv">${ic('download')}Export CSV</button>${m.add===false?'':`<button class="btn pri" data-a="add">${ic('plus')}Add ${m.one}</button>`}</div><div class="tw"></div><div class="pg"></div>`;
+ host.addEventListener('input',e=>{if(e.target.matches('[data-q]')){s.q=e.target.value;s.page=1;draw(key)}});
+ host.addEventListener('change',e=>{const t=e.target;if(t.dataset.f){s.f[t.dataset.f]=t.value;s.page=1;draw(key)}if(t.dataset.d){s[t.dataset.d]=t.value;s.page=1;draw(key)}});
+ host.addEventListener('click',e=>{const b=e.target.closest('[data-a],th[data-s],[data-p]');if(!b)return;
+  if(b.dataset.s){s.dir=s.sort===b.dataset.s?-s.dir:1;s.sort=b.dataset.s;return draw(key)}
+  if(b.dataset.p){s.page=+b.dataset.p;return draw(key)}
+  const id=b.dataset.id,r=id!=null?m.data.find(x=>String(x.id)===id):null,a=b.dataset.a;
+  if(a==='add')openForm(key);else if(a==='edit')openForm(key,r.id);
+  else if(a==='del')confirmBox(`Delete this ${m.one}? This can't be undone.`,()=>{m.data.splice(m.data.indexOf(r),1);toast(m.one[0].toUpperCase()+m.one.slice(1)+' deleted');log('Deleted '+m.one,m.title);draw(key);dashTick()});
+  else if(a==='csv')csv(m.title,[m.cols.map(k=>m.fields.find(f=>f.k===k)?.l||k),...rows(key).map(r=>m.cols.map(k=>r[k]))]);
+  else m.actions?.find(x=>x.k===a)?.fn(r)});
+ draw(key)}
+function rows(key){const m=M[key],s=S[key];let a=m.scoped?scope(m.data):m.data;
+ if(s.q){const q=s.q.toLowerCase();a=a.filter(r=>m.cols.some(k=>String(r[k]).toLowerCase().includes(q)))}
+ Object.entries(s.f).forEach(([k,v])=>{if(v)a=a.filter(r=>r[k]===v)});
+ if(m.dk){if(s.from)a=a.filter(r=>r[m.dk]>=s.from);if(s.to)a=a.filter(r=>r[m.dk]<=s.to)}
+ if(s.sort)a=[...a].sort((x,y)=>(typeof x[s.sort]==='number'?x[s.sort]-y[s.sort]:String(x[s.sort]).localeCompare(String(y[s.sort])))*s.dir);return a}
+const PER=8;
+function draw(key){const host=HOSTS[key];if(!host||!host.isConnected)return;const m=M[key],s=S[key],a=rows(key),pages=Math.max(1,Math.ceil(a.length/PER));s.page=Math.min(s.page,pages);
+ const cs=m.cols.map(k=>m.fields.find(f=>f.k===k)||{k,l:k==='id'?'ID':k,t:'text'}),pg=a.slice((s.page-1)*PER,s.page*PER);
+ $('.tw',host).innerHTML=`<table><thead><tr>${cs.map(f=>`<th data-s="${f.k}">${f.l.replace(/ \(.*\)/,'')}${s.sort===f.k?(s.dir>0?' ↑':' ↓'):''}</th>`).join('')}<th class="ns"></th></tr></thead><tbody>${pg.map(r=>`<tr>${cs.map(f=>`<td>${cell(f,r)}</td>`).join('')}<td class="ac">${(m.actions||[]).filter(x=>!x.show||x.show(r)).map(x=>`<button class="btn sm" data-a="${x.k}" data-id="${r.id}">${x.l}</button>`).join('')}${m.noedit?'':`<button class="btn sm" data-a="edit" data-id="${r.id}" aria-label="Edit">${ic('pencil')}</button><button class="btn sm" data-a="del" data-id="${r.id}" aria-label="Delete">${ic('trash-2')}</button>`}</td></tr>`).join('')}</tbody></table>${a.length?'':`<div class="empty">No ${m.title.toLowerCase()} match your filters. Clear the search or add a new ${m.one}.</div>`}`;
+ $('.pg',host).innerHTML=`<span>Showing ${a.length?(s.page-1)*PER+1:0}–${Math.min(s.page*PER,a.length)} of ${a.length}</span><div><button data-p="${s.page-1}" ${s.page<2?'disabled':''} aria-label="Previous">‹</button>${[...Array(pages)].map((_,i)=>`<button data-p="${i+1}" class="${i+1===s.page?'on':''}">${i+1}</button>`).join('')}<button data-p="${s.page+1}" ${s.page>=pages?'disabled':''} aria-label="Next">›</button></div>`;refresh()}
+function csv(name,data){const t=data.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/csv'}));a.download=name.toLowerCase().replace(/\W+/g,'-')+'.csv';a.click();toast(`${name} exported as CSV`)}
+const inputFor=(f,v)=>f.t==='select'||f.t==='status'?`<select name="${f.k}">${opts(f).map(o=>`<option value="${esc(optVal(o))}" ${String(optVal(o))===String(v)?'selected':''}>${esc(optLbl(o))}</option>`).join('')}</select>`:`<input name="${f.k}" type="${['number','money','rating'].includes(f.t)?'number':f.t==='date'?'date':f.t==='email'?'email':f.t==='tel'?'tel':'text'}" ${f.t==='rating'?'step="0.1" max="5"':''} min="0" value="${esc(v??'')}">`;
+function readForm(form,m){const o={};m.fields.filter(f=>!f.auto).forEach(f=>{const e=form.elements[f.k];if(!e)return;o[f.k]=['number','money','rating'].includes(f.t)?(e.value===''?NaN:+e.value):e.value.trim()});return o}
+function openForm(key,id){const m=M[key],r=id!=null?m.data.find(x=>x.id==id):null,fs=m.fields.filter(f=>!f.auto);
+ const dflt={status:m.fields.find(f=>f.t==='status')&&optVal(opts(m.fields.find(f=>f.t==='status'))[0]),date:iso(0),pickup:iso(1),ret:iso(2),deposit:5000,extra:0,advance:0,rating:4};
+ modal(`<h3>${r?'Edit':'Add'} ${m.one}</h3><form novalidate><div class="fg">${fs.map(f=>`<label class="${f.full||(f.k==='desc')?'full':''}">${f.l}${inputFor(f,r?r[f.k]:dflt[f.k]??(f.t==='date'?iso(0):f.t==='select'?optVal(opts(f)[0]):''))}</label>`).join('')}</div>${m.sum?'<div class="sum"></div>':''}<div class="err" role="alert"></div><div class="ma"><button type="button" class="btn" data-close>Cancel</button><button class="btn pri">${r?'Save changes':'Add '+m.one}</button></div></form>`,{w:m.wide?720:560,onmount:box=>{const form=$('form',box),upd=()=>{if(m.sum&&m.calc){const o={...(r||{}),...readForm(form,m)};m.calc(o);$('.sum',box).innerHTML=m.sum(o)}};form.addEventListener('input',upd);upd();
+  form.onsubmit=e=>{e.preventDefault();const v=readForm(form,m),err=$('.err',box);
+   for(const f of fs){const x=v[f.k];if(!f.opt&&(x===''||Number.isNaN(x)))return err.textContent=`${f.l} is required.`;if(typeof x==='number'&&x<0)return err.textContent=`${f.l} can't be negative.`;if(f.t==='rating'&&x>5)return err.textContent='Rating must be between 0 and 5.';if(f.t==='email'&&!/^\S+@\S+\.\S+$/.test(x))return err.textContent='Enter a valid email address.';if(f.t==='tel'&&!/^[+\d][\d\s-]{7,}$/.test(x))return err.textContent='Enter a valid phone number.'}
+   const rec={...(r||{}),...v};m.calc?.(rec);const bad=m.check?.(rec,r);if(bad)return err.textContent=bad;
+   if(r)Object.assign(r,rec);else{rec.id=m.next();m.data.unshift(rec)}
+   closeModal();toast(r?`${m.title} updated`:`${m.one[0].toUpperCase()+m.one.slice(1)} added`);log((r?'Edited ':'Added ')+m.one,m.title);draw(key);dashTick();if(key==='vehicles')vehiclesRedraw()}}})}
+
+/* ================= Detail views ================= */
+function bookingDetail(b){const c=M.customers.data.find(x=>x.name===b.customer);modal(`<h3>${b.id} ${badge(b.status)}</h3><div class="kv2"><div><small>Customer</small><b>${esc(b.customer)}</b></div><div><small>Phone</small><b>${esc(c?.phone||'—')}</b></div><div><small>Vehicle</small><b>${esc(vLabel(b.vehicle))}</b></div><div><small>Driver</small><b>${esc(b.driver)}</b></div><div><small>Pickup</small><b>${fdate(b.pickup)} · ${esc(b.pickupLoc)}</b></div><div><small>Return</small><b>${fdate(b.ret)} · ${esc(b.dropLoc)}</b></div><div><small>Rental (${b.days} days)</small><b>${inr(b.price)}</b></div><div><small>Additional charges</small><b>${inr(b.extra)}</b></div><div><small>Total</small><b>${inr(b.total)}</b></div><div><small>Advance / balance</small><b>${inr(b.advance)} / ${inr(b.balance)}</b></div><div><small>Security deposit</small><b>${inr(b.deposit)}</b></div></div><div class="ma"><button class="btn" data-close>Close</button><button class="btn pri" id="bi">${ic('file-text')}View agreement</button></div>`,{onmount:m=>$('#bi',m).onclick=()=>agreement(b)})}
+function agreement(b){modal(`<div class="inv"><h3>Vehicle Rental Agreement</h3><p>This agreement is made on ${fdate(iso(0))} between <b>RentalPro Mobility Pvt. Ltd.</b>, Guwahati, Assam (“Owner”) and <b>${esc(b.customer)}</b> (“Renter”).</p><p><b>Vehicle:</b> ${esc(vLabel(b.vehicle))}<br><b>Period:</b> ${fdate(b.pickup)} to ${fdate(b.ret)} (${b.days} days)<br><b>Rental:</b> ${inr(b.total)} · <b>Deposit:</b> ${inr(b.deposit)}</p><ol><li>The renter holds a valid driving licence and will drive only within the agreed region.</li><li>Fuel is returned at the level supplied. Extra distance is billed per package rates.</li><li>The deposit is refunded within 5 working days after inspection.</li><li>Late return is charged at the hourly rate after a 1-hour grace period.</li></ol><p>Sample document for prototype use — not legal advice.</p></div><div class="ma no-print"><button class="btn" data-close>Close</button><button class="btn" onclick="toast('Choose “Save as PDF” in the print dialog');print()">${ic('download')}Download PDF</button><button class="btn pri" onclick="print()">${ic('printer')}Print</button></div>`,{w:640})}
+function invoice(r){const b=M.bookings.data.find(x=>x.id===r.booking)||{price:r.amount,extra:0,deposit:0,advance:0,balance:0,days:1,vehicle:'',pickup:r.date};modal(`<div class="inv"><div class="ih"><div><b style="font-size:18px">RentalPro Mobility</b><br>GS Road, Guwahati 781005<br>GSTIN 18AABCR1234F1Z5</div><div style="text-align:right"><h3>${esc(r.no)}</h3>${fdate(r.date)}<br>${badge(r.status)}</div></div><p>Billed to <b>${esc(r.customer)}</b> · Booking ${esc(r.booking)}</p><table><thead><tr><th>Description</th><th>Amount</th></tr></thead><tbody><tr><td>Vehicle rental – ${esc(vLabel(b.vehicle))} (${b.days} days)</td><td>${inr(b.price)}</td></tr><tr><td>Additional charges</td><td>${inr(b.extra)}</td></tr><tr><td>GST @ 5% (incl.)</td><td>${inr(Math.round(r.amount*5/105))}</td></tr></tbody></table><div class="tot"><div>Total <b>${inr(r.amount)}</b></div><div>Advance received ${inr(b.advance)}</div><div><b>Balance due ${inr(b.balance)}</b></div><div>Security deposit held ${inr(b.deposit)} (refundable)</div></div></div><div class="ma no-print"><button class="btn" data-close>Close</button><button class="btn" onclick="toast('Choose “Save as PDF” in the print dialog');print()">${ic('download')}Download PDF</button><button class="btn pri" onclick="print()">${ic('printer')}Print</button></div>`,{w:640})}
+function slip(r){const e=r.net+ +r.ded;modal(`<div class="inv"><h3>Salary slip — November 2026</h3><p><b>${esc(r.employee)}</b> · ${badge(r.status)}</p><table><tbody><tr><td>Basic</td><td>${inr(r.basic)}</td></tr><tr><td>Allowances</td><td>${inr(r.allow)}</td></tr><tr><td>Bonus</td><td>${inr(r.bonus)}</td></tr><tr><td>Overtime</td><td>${inr(r.ot)}</td></tr><tr><td>Deductions</td><td>− ${inr(r.ded)}</td></tr><tr><td><b>Net salary</b></td><td><b>${inr(r.net)}</b></td></tr></tbody></table></div><div class="ma no-print"><button class="btn" data-close>Close</button><button class="btn pri" onclick="print()">${ic('printer')}Print</button></div>`,{w:480})}
+function salaryCalc(){modal(`<h3>Salary calculator</h3><div class="fg">${[['basic','Basic',30000],['allow','Allowances',4500],['bonus','Bonus',0],['ot','Overtime',0],['ded','Deductions',1800]].map(f=>`<label>${f[1]} (₹)<input type="number" min="0" name="${f[0]}" value="${f[2]}"></label>`).join('')}</div><div class="sum" style="grid-template-columns:1fr 1fr"><div><small>Gross</small><b id="cg"></b></div><div><small>Net payable</small><b id="cn"></b></div></div><div class="ma"><button class="btn" data-close>Close</button></div>`,{onmount:b=>{const u=()=>{const v=k=>+$(`[name=${k}]`,b).value||0,g=v('basic')+v('allow')+v('bonus')+v('ot');$('#cg',b).textContent=inr(g);$('#cn',b).textContent=inr(g-v('ded'))};b.addEventListener('input',u);u()}})}
+
+/* ================= Charts & map ================= */
+const CH={};let TIM=[];
+function chart(id,cfg){CH[id]?.destroy();const el=document.getElementById(id);if(!el||!window.Chart)return;const st=getComputedStyle(document.documentElement);Chart.defaults.font.family='Manrope';Chart.defaults.color=st.getPropertyValue('--mu').trim();Chart.defaults.borderColor=st.getPropertyValue('--bd').trim();CH[id]=new Chart(el,{...cfg,options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:8}},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.dataset.money===false?c.parsed.y:inr(c.parsed.y)}`}}},scales:cfg.type==='doughnut'?{}:{y:{ticks:{callback:v=>cfg.money===false?v:v>=1e5?'₹'+(v/1e5).toFixed(0)+'L':'₹'+v}},x:{grid:{display:false}}},...cfg.options}})}
+const AC=()=>getComputedStyle(document.documentElement).getPropertyValue('--ac').trim()||'#0e7c66';
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov'];
+const wk=n=>[...Array(n)].map((_,i)=>`W${i+1}`);
+const dl=[...Array(14)].map((_,i)=>{const d=new Date(TODAY);d.setDate(d.getDate()-13+i);return d.getDate()+' '+d.toLocaleString('en',{month:'short'})});
+const SER={Daily:[dl,58000],Weekly:[wk(8),310000],Monthly:[MON,1450000],Yearly:[['2022','2023','2024','2025','2026'],9e6]};
+const series=(k)=>{const[l,m]=SER[k],rev=l.map((_,i)=>Math.round(m*(.72+.55*((i*7+3)%10)/10+i*(k==='Yearly'?.12:.012))/1000)*1000);return{l,rev,exp:rev.map((r,i)=>Math.round(r*(.52+((i*3)%5)/40)/1000)*1000)}};
+const RB=series('Monthly').rev,EX=series('Monthly').exp;
+
+const TRK=[['Innova Crysta','AS01CK1733','Biren Hazarika','Shillong',30,64,70,42,61],['Scorpio','AS03DM1000','Manoj Rabha','Kaziranga',62,50,35,18,96],['Swift Dzire','AS01JK3199','Dipak Nath','Tinsukia',82,30,85,66,45],['Hyundai Creta','AS03EK2466','Kabir Ali','Sivasagar',48,28,60,22,28],['Ertiga','AS01FM3932','Pranjal Saikia','Tezpur',18,24,45,28,80],['Fortuner','AS06EK2198','Hemanta Borah','Majuli',70,76,40,60,12]].map(t=>({veh:t[0],reg:t[1],driver:t[2],dest:t[3],x:t[4],y:t[5],tx:t[6],ty:t[7],p:t[8]*0+Math.round(20+Math.random()*60),km:t[8],st:t[3]==='Tezpur'?'On trip':'On trip'}));
+function mapHTML(big){return `<div class="map ${big?'big':''}"><svg class="bg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 70 C25 55 40 80 65 60 S90 45 100 50 L100 56 C90 52 70 66 62 66 S28 86 0 76Z" fill="#b9d3e6" opacity=".7"/><g fill="none" stroke="#c9d1cc" stroke-width=".7"><path d="M0 40 L40 35 L100 20"/><path d="M20 0 L30 50 L18 100"/><path d="M0 85 L50 78 L100 90"/><path d="M60 0 L65 40 L82 100"/><path d="M0 20 L45 25 L100 60"/></g></svg>${TRK.map((t,i)=>`<div class="mk" data-i="${i}" style="left:${t.x}%;top:${t.y}%"><span>${t.reg}</span>${ic('car-front')}</div>`).join('')}<div class="pop" hidden></div></div>`}
+function startMap(host){TIM.forEach(clearInterval);TIM=[];const box=$('.map',host),pop=$('.pop',box);let sel=-1;
+ const show=i=>{sel=i;const t=TRK[i];$$('.mk',box).forEach(m=>m.classList.toggle('sel',+m.dataset.i===i));pop.hidden=false;pop.innerHTML=`<b>${t.veh} · ${t.reg}</b><br>Driver: ${t.driver}<br>To: ${t.dest} ${badge(t.st)}<div class="bar" style="margin:8px 0 4px"><i style="width:${t.p}%"></i></div>${t.p}% · ${t.km} km travelled · ETA ${p2(14+i%4)}:${p2(10+i*8)}`};
+ box.addEventListener('click',e=>{const m=e.target.closest('.mk');if(m)show(+m.dataset.i);else if(!e.target.closest('.pop')){pop.hidden=true;sel=-1}});host.addEventListener('click',e=>{const l=e.target.closest('[data-v]');if(l)show(+l.dataset.v)});
+ TIM.push(setInterval(()=>{TRK.forEach((t,i)=>{t.x+=(t.tx-t.x)*.06;t.y+=(t.ty-t.y)*.06;t.p=Math.min(100,t.p+1);t.km+=1;if(Math.abs(t.tx-t.x)<2){t.tx=10+Math.random()*80;t.ty=12+Math.random()*70;t.p=Math.max(5,t.p-40)}const m=$(`.mk[data-i="${i}"]`,box);if(m){m.style.left=t.x+'%';m.style.top=t.y+'%'}const b=$(`[data-v="${i}"] .bar i`,host);if(b)b.style.width=t.p+'%'});if(sel>=0)show(sel)},2200))}
+const trackList=()=>`<div class="list">${TRK.map((t,i)=>`<div class="li" data-v="${i}" style="cursor:pointer"><span class="ki info">${ic('navigation')}</span><div style="flex:1"><b>${t.reg}</b> ${badge(t.st)}<small>${t.veh} · ${t.driver}</small><small>→ ${t.dest}</small><div class="bar" style="margin-top:6px"><i style="width:${t.p}%"></i></div></div></div>`).join('')}</div>`;
+
+/* ================= Pages ================= */
+const P={};
+const head=(t,s,a='')=>`<div class="ph"><div><h1>${t}</h1><p>${s}</p></div><div class="pa">${a}</div></div>`;
+const card=(t,body,sub='')=>`<section class="card"><div class="ch"><h2>${t}</h2>${sub}</div>${body}</section>`;
+const kpi=(i,l,v,d,up=1)=>`<div class="card kpi"><div class="kt">${l}<span class="ki">${ic(i)}</span></div><div class="kv">${v}</div><div class="kd"><span class="${up?'up':'dn'}">${d}</span> vs last month</div></div>`;
+const alerts=()=>{const A=[],V=M.vehicles.data;V.filter(v=>v.ins<=iso(30)).forEach(v=>A.push(['shield-alert','warn',`Insurance ${v.ins<iso(0)?'expired':'expires '+fdate(v.ins)}`,`${v.name} · ${v.reg}`]));M.bookings.data.filter(b=>b.status==='Overdue').forEach(b=>A.push(['clock','bad',`Overdue rental ${b.id}`,`${b.customer} · ${vLabel(b.vehicle)}`]));const pp=M.payroll.data.filter(p=>p.status==='Pending');if(pp.length)A.push(['wallet','warn',`${pp.length} salary payments pending`,`${inr(sum(pp,'net'))} due for November`]);M.maintenance.data.filter(m=>m.status==='Scheduled').forEach(m=>A.push(['wrench','info','Maintenance due '+fdate(m.date),`${m.service} · ${vLabel(m.vehicle)}`]));const ob=M.customers.data.filter(c=>c.balance>0);A.push(['indian-rupee','bad',`${inr(sum(ob,'balance'))} outstanding`,`${ob.length} customers with unpaid balance`]);M.inventory.data.filter(i=>i.status==='Low stock').forEach(i=>A.push(['package','warn','Low stock: '+i.item,`${i.qty} left (min ${i.min})`]));return A};
+const alertList=n=>`<div class="list">${alerts().slice(0,n||99).map((a,i)=>`<div class="li ${n?'':'unread'}"><span class="ki ${a[1]}">${ic(a[0])}</span><div><b>${a[2]}</b><small>${a[3]}</small></div></div>`).join('')}</div>`;
+const st=(h,rs)=>`<div class="tw"><table><thead><tr>${h.map(x=>`<th class="ns">${x}</th>`).join('')}</tr></thead><tbody>${rs.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+
+let dashKey='Monthly';
+function dashTick(){if(CUR==='dashboard')P.dashboard()}
+P.dashboard=()=>{const V=scope(M.vehicles.data),c=s=>V.filter(v=>v.status===s).length,out=sum(M.bookings.data,'balance'),rev=1842500,exp=638200;
+ $('#view').innerHTML=head(`Good morning, Anika`,`${TODAY.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${BR==='All'?'All branches':BR}`,`<button class="btn" data-go="calendar">${ic('calendar')}Calendar</button><button class="btn pri" id="nb">${ic('plus')}New booking</button>`)+
+ `<div class="grid g4">${kpi('car','Total fleet',V.length,'+2')}${kpi('circle-check','Available',c('Available'),'+1')}${kpi('key-round','Currently rented',c('Rented'),'+12%')}${kpi('calendar-check','Active bookings',M.bookings.data.filter(b=>['Active','Confirmed'].includes(b.status)).length,'+8%')}${kpi('indian-rupee','Total revenue',inr(rev),'+12.4%')}${kpi('hourglass','Outstanding payments',inr(out),'−3.1%')}${kpi('receipt','Monthly expenses',inr(exp),'+4.1%',0)}${kpi('trending-up','Net profit',inr(rev-exp),'+16.8%')}</div>
+ <div class="grid g21">${card('Revenue vs expenses',`<div class="cw"><canvas id="rc"></canvas></div>`,`<div class="seg" id="rs">${Object.keys(SER).map(k=>`<button class="${k===dashKey?'on':''}">${k}</button>`).join('')}</div>`)}${card('Fleet utilization',`<div class="cw" style="height:200px"><canvas id="uc"></canvas></div>${['Available','Rented','Maintenance','Reserved'].map(s=>`<div class="rl" style="padding:7px 0"><span>${badge(s)}</span><b>${c(s)} vehicles</b></div>`).join('')}`)}</div>
+ <div class="grid g2">${card('Upcoming bookings',st(['Customer','Vehicle','Pickup','Return','Status'],M.bookings.data.filter(b=>b.pickup>=iso(0)||b.status==='Active').slice(0,6).map(b=>[esc(b.customer),esc(veh(b.vehicle)?.name),fdate(b.pickup),fdate(b.ret),badge(b.status)])),`<button class="btn sm" data-go="bookings">View all</button>`)}${card('Live fleet overview',mapHTML(),`<button class="btn sm" data-go="tracking">Open tracking</button>`)}</div>
+ <div class="grid g21">${card('Recent transactions',st(['Customer','ID','Amount','Method','Status'],M.transactions.data.slice(0,6).map(t=>[esc(t.customer),t.id,inr(t.amount),t.method,badge(t.status)])))}${card('Alerts & notifications',alertList(6),`<button class="btn sm" data-go="notifications">All</button>`)}</div>`;
+ const d=series(dashKey);chart('rc',{type:'line',data:{labels:d.l,datasets:[{label:'Revenue',data:d.rev,borderColor:AC(),backgroundColor:AC()+'22',fill:true,tension:.35,pointRadius:2},{label:'Expenses',data:d.exp,borderColor:'#d9822b',borderDash:[5,4],tension:.35,pointRadius:0}]}});
+ chart('uc',{type:'doughnut',data:{labels:['Available','Rented','Maintenance','Reserved'],datasets:[{data:['Available','Rented','Maintenance','Reserved'].map(c),backgroundColor:[AC(),'#3b82f6','#d9822b','#8b5cf6'],borderWidth:0,money:false}]},options:{cutout:'68%',plugins:{tooltip:{callbacks:{label:x=>` ${x.label}: ${x.parsed}`}}}}});
+ $('#rs').onclick=e=>{if(e.target.tagName==='BUTTON'){dashKey=e.target.textContent;P.dashboard()}};$('#nb').onclick=()=>openForm('bookings');startMap($('#view'))};
+
+const modPage=(keys,t,s,extra='',after)=>()=>{$('#view').innerHTML=head(t,s,extra)+keys.map(k=>`<section class="card" data-m="${k}" style="margin-bottom:16px"></section>`).join('');$$('[data-m]').forEach(h=>mount(h.dataset.m,h));after?.()};
+['customers','employees','drivers','attendance','leave','maintenance','branches','packages','documents','audit'].forEach(k=>{});
+P.customers=modPage(['customers'],'Customers','Directory, verification status and outstanding balances.');
+P.drivers=modPage(['drivers'],'Drivers','Licences, assignments and performance.');
+P.employees=modPage(['employees'],'Employees & HR','Staff directory, departments and salary information.');
+P.attendance=()=>{modPage(['attendance'],'Attendance','Daily check-ins, shifts and monthly overview.','',()=>{const f=M.attendance.data,p=f.filter(x=>x.status==='Present').length;$('#view').insertAdjacentHTML('afterbegin','');$('#view .ph').insertAdjacentHTML('afterend',`<div class="grid g4">${kpi('user-check','Present today',p,'')}${kpi('clock','Late',f.filter(x=>x.status==='Late').length,'',0)}${kpi('user-x','Absent',f.filter(x=>x.status==='Absent').length,'',0)}${card('Shifts',`<small>Morning 09:00–17:00<br>Evening 13:00–21:00</small>`)}</div>`);$$('.kpi .kd').forEach(e=>e.innerHTML='today')})()};
+P.leave=modPage(['leave'],'Leave & holidays','Approve or reject requests. Upcoming holidays are listed below.','',()=>$('#view').insertAdjacentHTML('beforeend',card('Holiday calendar',st(['Date','Holiday','Type'],[['2026-11-15','Bhai Dooj','Optional'],['2026-12-25','Christmas','Public'],['2027-01-14','Magh Bihu','Public'],['2027-01-26','Republic Day','Public']].map(h=>[fdate(h[0]),h[1],badge(h[2]==='Public'?'Paid':'Pending').replace('Paid','Public').replace('Pending','Optional')])))));
+P.payroll=()=>{const d=M.payroll.data;modPage(['payroll'],'Payroll & salaries','November 2026 payroll overview.',`<button class="btn" id="sc">${ic('calculator')}Salary calculator</button>`,()=>{$('#view .ph').insertAdjacentHTML('afterend',`<div class="grid g4">${kpi('wallet','Total payroll',inr(sum(d,'net')),'+2.1%')}${kpi('circle-check','Paid',inr(sum(d.filter(x=>x.status==='Paid'),'net')),'')}${kpi('hourglass','Pending',inr(sum(d.filter(x=>x.status==='Pending'),'net')),'',0)}${kpi('users','Employees',d.length,'')}</div>`);$('#sc').onclick=salaryCalc})()};
+P.maintenance=()=>modPage(['maintenance','inventory'],'Maintenance','Service history, upcoming services, parts inventory.')();
+P.vendors=modPage(['vendors'],'Vendors','Maintenance, fuel and spare-parts suppliers.');
+P.trips=()=>modPage(['trips'],'Trips & destinations','Plan trips and track fuel costs.')();
+P.transactions=()=>{const t=M.transactions.data,r=sum(t.filter(x=>x.type==='Payment'&&x.status==='Paid'),'amount'),e=sum(M.expenses.data,'amount');modPage(['transactions'],'Transactions','Customer payments, deposits and refunds.','',()=>$('#view .ph').insertAdjacentHTML('afterend',`<div class="grid g4">${kpi('arrow-down-left','Collected',inr(r),'')}${kpi('arrow-up-right','Expenses',inr(e),'',0)}${kpi('shield','Deposits held',inr(sum(t.filter(x=>x.type==='Deposit'),'amount')),'')}${kpi('undo-2','Refunds',inr(sum(t.filter(x=>x.type==='Refund'),'amount')),'')}</div>`))()};
+P.expenses=()=>{const e=M.expenses.data,by=k=>sum(e.filter(x=>x.category===k),'amount');modPage(['expenses'],'Expenses','Fuel, maintenance, salaries and office costs.','',()=>$('#view .ph').insertAdjacentHTML('afterend',`<div class="grid g4">${['Fuel','Maintenance','Salaries','Office'].map(k=>kpi('receipt',k,inr(by(k)),'')).join('')}</div>`))()};
+P.invoices=modPage(['invoices'],'Invoices & agreements','Generate, preview and print invoices.',`<button class="btn" id="ag">${ic('file-signature')}Rental agreement preview</button>`,()=>$('#ag').onclick=()=>agreement(M.bookings.data[0]));
+P.payments=modPage(['payments'],'Payments','Receipts and payment history.');
+P.branches=modPage(['branches'],'Branches','Performance across locations.');
+P.packages=modPage(['packages'],'Rental packages & pricing','Rates, included kilometres and extra charges.');
+P.documents=modPage(['documents'],'Documents','Insurance, registration and licence records.');
+P.audit=modPage(['audit'],'Audit logs','Every change made in this session is recorded here.');
+P.bookings=()=>{modPage(['bookings'],'Bookings','Reservations with conflict checking and automatic pricing.',`<button class="btn" data-go="calendar">${ic('calendar')}Calendar view</button>`)()};
+
+/* Vehicles (grid + list) */
+const VS={view:'grid',q:'',f:''};
+const vcard=v=>`<article class="card vc" data-v="${v.id}"><div class="vimg"><img src="${getCarImg(v.name,v.category)}" alt="" loading="lazy" onerror="this.style.display='none'"></div><div class="vb"><div class="row"><b style="font-size:15px">${esc(v.name)}</b>${badge(v.status)}</div><div class="row"><span>${esc(v.reg)}</span><span>${v.seats} seats · ${v.fuel}</span></div><div class="row"><span>${esc(v.branch)}</span><b>${inr(v.daily)}/day</b></div></div></article>`;
+function vehicleDetail(id){const v=M.vehicles.data.find(x=>x.id==id),bk=M.bookings.data.filter(b=>b.vehicle===v.reg),mt=M.maintenance.data.filter(m=>m.vehicle===v.reg),rev=sum(bk.filter(b=>b.status!=='Cancelled'),'total'),ex=sum(mt,'cost');
+ const T={Overview:`<div class="kv2">${[['Brand / model',v.name],['Registration',v.reg],['Category',v.category],['Year',v.year],['Fuel / transmission',v.fuel+' · '+v.trans],['Seats',v.seats],['Mileage',v.km.toLocaleString('en-IN')+' km'],['Rates',inr(v.daily)+'/day · '+inr(v.hourly)+'/hr'],['Branch',v.branch],['Assigned driver',v.driver],['Revenue generated',inr(rev)],['Maintenance expenses',inr(ex)]].map(x=>`<div><small>${x[0]}</small><b>${esc(x[1])}</b></div>`).join('')}</div>`,'Rental history':bk.length?st(['Booking','Customer','Dates','Total','Status'],bk.map(b=>[b.id,esc(b.customer),fdate(b.pickup)+' – '+fdate(b.ret),inr(b.total),badge(b.status)])):'<div class="empty">No rentals yet.</div>',Maintenance:mt.length?st(['Service','Date','Cost','Status'],mt.map(m=>[esc(m.service),fdate(m.date),inr(m.cost),badge(m.status)])):'<div class="empty">No service records.</div>',Documents:st(['Document','Expiry','Status'],[['Insurance',v.ins],['Registration',v.regExp]].map(d=>[d[0],fdate(d[1]),badge(d[1]<iso(0)?'Expired':d[1]<iso(30)?'Expiring':'Valid')]))};
+ modal(`<div style="border-radius:12px;overflow:hidden;height:180px;margin-bottom:14px;background:var(--bg)"><img src="${getCarImg(v.name,v.category)}" style="width:100%;height:100%;object-fit:cover" alt="${esc(v.name)}" onerror="this.style.display='none'"></div><h3>${esc(v.name)} ${badge(v.status)}</h3><div class="tabs">${Object.keys(T).map((k,i)=>`<button class="${i?'':'on'}">${k}</button>`).join('')}</div><div id="tb">${T.Overview}</div><div class="ma"><button class="btn" data-close>Close</button><button class="btn" id="ve">${ic('pencil')}Edit</button><button class="btn dng" id="vd">${ic('trash-2')}Delete</button></div>`,{w:700,onmount:b=>{$('.tabs',b).onclick=e=>{if(e.target.tagName==='BUTTON'){$$('.tabs button',b).forEach(x=>x.classList.toggle('on',x===e.target));$('#tb',b).innerHTML=T[e.target.textContent];refresh()}};$('#ve',b).onclick=()=>openForm('vehicles',v.id);$('#vd',b).onclick=()=>confirmBox(`Delete ${v.name} (${v.reg})?`,()=>{M.vehicles.data.splice(M.vehicles.data.indexOf(v),1);toast('Vehicle deleted');log('Deleted vehicle','Vehicles');vehiclesRedraw()})}})}
+function vehiclesRedraw(){if(CUR==='vehicles')P.vehicles()}
+P.vehicles=()=>{$('#view').innerHTML=head('Vehicles & fleet',`${scope(M.vehicles.data).length} vehicles · ${BR==='All'?'all branches':BR}`,`<div class="seg" id="vs"><button class="${VS.view==='grid'?'on':''}" data-v="grid">${ic('layout-grid')}</button><button class="${VS.view==='list'?'on':''}" data-v="list">${ic('list')}</button></div><button class="btn pri" id="av">${ic('plus')}Add vehicle</button>`)+(VS.view==='list'?`<section class="card" data-m="vehicles"></section>`:`<div class="tb"><div class="sr">${ic('search')}<input id="vq" placeholder="Search name or registration…" value="${esc(VS.q)}"></div><select id="vf"><option value="">All statuses</option>${['Available','Reserved','Rented','Maintenance','Inactive'].map(s=>`<option ${VS.f===s?'selected':''}>${s}</option>`).join('')}</select></div><div class="vg" id="vg"></div>`);
+ const g=()=>{const q=VS.q.toLowerCase(),a=scope(M.vehicles.data).filter(v=>(!VS.f||v.status===VS.f)&&(`${v.name} ${v.reg}`.toLowerCase().includes(q)));$('#vg').innerHTML=a.map(vcard).join('')||'<div class="empty">No vehicles match. Clear the filters or add a vehicle.</div>';refresh()};
+ $('#av').onclick=()=>openForm('vehicles');$('#vs').onclick=e=>{const b=e.target.closest('button');if(b){VS.view=b.dataset.v;P.vehicles()}};
+ if(VS.view==='list'){const h=$('[data-m]');M.vehicles.actions=[{k:'view',l:'View',fn:r=>vehicleDetail(r.id)}];mount('vehicles',h)}else{g();$('#vq').oninput=e=>{VS.q=e.target.value;g()};$('#vf').onchange=e=>{VS.f=e.target.value;g()};$('#vg').onclick=e=>{const c=e.target.closest('[data-v]');if(c)vehicleDetail(c.dataset.v)}}};
+
+P.tracking=()=>{$('#view').innerHTML=head('Live tracking','Simulated GPS positions — demo data, not real tracking.',`<button class="btn pri" id="ct">${ic('plus')}Create trip</button>`)+`<div class="trk">${mapHTML(1)}<div class="card side"><div class="ch"><h2>Active trips</h2><small>${TRK.length} vehicles</small></div>${trackList()}</div></div>`;$('#ct').onclick=()=>openForm('trips');startMap($('#view'))};
+
+let CM=new Date(2026,10,1);
+P.calendar=()=>{const y=CM.getFullYear(),m=CM.getMonth(),first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate();let cells=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>`<div class="h">${d}</div>`).join('')+'<div class="o"></div>'.repeat(first);
+ for(let d=1;d<=dim;d++){const ds=`${y}-${p2(m+1)}-${p2(d)}`,bs=M.bookings.data.filter(b=>b.status!=='Cancelled'&&b.pickup<=ds&&ds<=b.ret);cells+=`<div class="${ds===iso(0)?'td':''}"><b>${d}</b>${bs.slice(0,3).map(b=>`<span class="chip ${{Active:'',Confirmed:'g',Overdue:'r',Pending:'w',Completed:'g'}[b.status]}" title="${esc(b.customer)}">${esc(veh(b.vehicle)?.name)}</span>`).join('')}${bs.length>3?`<small>+${bs.length-3} more</small>`:''}</div>`}
+ $('#view').innerHTML=head('Calendar','Vehicle bookings by day.',`<div class="seg"><button id="pm" aria-label="Previous month">‹</button><button disabled>${CM.toLocaleString('en',{month:'long',year:'numeric'})}</button><button id="nm" aria-label="Next month">›</button></div><button class="btn pri" id="nb">${ic('plus')}New booking</button>`)+`<div class="card"><div class="cal">${cells}</div></div>`;
+ $('#pm').onclick=()=>{CM=new Date(y,m-1,1);P.calendar()};$('#nm').onclick=()=>{CM=new Date(y,m+1,1);P.calendar()};$('#nb').onclick=()=>openForm('bookings')};
+
+let READ=false;
+P.notifications=()=>{$('#view').innerHTML=head('Notifications','Alerts generated from live data.',`<button class="btn" id="mr">${ic('check-check')}Mark all read</button>`)+card('All alerts',READ?alertList().replace(/unread/g,''):alertList());$('#mr').onclick=()=>{READ=true;$('#bellDot').style.display='none';toast('All notifications marked as read');P.notifications()}};
+
+/* Reports */
+const brs=BRANCHES,VM=MODELS.map(m=>m[0]);
+const REPORTS={'Revenue':['bar',MON,[['Revenue',RB]]],'Expenses':['bar',MON,[['Expenses',EX]]],'Profit & loss':['line',MON,[['Revenue',RB],['Expenses',EX],['Profit',RB.map((r,i)=>r-EX[i])]]],'Vehicle utilization':['bar',VM,[['Utilization %',[78,72,84,69,61,76]]],0],'Vehicle profitability':['bar',VM,[['Net profit',[312000,288000,455000,341000,402000,295000]]]],'Booking performance':['line',MON,[['Bookings',[62,58,71,66,74,80,77,84,79,88,92]]],0],'Customer report':['bar',CUS.slice(0,6),[['Spend',[84000,62000,71000,39000,96000,44000]]]],'Driver performance':['bar',DRV,[['Trips',[157,194,231,268,305]]],0],'Employee attendance':['bar',['Fleet','Bookings','Finance','HR','Operations'],[['Attendance %',[96,93,98,97,94]]],0],'Payroll':['bar',MON,[['Payroll',MON.map((_,i)=>372000+i*3100)]]],'Maintenance expenses':['bar',MON,[['Maintenance',MON.map((_,i)=>18000+(i*7919%30000))]]],'Branch performance':['bar',brs,[['Revenue',[420000,210000,160000]],['Expenses',[310000,150000,118000]]]]};
+let RP='Revenue';
+P.reports=()=>{const [type,l,ds,money]=REPORTS[RP],mon=money!==0;$('#view').innerHTML=head('Reports & analytics','Interactive reports with CSV export and print.',`<select id="rsel">${Object.keys(REPORTS).map(k=>`<option ${k===RP?'selected':''}>${k}</option>`).join('')}</select><input type="date" id="rf" value="${iso(-90)}" style="width:150px" aria-label="From"><input type="date" id="rt" value="${iso(0)}" style="width:150px" aria-label="To"><button class="btn" id="rcsv">${ic('download')}Export CSV</button><button class="btn pri" id="rpr">${ic('printer')}Print</button>`)+card(RP,`<div class="cw" style="height:340px"><canvas id="rch"></canvas></div>`)+`<div style="height:16px"></div>`+card('Data',st(['', ...ds.map(d=>d[0])],l.map((x,i)=>[esc(x),...ds.map(d=>mon?inr(d[1][i]):d[1][i])])));
+ chart('rch',{type,money:mon,data:{labels:l,datasets:ds.map((d,i)=>({label:d[0],data:d[1],money:mon,backgroundColor:[AC(),'#d9822b','#3b82f6'][i],borderColor:[AC(),'#d9822b','#3b82f6'][i],borderRadius:6,tension:.3}))}});
+ $('#rsel').onchange=e=>{RP=e.target.value;P.reports()};$('#rf').onchange=$('#rt').onchange=()=>toast('Date range applied to sample data');$('#rcsv').onclick=()=>csv(RP,[['',...ds.map(d=>d[0])],...l.map((x,i)=>[x,...ds.map(d=>d[1][i])])]);$('#rpr').onclick=()=>{$('#view').classList.add('keep');print();$('#view').classList.remove('keep')}};
+
+/* Roles & settings */
+const ROLES=['Super Admin','Branch Manager','Accountant','Fleet Manager','HR Manager','Booking Staff','Driver'],MODS=['Bookings','Vehicles','Customers','Finance','HR & Payroll','Reports','Settings'];
+const PERM={};ROLES.forEach((r,i)=>MODS.forEach((m,j)=>PERM[r+m]=i===0||[[1,1,1,1,1,1,0],[0,0,0,1,0,1,0],[1,1,0,0,0,1,0],[0,0,0,0,1,1,0],[1,1,1,0,0,0,0],[1,0,0,0,0,0,0]][i-1][j]===1));
+P.roles=()=>{$('#view').innerHTML=head('User roles & permissions','Control what each role can access.')+card('Permission matrix',`<div class="tw"><table><thead><tr><th class="ns">Role</th>${MODS.map(m=>`<th class="ns">${m}</th>`).join('')}</tr></thead><tbody>${ROLES.map(r=>`<tr><td><b>${r}</b></td>${MODS.map(m=>`<td><label class="sw"><input type="checkbox" data-p="${r}|${m}" ${PERM[r+m]?'checked':''} ${r==='Super Admin'?'disabled':''} aria-label="${r} ${m}"><i></i></label></td>`).join('')}</tr>`).join('')}</tbody></table></div>`);$('#view').onchange=e=>{const t=e.target;if(t.dataset.p){const[r,m]=t.dataset.p.split('|');PERM[r+m]=t.checked;toast(`${r}: ${m} ${t.checked?'enabled':'disabled'}`);log('Changed permission','Roles')}}};
+const SET={'Company profile':[['Company name','RentalPro Mobility Pvt. Ltd.'],['Email','hello@rentalpro.in'],['Phone','+91 98640 12345'],['Address','GS Road, Guwahati, Assam 781005']],'Business info':[['GSTIN','18AABCR1234F1Z5'],['PAN','AABCR1234F'],['Business type','Vehicle rental']],'Branding':[['Brand colour','#0E7C66'],['Invoice footer','Thank you for choosing RentalPro.']],'Currency & tax':[['Currency','INR (₹)'],['GST rate (%)','5'],['Invoice prefix','INV-']],'Rental policies':[['Grace period (minutes)','60'],['Free cancellation (hours)','24'],['Fuel policy','Return at same level']],'Booking settings':[['Minimum rental (hours)','4'],['Advance payment (%)','30'],['Default deposit (₹)','5000']],Notifications:['Insurance expiry reminders','Overdue rental alerts','Low-stock alerts','Pending salary reminders'],Security:['Two-factor authentication','Session timeout (30 min)','Login alerts']};
+let ST='Company profile';
+P.settings=()=>{const c=SET[ST];$('#view').innerHTML=head('Settings','Company, rules and preferences.')+`<div class="tabs">${Object.keys(SET).map(k=>`<button class="${k===ST?'on':''}">${k}</button>`).join('')}</div><div class="card" style="max-width:720px">${typeof c[0]==='string'?c.map((x,i)=>`<div class="rl"><span>${x}</span><label class="sw"><input type="checkbox" ${i%3!==2?'checked':''}><i></i></label></div>`).join(''):`<div class="fg">${c.map(x=>`<label>${x[0]}<input type="text" value="${esc(x[1])}"></label>`).join('')}</div>`}<div class="ma"><button class="btn pri" id="ss">Save changes</button></div></div>`;$('.tabs').onclick=e=>{if(e.target.tagName==='BUTTON'){ST=e.target.textContent;P.settings()}};$('#ss').onclick=()=>{toast(ST+' saved');log('Updated settings',ST)}};
+P.help=()=>{$('#view').innerHTML=head('Help & support','Answers and ways to reach us.',`<button class="btn pri" id="ct">${ic('life-buoy')}Contact support</button>`)+card('Frequently asked questions',[['How do I avoid double bookings?','The booking form checks the selected vehicle against existing reservations and blocks overlapping dates.'],['How is rental cost calculated?','Daily rate × number of days, plus additional charges. Balance is total minus advance.'],['Is tracking real?','No. Vehicle positions in this prototype are simulated with JavaScript.'],['Can I export data?','Every table has an Export CSV button, and reports can be printed or saved as PDF.']].map(q=>`<details><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join(''));$('#ct').onclick=()=>toast('Support request sent (demo)')};
+
+/* ================= Navigation & shell ================= */
+const NAV=[['Overview',[['dashboard','Dashboard','layout-dashboard'],['calendar','Calendar','calendar-days'],['notifications','Notifications','bell']]],['Operations',[['bookings','Bookings','calendar-check'],['vehicles','Vehicles & Fleet','car'],['tracking','Live Tracking','map-pin'],['trips','Trips & Destinations','route'],['customers','Customers','users'],['drivers','Drivers','user-round']]],['Business management',[['employees','Employees & HR','briefcase'],['attendance','Attendance','user-check'],['payroll','Payroll & Salaries','wallet'],['leave','Leave & Holidays','plane'],['maintenance','Maintenance','wrench'],['vendors','Vendors','truck']]],['Finance',[['transactions','Transactions','arrow-left-right'],['expenses','Expenses','receipt'],['invoices','Invoices','file-text'],['payments','Payments','credit-card'],['reports','Reports & Analytics','bar-chart-3']]],['Management',[['branches','Branches','building-2'],['packages','Rental Packages & Pricing','tags'],['documents','Documents','folder-open'],['roles','User Roles & Permissions','shield-check'],['audit','Audit Logs','scroll-text']]],['System',[['settings','Settings','settings'],['help','Help & Support','circle-help']]]];
+let CUR='dashboard';
+$('#nav').innerHTML=NAV.map(g=>`<div class="ng">${g[0].toUpperCase()===g[0]?g[0]:g[0]}</div>`+g[1].map(i=>`<a class="ni" data-go="${i[0]}" tabindex="0" title="${i[1]}">${ic(i[2])}<span>${i[1]}</span></a>`).join('')).join('');
+function go(id){if(!P[id])id='dashboard';CUR=id;TIM.forEach(clearInterval);TIM=[];Object.values(CH).forEach(c=>c.destroy());Object.keys(CH).forEach(k=>delete CH[k]);Object.keys(HOSTS).forEach(k=>delete HOSTS[k]);$$('.ni').forEach(n=>n.classList.toggle('on',n.dataset.go===id));$('#gsearch').value='';P[id]();refresh();$('#app').classList.remove('sb-open');try{history.replaceState(null,'','#'+id)}catch(e){}window.scrollTo(0,0)}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){$('#profile').classList.remove('open');go(g.dataset.go)}const a=e.target.closest('[data-act]');if(a){$('#profile').classList.remove('open');const[t,m]=a.dataset.act.split(/:(.*)/s);if(t==='toast')toast(m)}if(!e.target.closest('#profile'))$('#profile').classList.remove('open')});
+document.addEventListener('keydown',e=>{if((e.key==='Enter')&&e.target.classList.contains('ni'))go(e.target.dataset.go)});
+$('#profile .pf').onclick=()=>$('#profile').classList.toggle('open');
+$('#menuBtn').onclick=()=>{if(innerWidth<=820)$('#app').classList.toggle('sb-open');else $('#app').classList.toggle('collapsed')};$('#scrim').onclick=()=>$('#app').classList.remove('sb-open');
+$('#bellBtn').onclick=()=>go('notifications');
+const setTheme=t=>{document.documentElement.dataset.theme=t;const b=$('#themeBtn');b.innerHTML=ic(t==='light'?'moon':'sun');refresh()};
+$('#themeBtn').onclick=()=>{const t=document.documentElement.dataset.theme==='light'?'dark':'light';setTheme(t);toast(t==='light'?'Light theme on':'Dark theme on');go(CUR)};
+$('#branchSel').innerHTML=['All',...BRANCHES].map(b=>`<option value="${b}">${b==='All'?'All branches':b}</option>`).join('');
+$('#branchSel').onchange=e=>{BR=e.target.value;toast(BR==='All'?'Showing all branches':'Showing '+BR);go(CUR)};
+$('#gsearch').oninput=e=>{const k=Object.keys(HOSTS)[0];if(k){S[k].q=e.target.value;S[k].page=1;const i=$('[data-q]',HOSTS[k]);if(i)i.value=e.target.value;draw(k)}else if(CUR==='vehicles'&&VS.view==='grid'){VS.q=e.target.value;$('#vq').value=VS.q;$('#vq').dispatchEvent(new Event('input'))}};
+$('#gsearch').onkeydown=e=>{if(e.key==='Enter'&&!Object.keys(HOSTS).length&&CUR!=='vehicles')go('bookings')};
+$('#gsearch').addEventListener('focus',()=>{if(!Object.keys(HOSTS).length&&CUR!=='vehicles')$('#gsearch').placeholder='Press Enter to search bookings'});
+window.addEventListener('load',()=>go(location.hash.slice(1)||'dashboard'));
+</script>
+</body>
+</html>

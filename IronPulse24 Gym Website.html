@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IronPulse24 – Gym &amp; Fitness Club</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#0d0d0d;--panel:#171717;--line:#2a2a2a;--text:#f4f4f0;--mute:#a3a3a0;--lime:#d4ff1f;--ink:#0d0d0d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0d0d}}
+:root[data-theme="dark"]{--bg:#0d0d0d}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 "DM Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;text-transform:uppercase;line-height:.92;margin:0;font-weight:800}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(13,13,13,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font:800 28px "Barlow Condensed",sans-serif}.logo b{color:var(--lime)}
+nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-size:14px;font-weight:500}
+nav ul a:hover{color:var(--lime)}
+.btn{display:inline-block;background:var(--lime);color:var(--ink);font-weight:700;font-size:14px;padding:14px 24px;border-radius:4px;border:0;cursor:pointer;font-family:inherit}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid #444}
+.btn:hover{filter:brightness(1.08)}
+.hero{position:relative;overflow:hidden;padding:120px 0 100px;background:linear-gradient(90deg,rgba(13,13,13,.96) 0%,rgba(13,13,13,.85) 50%,rgba(13,13,13,.5) 100%),url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1920&auto=format&fit=crop');background-size:cover;background-position:center;background-repeat:no-repeat}
+.hero h1{font-size:clamp(60px,12vw,150px);max-width:9ch}
+.hero h1 span,.lime{color:var(--lime)}
+.hero p{max-width:46ch;color:#d8d8d4;margin:24px 0 32px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;max-width:560px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.stats div{padding:20px 12px;text-align:center}.stats div+div{border-left:1px solid var(--line)}
+.stats b{display:block;font:800 40px "Barlow Condensed",sans-serif;color:var(--lime)}.stats small{color:var(--mute);font-size:12px}
+section{padding:88px 0}
+h2{font-size:clamp(40px,6vw,72px);margin-bottom:12px}
+.sub{color:var(--mute);max-width:52ch;margin:0 0 40px}
+.progs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:28px;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,13,.15) 20%,rgba(13,13,13,.92) 85%)}
+.card>*{position:relative}.card h3{font-size:36px;margin-bottom:8px}.card p{margin:0;color:var(--mute);font-size:15px}
+.equip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:40px}
+.equip-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;height:220px;display:flex;align-items:center;justify-content:center;padding:16px;transition:transform .3s,border-color .3s}
+.equip-card:hover{transform:translateY(-4px);border-color:var(--lime)}
+.equip-card img{max-width:100%;max-height:100%;object-fit:contain}
+.mindset{background:var(--panel);border-block:1px solid var(--line)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.sticker{background:var(--lime);color:var(--ink);padding:40px 32px;transform:rotate(-3deg);border-radius:6px;font:800 clamp(48px,7vw,88px)/.9 "Barlow Condensed",sans-serif;text-transform:uppercase}
+.sticker small{display:block;font:700 14px "DM Sans",sans-serif;margin-top:14px;text-transform:none}
+.ticks{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;padding:0;list-style:none;margin:28px 0}
+.ticks li::before{content:"✓ ";color:var(--lime);font-weight:700}
+.toggle{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:36px}
+.toggle button{border:0;background:none;color:var(--mute);font:600 14px "DM Sans",sans-serif;padding:10px 20px;border-radius:999px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--lime);color:var(--ink)}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:stretch}
+.plan{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:32px 28px;display:flex;flex-direction:column}
+.plan.pop{border:2px solid var(--lime);position:relative}
+.tag{position:absolute;top:-14px;left:24px;background:var(--lime);color:var(--ink);font-weight:700;font-size:12px;padding:4px 12px;border-radius:4px}
+.plan h3{font-size:34px}.plan .for{color:var(--mute);font-size:14px;margin:6px 0 20px}
+.price{font:800 60px/1 "Barlow Condensed",sans-serif}.price small{font:500 15px "DM Sans",sans-serif;color:var(--mute)}
+.save{color:var(--lime);font-size:13px;min-height:22px;margin:4px 0 20px}
+.plan ul{list-style:none;padding:20px 0 0;margin:0 0 28px;border-top:1px solid var(--line);display:grid;gap:10px;font-size:15px;flex:1}
+.plan li::before{content:"✓ ";color:var(--lime);font-weight:700}
+.plan li.no{color:#6d6d6a}.plan li.no::before{content:"– ";color:#6d6d6a}
+.plan .btn{text-align:center}
+.note{color:var(--mute);font-size:13px;margin-top:24px}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.quote{border:1px solid var(--line);border-radius:10px;padding:24px}.quote .st{color:var(--lime);letter-spacing:2px}
+.quote p{margin:12px 0 18px}.quote small{color:var(--mute)}
+.final{text-align:center;background:radial-gradient(70% 100% at 50% 100%,rgba(212,255,31,.14),transparent 70%)}
+.final h2{font-size:clamp(48px,9vw,112px)}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;max-width:760px;margin:32px auto 0;text-align:left}
+input,select{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:4px;padding:14px;font:inherit;width:100%}
+.msg{grid-column:1/-1;color:var(--lime);text-align:center;min-height:24px;margin:0}
+footer{border-top:1px solid var(--line);padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));color:var(--mute);font-size:14px}
+@media(max-width:760px){nav ul{display:none}.split{grid-template-columns:1fr;gap:40px}.hero{padding-top:48px}section{padding:60px 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<a class="logo" href="#top">IRONPULSE<b>24</b></a>
+<ul><li><a href="#programs">Programs</a></li><li><a href="#about">About</a></li><li><a href="#equipment">Equipment</a></li><li><a href="#plans">Membership</a></li><li><a href="#community">Reviews</a></li></ul>
+<a class="btn" href="#join">Join the club</a>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+<h1>The work hits <span>different.</span></h1>
+<p>No shortcuts. Just real coaching, real commitment, and a place where every rep moves you forward. Open 24 hours, all year round.</p>
+<div class="cta"><a class="btn" href="#join">Book a free session</a><a class="btn ghost" href="#plans">See membership plans</a></div>
+<div class="stats"><div><b>500+</b><small>Active members</small></div><div><b>20+</b><small>Expert coaches</small></div><div><b>50+</b><small>Weekly classes</small></div></div>
+</div></header>
+
+<section id="programs"><div class="wrap">
+<h2>Pick your <span class="lime">fight.</span></h2>
+<p class="sub">Three ways to train, all under one roof and all coached by people who&rsquo;ve done the work themselves.</p>
+<div class="progs">
+<div class="card" style="background:url('https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?q=80&w=800&auto=format&fit=crop');background-size:cover;background-position:center;">
+<span style="font-size:13px;color:var(--lime);font-weight:700;margin-bottom:6px">01 / BUILD POWER</span>
+<h3>Strength training</h3><p>Lift heavier. Move better. Free weights, racks and platforms for every level.</p></div>
+<div class="card" style="background:url('https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop');background-size:cover;background-position:center;">
+<span style="font-size:13px;color:var(--lime);font-weight:700;margin-bottom:6px">02 / PUSH FURTHER</span>
+<h3>HIIT &amp; conditioning</h3><p>High-energy group classes that burn hard and leave you wanting the next one.</p></div>
+<div class="card" style="background:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop');background-size:cover;background-position:center;">
+<span style="font-size:13px;color:var(--lime);font-weight:700;margin-bottom:6px">03 / LEVEL UP</span>
+<h3>Personal coaching</h3><p>One-on-one guidance with a plan built around your body, goals and schedule.</p></div>
+</div></div></section>
+
+<section class="mindset" id="about"><div class="wrap split">
+<div style="position:relative;border-radius:12px;overflow:hidden;min-height:420px;background:url('https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=1000&auto=format&fit=crop');background-size:cover;background-position:center;">
+<div class="sticker" style="position:absolute;bottom:24px;left:24px;">Zero limits<small>All in, every day.</small></div>
+</div>
+<div>
+<h2>More than just a <span class="lime">gym.</span></h2>
+<p class="sub" style="margin-bottom:0">We&rsquo;re here for the early risers, the last-rep fighters and everyone ready to become more. IronPulse24 brings serious training and real community under one roof.</p>
+<ul class="ticks"><li>Expert coaches</li><li>Quality equipment</li><li>All fitness levels</li><li>Supportive community</li><li>Open 24 × 7</li><li>Steam &amp; locker rooms</li></ul>
+<a class="btn" href="#plans">Become a member</a>
+</div></div></section>
+
+<section id="equipment" style="background:var(--bg);border-block:1px solid var(--line);">
+<div class="wrap">
+<h2>Built for <span class="lime">performance.</span></h2>
+<p class="sub">Gear up for every lift, sprint, and stretch with equipment made for serious training.</p>
+<div class="equip-grid">
+<div class="equip-card"><img src="https://images.unsplash.com/photo-1566241142559-40e1dab266c6?q=80&w=600&auto=format&fit=crop" alt="Kettlebell"></div>
+<div class="equip-card"><img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=600&auto=format&fit=crop" alt="Multi Gym"></div>
+<div class="equip-card"><img src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?q=80&w=600&auto=format&fit=crop" alt="Dumbbells"></div>
+<div class="equip-card"><img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?q=80&w=600&auto=format&fit=crop" alt="Treadmill"></div>
+<div class="equip-card"><img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop" alt="Exercise Bike"></div>
+</div>
+</div>
+</section>
+
+<section id="plans"><div class="wrap">
+<h2>Membership <span class="lime">plans.</span></h2>
+<p class="sub">Simple pricing in Indian rupees. Pay for longer and pay less each month.</p>
+<div class="toggle" role="group" aria-label="Billing period">
+<button data-p="1" aria-pressed="true">Monthly</button><button data-p="3" aria-pressed="false">Quarterly</button><button data-p="12" aria-pressed="false">Yearly</button>
+</div>
+<div class="plans">
+<article class="plan" data-base="1499"><h3>Starter</h3><p class="for">Gym floor access for self-guided training.</p>
+<div class="price"><span class="amt"></span><small> /month</small></div><div class="save"></div>
+<ul><li>Gym floor access, 6 am – 10 pm</li><li>Cardio &amp; strength equipment</li><li>Locker room access</li><li>1 free fitness assessment</li><li class="no">Group classes</li><li class="no">Personal coaching</li></ul>
+<a class="btn ghost" href="#join">Choose Starter</a></article>
+
+<article class="plan pop" data-base="2499"><span class="tag">Most popular</span><h3>Pro</h3><p class="for">Unlimited access with group classes.</p>
+<div class="price"><span class="amt"></span><small> /month</small></div><div class="save"></div>
+<ul><li>24 × 7 gym access</li><li>Unlimited HIIT &amp; strength classes</li><li>Diet &amp; workout plan</li><li>Steam room &amp; lockers</li><li>Monthly body check-in</li><li class="no">Personal coaching</li></ul>
+<a class="btn" href="#join">Choose Pro</a></article>
+
+<article class="plan" data-base="4999"><h3>Elite</h3><p class="for">Everything, plus a coach in your corner.</p>
+<div class="price"><span class="amt"></span><small> /month</small></div><div class="save"></div>
+<ul><li>Everything in Pro</li><li>8 personal training sessions a month</li><li>Custom nutrition coaching</li><li>Priority class booking</li><li>Free guest pass, 2 per month</li><li>Free IronPulse24 gym kit</li></ul>
+<a class="btn ghost" href="#join">Choose Elite</a></article>
+</div>
+<p class="note">All prices are per month in ₹ and include GST. One-time joining fee of ₹999 is waived on Quarterly and Yearly plans. Prices are sample figures, so update them before launch.</p>
+</div></section>
+
+<section id="community"><div class="wrap">
+<h2>The work <span class="lime">speaks.</span></h2>
+<p class="sub">Sample member stories. Replace with real reviews before launch.</p>
+<div class="quotes">
+<div class="quote"><span class="st">★★★★★</span><p>A motivating space, a strong community, and the kind of atmosphere that makes you want to show up.</p><small>Member story</small></div>
+<div class="quote"><span class="st">★★★★★</span><p>The training feels focused and welcoming. Every session is another chance to get better.</p><small>Member story</small></div>
+<div class="quote"><span class="st">★★★★★</span><p>It&rsquo;s more than equipment. It&rsquo;s about consistency, confidence, and becoming a stronger version of yourself.</p><small>Member story</small></div>
+</div></div></section>
+
+<section class="final" id="join"><div class="wrap">
+<h2>Don&rsquo;t just wish.<br><span class="lime">Get to work.</span></h2>
+<p class="sub" style="margin-inline:auto">Book your free first session. We&rsquo;ll show you around and build a starter plan.</p>
+<form id="f">
+<input name="n" placeholder="Your name" required aria-label="Your name">
+<input name="p" type="tel" placeholder="Phone number" required aria-label="Phone number">
+<select name="s" aria-label="Plan"><option>Starter – ₹1,499/mo</option><option selected>Pro – ₹2,499/mo</option><option>Elite – ₹4,999/mo</option></select>
+<button class="btn" style="grid-column:1/-1">Book my free session</button>
+<p class="msg" id="msg" role="status"></p>
+</form>
+</div></section>
+
+<footer>
+<div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;align-items:start;">
+<div><span class="logo">IRONPULSE<b>24</b></span><p style="margin:12px 0 0;color:var(--mute)">Train harder. Grow stronger. Open 24 hours · 7 days a week.</p></div>
+<div><h4 style="color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:18px;margin-bottom:14px;text-transform:uppercase">About</h4><ul style="list-style:none;padding:0;margin:0;display:grid;gap:8px"><li><a href="#top">Home</a></li><li><a href="#about">About</a></li><li><a href="#community">Testimonials</a></li><li><a href="#programs">Programs</a></li></ul></div>
+<div><h4 style="color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:18px;margin-bottom:14px;text-transform:uppercase">Follow</h4><ul style="list-style:none;padding:0;margin:0;display:grid;gap:8px"><li><a href="#">Instagram</a></li><li><a href="#">YouTube</a></li><li><a href="#">Facebook</a></li><li><a href="#">Thread</a></li></ul></div>
+<div><h4 style="color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:18px;margin-bottom:14px;text-transform:uppercase">Newsletter</h4><p style="margin:0 0 12px;font-size:13px;color:var(--mute)">Join our grind list and stay in the loop with exclusive gear drops &amp; fitness tips.</p><form id="newsletter-form" style="display:flex;gap:8px;margin:0"><input type="email" placeholder="Enter your email" required aria-label="Email address" style="padding:10px 14px;font-size:14px;border-radius:4px;flex:1;background:var(--panel);border:1px solid var(--line);color:var(--text)"><button class="btn" style="padding:10px 18px;font-size:13px">Subscribe</button></form></div>
+</div>
+<div class="wrap" style="margin-top:40px;border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mute)">
+<span>© 2026 IronPulse24. All rights reserved.</span>
+<span>Designed for serious training.</span>
+</div>
+</footer>
+
+<script>
+(function(){
+var disc={1:0,3:.10,12:.20},cur=1;
+function fmt(n){return "₹"+Math.round(n).toLocaleString("en-IN")}
+function render(){
+document.querySelectorAll(".plan").forEach(function(el){
+var b=+el.dataset.base,m=b*(1-disc[cur]);
+el.querySelector(".amt").textContent=fmt(m);
+el.querySelector(".save").textContent=cur===1?"Billed monthly":"Billed "+fmt(m*cur)+" · save "+fmt((b-m)*cur);
+});
+}
+document.querySelectorAll(".toggle button").forEach(function(btn){
+btn.addEventListener("click",function(){
+cur=+btn.dataset.p;
+document.querySelectorAll(".toggle button").forEach(function(x){x.setAttribute("aria-pressed",x===btn)});
+render();
+});
+});
+render();
+document.getElementById("f").addEventListener("submit",function(e){
+e.preventDefault();
+document.getElementById("msg").textContent="Thanks, "+e.target.n.value+". We\u2019ll call you shortly to confirm your free session.";
+e.target.reset();
+});
+})();
+</script>
+</body>
+</html>

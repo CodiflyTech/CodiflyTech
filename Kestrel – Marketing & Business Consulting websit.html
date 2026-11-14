@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kestrel – Marketing & Business Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff;--ink:#0a0a0a;--mute:#5d6470;--line:#e6e8ec;--soft:#f3f4f7;--card:#fff;
+  --green:#0f5a3c;--green-ink:#fff;--lime:#c9f26b;--orange:#f2622a;
+  --f:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);line-height:1.5;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+
+/* nav */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:20px;text-decoration:none}
+.logo i{width:30px;height:22px;border-radius:12px;background:linear-gradient(120deg,#3cf08c,#2fb6ff 55%,#5d5cf2)}
+.links{display:flex;gap:44px;font-size:13px;font-weight:500}
+.links a{text-decoration:none}.links a:hover{text-decoration:underline}
+.cta-row{display:flex;align-items:center;gap:20px;font-size:13px;font-weight:500}
+.cta-row a{text-underline-offset:4px}
+.menu{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--bg);border:0;cursor:pointer;font-size:18px}
+@media(max-width:820px){.links{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:calc(100vh - 72px);min-height:min(760px,calc(100vh - 72px));overflow:hidden;display:flex;align-items:center}
+.hero h1{font-size:clamp(64px,11vw,148px);line-height:.92;letter-spacing:-.045em;font-weight:600;position:relative;z-index:2}
+.hero p{margin-top:36px;max-width:380px;font-size:17px;position:relative;z-index:2}
+.ribbon{position:absolute;right:-6%;top:50%;width:min(78vw,980px);transform:translateY(-52%);z-index:1}
+.ribbon svg{width:100%;height:auto;display:block}
+.pill{position:absolute;left:28px;bottom:28px;z-index:3;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;display:flex;gap:14px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.pill b{font-size:22px;display:block;line-height:1}.pill small{color:var(--mute);font-size:11px}
+.pill span{background:#ffe6db;color:var(--orange);font-weight:600;font-size:11px;padding:4px 8px;border-radius:99px}
+@media(max-width:820px){.ribbon{opacity:.45;width:130vw;right:-40%}.hero{min-height:620px}}
+
+/* statement + chart */
+.green{background:var(--green);color:var(--green-ink);padding:96px 0}
+.green h2{font-size:clamp(28px,4vw,46px);line-height:1.18;letter-spacing:-.02em;font-weight:600;max-width:900px}
+.green h2 span{color:#9fd6bb}
+.panel{margin-top:64px;background:#fff;color:#0a0a0a;border-radius:28px;padding:40px;display:grid;grid-template-columns:1fr 1.1fr;gap:40px}
+.panel h3{font-size:28px;font-weight:600;letter-spacing:-.02em}
+.panel p{color:#566;font-size:14px;margin-top:14px;max-width:360px}
+.big{font-size:104px;letter-spacing:-.05em;font-weight:600;line-height:1;margin-top:36px}
+.big-note{font-size:13px;color:#566;margin-top:8px}
+.chart{background:#fafafa;border-radius:20px;padding:28px 24px 20px;display:flex;align-items:flex-end;gap:16px;height:320px;box-shadow:0 8px 28px rgba(0,0,0,.07)}
+.col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;height:100%}
+.bar{width:100%;border-radius:10px;display:flex;align-items:flex-start;justify-content:center;padding-top:10px;font-weight:600;font-size:14px;height:0;transition:height 1s cubic-bezier(.2,.7,.2,1)}
+.col span{font-size:11px;color:#566;text-align:center;line-height:1.2;min-height:28px}
+@media(max-width:820px){.panel{grid-template-columns:1fr;padding:26px}.big{font-size:80px}}
+
+/* services */
+.work{padding:96px 0;background:var(--soft)}
+.work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;border-bottom:1px solid var(--line);padding-bottom:24px}
+.work-head h2{font-size:clamp(22px,3vw,30px);font-weight:500;letter-spacing:-.01em}
+.btn{display:inline-block;background:var(--ink);color:var(--bg);padding:11px 22px;border-radius:99px;font-size:13px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.work-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}
+.svc{list-style:none;padding:0}
+.svc li{border-bottom:1px solid var(--line)}
+.svc button{all:unset;box-sizing:border-box;display:block;width:100%;padding:28px 0;cursor:pointer}
+.svc small{display:block;color:var(--mute);font-size:14px;margin-bottom:8px}
+.svc strong{display:block;font-size:clamp(32px,4.4vw,54px);line-height:1.08;letter-spacing:-.03em;font-weight:500;color:#a4a9b3;transition:color .25s}
+.svc button:hover strong,.svc button[aria-selected="true"] strong{color:var(--ink)}
+.svc button:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.preview{position:sticky;top:110px;margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px;min-height:340px}
+.preview h3{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.preview p{color:var(--mute);margin-top:10px;font-size:15px}
+.preview ul{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:10px;font-size:14px}
+.preview li{padding:12px 14px;border-radius:12px;background:var(--soft);display:flex;justify-content:space-between;gap:12px}
+.preview li b{font-weight:600}
+@media(max-width:820px){.work-grid{grid-template-columns:1fr}.preview{position:static}}
+
+/* process */
+.proc{padding:96px 0}
+.proc h2{font-size:clamp(28px,4vw,46px);letter-spacing:-.03em;font-weight:600;max-width:640px;line-height:1.1}
+.steps{margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.step{padding:28px 24px 0 0}
+.step b{display:block;font-size:20px;font-weight:600;margin-bottom:8px}
+.step p{color:var(--mute);font-size:15px}
+.step em{font-style:normal;font-size:13px;color:var(--orange);font-weight:600;display:block;margin-bottom:10px}
+@media(max-width:820px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* contact */
+.contact{padding:0 0 96px}
+.box{background:var(--soft);border-radius:28px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.box h2{font-size:clamp(30px,4vw,48px);letter-spacing:-.03em;line-height:1.08;font-weight:600}
+.box p{color:var(--mute);margin-top:14px;max-width:360px}
+form{display:grid;gap:14px}
+label{font-size:13px;font-weight:500;display:grid;gap:6px}
+input,textarea,select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;width:100%}
+textarea{min-height:110px;resize:vertical}
+#ok{font-size:14px;font-weight:500;color:#1b8a52;min-height:20px}
+@media(max-width:820px){.box{grid-template-columns:1fr;padding:28px}}
+
+/* footer */
+footer{background:#000;color:#fff;position:relative;overflow:hidden;padding:72px 0 0}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:48px;position:relative;z-index:2}
+.fgrid small{font-size:12px;font-weight:600;display:block;margin-bottom:12px}
+.fgrid p{font-size:14px;line-height:1.9}
+.soc{display:flex;gap:26px;margin-top:26px;font-size:14px}
+.soc a{text-underline-offset:4px}
+.fcols{display:grid;grid-template-columns:1fr 1fr;gap:28px 24px;font-size:14px}
+.fcols div{display:grid;gap:10px;align-content:start}
+.fcols b{font-weight:600;margin-bottom:4px}
+.fcols a{text-decoration:none;color:#d4d7dd}.fcols a:hover{color:#fff;text-decoration:underline}
+.fribbon{width:min(520px,80vw);margin:-10px 0 0 -90px;position:relative;z-index:1}
+.fribbon svg{width:100%;display:block}
+.copy{background:#161616;text-align:center;font-size:11px;padding:14px;color:#aaa;position:relative;z-index:2;margin-top:-24px}
+@media(max-width:820px){.fgrid{grid-template-columns:1fr}.fcols{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+  <a class="logo" href="#top"><i></i>Kestrel</a>
+  <div class="links"><a href="#top">Home</a><a href="#about">About us</a><a href="#services">Our services</a><a href="#process">Process</a></div>
+  <div class="cta-row"><a href="#contact">Let’s talk</a></div>
+</nav></div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap">
+  <h1>Growth<br>strategy</h1>
+  <p>We help businesses find the right customers and build clear, data-led plans for marketing, operations and revenue.</p>
+</div>
+<div class="ribbon" aria-hidden="true"><svg id="rib" viewBox="0 0 900 640"></svg></div>
+<div class="pill"><div><b>15,560</b><small>Leads, August</small></div><span>+54%</span></div>
+</section>
+
+<section class="green" id="about"><div class="wrap">
+  <h2>Kestrel advises growing companies on marketing, pricing and operations. <span>We turn research into a plan your team can run, then stay to measure it.</span></h2>
+  <div class="panel">
+    <div>
+      <h3>Marketing consulting</h3>
+      <p>We audit your channels, find where budget is wasted and rebuild the funnel around the customers who actually buy.</p>
+      <div class="big" data-count="56">0%</div>
+      <div class="big-note">Average improvement across the four indicators shown</div>
+    </div>
+    <div class="chart" id="chart" role="img" aria-label="Bar chart: client retention 85.5%, budget growth 41.7%, ROI 20%, services demand 75%">
+      <div class="col"><div class="bar" data-h="85.5" style="background:#e4effb">85.5%</div><span>Client retention</span></div>
+      <div class="col"><div class="bar" data-h="41.7" style="background:#e2f5c8">41.7%</div><span>Budget growth</span></div>
+      <div class="col"><div class="bar" data-h="20" style="background:var(--orange);color:#fff">ROI</div><span>20%</span></div>
+      <div class="col"><div class="bar" data-h="75" style="background:#fde5d3">75%</div><span>Services demand</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="work" id="services"><div class="wrap">
+  <div class="work-head"><h2>Consulting built around your next stage of growth</h2><a class="btn" href="#contact">Book a call</a></div>
+  <div class="work-grid">
+    <ul class="svc" role="tablist" id="svc"></ul>
+    <aside class="preview" id="prev" aria-live="polite"></aside>
+  </div>
+</div></section>
+
+<section class="proc" id="process"><div class="wrap">
+  <h2>How an engagement works</h2>
+  <div class="steps">
+    <div class="step"><em>Week 1</em><b>Discover</b><p>Interviews, data pull and a look at what customers and competitors are doing.</p></div>
+    <div class="step"><em>Weeks 2–3</em><b>Diagnose</b><p>We show where revenue leaks and rank fixes by impact and effort.</p></div>
+    <div class="step"><em>Weeks 4–6</em><b>Plan</b><p>A 90-day roadmap with owners, budgets and targets for each initiative.</p></div>
+    <div class="step"><em>Ongoing</em><b>Measure</b><p>A monthly review of the numbers, so the plan changes when results do.</p></div>
+  </div>
+</div></section>
+
+<section class="contact" id="contact"><div class="wrap"><div class="box">
+  <div><h2>Tell us where you want to grow</h2><p>Share a few details and a senior consultant will reply within one business day.</p></div>
+  <form id="f">
+    <label>Name<input required autocomplete="name"></label>
+    <label>Work email<input type="email" required autocomplete="email"></label>
+    <label>What do you need help with?<select><option>Marketing strategy</option><option>Analytics and reporting</option><option>Brand and website</option><option>Business operations</option></select></label>
+    <label>Goal<textarea placeholder="e.g. Double qualified leads by Q3"></textarea></label>
+    <button class="btn" type="submit">Request a call</button>
+    <div id="ok" role="status"></div>
+  </form>
+</div></div></section>
+</main>
+
+<footer>
+  <div class="wrap fgrid">
+    <div>
+      <small>Address</small>
+      <p>123 Course Road, Springfield, IL, USA<br>hello@kestrel.example<br>+1 (555) 123-4567</p>
+      <div class="soc"><a href="#">Instagram ↗</a><a href="#">LinkedIn ↗</a><a href="#">YouTube ↗</a></div>
+    </div>
+    <div class="fcols">
+      <div><b>Company</b><a href="#about">About us</a><a href="#">Careers</a><a href="#">Blog</a></div>
+      <div><b>Services</b><a href="#services">Marketing</a><a href="#services">Analytics</a><a href="#services">Operations</a></div>
+      <div><b>Support</b><a href="#contact">Contact us</a><a href="#">FAQs</a><a href="#">Terms and conditions</a></div>
+    </div>
+  </div>
+  <div class="fribbon" aria-hidden="true"><svg id="rib2" viewBox="0 0 900 640"></svg></div>
+  <div class="copy">© 2026 Kestrel Consulting. All rights reserved.</div>
+</footer>
+
+<script>
+// 3D-looking segmented ribbon, drawn as stacked slabs along an arc
+function ribbon(id,start,end,count){
+  var s=document.getElementById(id),ns='http://www.w3.org/2000/svg',h='';
+  var gid='g'+id;
+  h+='<defs><linearGradient id="'+gid+'" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#37f07a"/><stop offset=".5" stop-color="#34c8f0"/><stop offset="1" stop-color="#5a5cf0"/></linearGradient></defs>';
+  for(var i=0;i<count;i++){
+    var t=i/(count-1),a=start+(end-start)*t;
+    var cx=450+330*Math.cos(a),cy=520+330*Math.sin(a);
+    var rot=a*180/Math.PI+90,w=200-t*40,l=70;
+    var o=.55+.45*Math.sin(t*Math.PI*.9+.3);
+    h+='<g transform="translate('+cx.toFixed(1)+' '+cy.toFixed(1)+') rotate('+rot.toFixed(1)+')">'
+     +'<polygon points="'+(-w/2)+',0 '+(-w/4)+','+(-l*.45)+' '+(w/4)+','+(-l*.45)+' '+(w/2)+',0 '+(w/4)+','+(l*.45)+' '+(-w/4)+','+(l*.45)+'" fill="url(#'+gid+')" opacity="'+o.toFixed(2)+'" stroke="rgba(255,255,255,.55)" stroke-width="2"/></g>';
+  }
+  s.innerHTML=h;
+}
+ribbon('rib',Math.PI*1.02,Math.PI*1.93,26);
+ribbon('rib2',Math.PI*1.0,Math.PI*1.8,20);
+
+// services
+var S=[
+ {k:'Marketing',s:'Plans that bring in the right audience',t:'Marketing strategy',d:'Positioning, channel mix and campaign plans tied to revenue targets.',i:[['Channel audit','2 weeks'],['Campaign roadmap','90 days'],['Budget model','Monthly']]},
+ {k:'Analytics',s:'Turn data into smarter decisions',t:'Analytics and reporting',d:'One dashboard your leadership team trusts, built on your own data.',i:[['Tracking setup','1 week'],['KPI dashboard','Live'],['Attribution review','Quarterly']]},
+ {k:'Brand',s:'Design that lifts your online presence',t:'Brand and website',d:'Messaging, identity and a site that explains what you sell in seconds.',i:[['Messaging guide','2 weeks'],['Site redesign','6 weeks'],['Conversion testing','Ongoing']]},
+ {k:'Operations',s:'Systems that support growth',t:'Business operations',d:'Process, hiring and pricing reviews so the business can handle more demand.',i:[['Process map','2 weeks'],['Pricing review','3 weeks'],['Org plan','4 weeks']]}
+];
+var ul=document.getElementById('svc'),pv=document.getElementById('prev');
+S.forEach(function(x,n){
+  var li=document.createElement('li');li.setAttribute('role','presentation');
+  li.innerHTML='<button role="tab" aria-selected="'+(n==0)+'"><small>'+x.s+'</small><strong>'+x.k+':<br>'+x.t+'</strong></button>';
+  li.firstChild.onclick=li.firstChild.onmouseenter=function(){show(n)};
+  ul.appendChild(li);
+});
+function show(n){
+  var x=S[n];
+  ul.querySelectorAll('button').forEach(function(b,j){b.setAttribute('aria-selected',j==n)});
+  pv.innerHTML='<h3>'+x.t+'</h3><p>'+x.d+'</p><ul>'+x.i.map(function(r){return '<li><span>'+r[0]+'</span><b>'+r[1]+'</b></li>'}).join('')+'</ul>';
+}
+show(0);
+
+// chart + counter animate once when visible
+var done=false;
+function run(){
+  if(done)return;done=true;
+  document.querySelectorAll('.bar').forEach(function(b){b.style.height=(b.dataset.h*.78)+'%'});
+  var el=document.querySelector('[data-count]'),to=+el.dataset.count,st=null;
+  (function f(ts){st=st||ts;var p=Math.min((ts-st)/1000,1);el.textContent=Math.round(to*p)+'%';if(p<1)requestAnimationFrame(f)})(performance.now());
+}
+if('IntersectionObserver' in window){new IntersectionObserver(function(e,o){if(e[0].isIntersecting){run();o.disconnect()}},{threshold:.3}).observe(document.getElementById('chart'))}else run();
+
+document.getElementById('f').onsubmit=function(e){e.preventDefault();document.getElementById('ok').textContent='Thanks. We’ll reply within one business day.';e.target.reset()};
+</script>
+</body>
+</html>

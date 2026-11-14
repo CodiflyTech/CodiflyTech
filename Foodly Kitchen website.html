@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Foodly Kitchen – Fresh food, fast delivery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f3ee;--surface:#fff;--ink:#1d1a17;--mute:#6f6a63;--line:#e8e3da;--brand:#c8201e;--gold:#f4c430;--gold-ink:#1d1a17;--tint:#fff4d6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:"DM Serif Display",Georgia,serif;font-weight:400;margin:0}
+button{font:inherit;cursor:pointer;border:0;color:inherit}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{background:var(--surface);position:sticky;top:env(safe-area-inset-top,0px);z-index:5;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.logo{font-family:"DM Serif Display",serif;font-size:26px;color:var(--brand);text-decoration:none}
+nav{display:flex;gap:22px;margin:0 auto}
+nav a{color:var(--mute);text-decoration:none;font-size:14px}nav a:hover{color:var(--ink)}
+.cartbtn{position:relative;background:var(--gold);color:var(--gold-ink);padding:9px 18px;border-radius:99px;font-weight:600}
+.cartbtn b{background:var(--brand);color:#fff;border-radius:99px;font-size:11px;padding:1px 7px;margin-left:6px}
+.hero{background:linear-gradient(180deg,var(--tint),var(--bg));padding:56px 0 40px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+.pill{display:inline-block;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:4px 12px;font-size:12px;color:var(--brand);font-weight:600}
+.hero h1{font-size:clamp(38px,6vw,64px);line-height:1.05;margin:16px 0}
+.hero p{color:var(--mute);max-width:46ch}
+.addr{display:flex;gap:8px;margin-top:22px;max-width:480px}
+.addr input{flex:1;padding:13px 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
+.btn{background:var(--brand);color:#fff;padding:13px 20px;border-radius:12px;font-weight:600}
+.plate{text-align:center;line-height:1}
+section{padding:36px 0}
+.cats{display:flex;gap:14px;overflow-x:auto;padding:8px 0;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex:0 0 auto;width:86px;text-align:center;background:none;font-size:13px}
+.cat i{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 6px;border-radius:50%;background:var(--tint);font-size:30px;font-style:normal}
+.promos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.promo{border-radius:18px;padding:22px;min-height:150px;display:flex;justify-content:space-between;align-items:center}
+.promo h3{font-size:26px}.promo small{display:block;margin:4px 0 12px}
+.promo img{width:110px;height:110px;object-fit:cover;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,0.12)}
+.p1{background:var(--gold);color:#1d1a17}.p2{background:var(--tint)}.p3{background:var(--brand);color:#fff}
+.p2 .btn{background:var(--brand)}.p1 .btn,.p3 .btn{background:#fff;color:#1d1a17;padding:8px 16px;border-radius:99px}
+.p2 .btn{padding:8px 16px;border-radius:99px}
+.mh{background:var(--surface);border-block:1px solid var(--line);padding:28px 0}
+.mh .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.mh h2{font-size:38px}
+.search{display:flex;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:5px 5px 5px 16px;min-width:min(380px,100%)}
+.search input{flex:1;border:0;background:none;color:var(--ink);font:inherit;min-width:0}.search input:focus{outline:0}
+.search button{background:var(--gold);color:var(--gold-ink);border-radius:99px;padding:8px 18px;font-weight:600}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:24px;align-items:start}
+aside{background:var(--surface);border-radius:16px;padding:20px;position:sticky;top:84px;border:1px solid var(--line)}
+aside h3{font-size:22px;display:flex;justify-content:space-between;align-items:baseline}
+aside h3 button{background:none;font:12px Inter;color:var(--mute)}
+aside h4{margin:18px 0 8px;font-size:13px}
+aside label{display:flex;gap:8px;align-items:center;padding:4px 0;font-size:14px;color:var(--mute);cursor:pointer}
+aside input[type=checkbox]{accent-color:var(--gold);width:16px;height:16px}
+aside input[type=range]{width:100%;accent-color:var(--gold)}
+.bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.bar select{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{background:var(--surface);border-radius:16px;padding:12px;position:relative;border:1px solid var(--line)}
+.card .img{display:grid;place-items:center;height:140px;font-size:84px;background:var(--bg);border-radius:12px;overflow:hidden}
+.tag{position:absolute;left:12px;top:12px;background:var(--gold);color:#1d1a17;font-size:11px;font-weight:700;padding:2px 10px;border-radius:99px}
+.fav{position:absolute;right:12px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--surface);border:1px solid var(--line);font-size:15px;line-height:1}
+.fav.on{color:var(--brand)}
+.card h3{font:600 16px Inter;margin:12px 0 2px}
+.card p{margin:0;color:var(--mute);font-size:12.5px}
+.meta{display:flex;gap:12px;font-size:12px;color:var(--mute);margin:6px 0}.meta b{color:var(--ink)}
+.row{display:flex;justify-content:space-between;align-items:center}
+.row strong{font-size:18px}
+.add{width:34px;height:34px;border-radius:50%;background:var(--gold);color:#1d1a17;font-size:20px;font-weight:700}
+.empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:40px}
+footer{background:var(--surface);border-top:1px solid var(--line);margin-top:30px;padding:40px 0 24px}
+.fcols{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:24px}
+.fcols h4{margin:0 0 10px;font-size:14px}.fcols a{display:block;color:var(--mute);text-decoration:none;font-size:13px;padding:3px 0}
+.copy{color:var(--mute);font-size:12px;margin-top:28px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;z-index:9}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:960px){
+  .hero .wrap{grid-template-columns:1fr;text-align:center}
+  .addr{margin:22px auto 0}
+  .plate{margin-top:24px}
+  .layout{grid-template-columns:1fr}
+  aside{position:static;margin-bottom:20px}
+  .promos{grid-template-columns:1fr}
+  nav{display:none}
+  header .wrap{justify-content:space-between}
+  .fcols{grid-template-columns:1fr 1fr}
+}
+@media(max-width:540px){
+  .fcols{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .promo{flex-direction:column;text-align:center;gap:16px}
+  .promo img{width:100px;height:100px}
+  .bar{flex-direction:column;align-items:flex-start;gap:10px}
+  .addr{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a class="logo" href="#top">Foodly Kitchen</a>
+<nav><a href="#top">Home</a><a href="#menu">Menu</a><a href="#categories">Categories</a><a href="#recent">Recently viewed</a><a href="#contact">Contact</a></nav>
+<button class="cartbtn" id="cartBtn" aria-label="Cart">Cart<b id="cartN">0</b></button>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+<div>
+<span class="pill">Delivery in 30 minutes or less</span>
+<h1>Hot meals, quick bites and memorable flavor</h1>
+<p>Fresh food made to order from our kitchen and delivered to your door. Pick a dish, add it to your cart and we start cooking.</p>
+<form class="addr" onsubmit="event.preventDefault();toast('Great, we deliver to that address.')"><input placeholder="Enter your delivery address" aria-label="Delivery address"><button class="btn">Find food</button></form>
+</div>
+<div class="plate" aria-hidden="true"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&auto=format&fit=crop&q=80" alt="Fresh food spread" style="width:100%;max-width:380px;height:auto;border-radius:24px;object-fit:cover;box-shadow:0 20px 40px rgba(0,0,0,0.15)"></div>
+</div></div>
+
+<section id="categories"><div class="wrap">
+<h2 style="font-size:30px;margin-bottom:8px">Popular categories</h2>
+<div class="cats" id="cats"></div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap promos">
+<div class="promo p1"><div><h3>Buy 1, get 1</h3><small>On your favorite burger</small><button class="btn" data-cat="Burgers">Order now</button></div><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&auto=format&fit=crop&q=80" alt="Burger"></div>
+<div class="promo p2"><div><h3>Pasta, 10% off</h3><small>Creamy and delicious</small><button class="btn" data-cat="Pasta">Order now</button></div><img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&auto=format&fit=crop&q=80" alt="Pasta"></div>
+<div class="promo p3"><div><h3>Pizza, 20% off</h3><small>Hot and crispy</small><button class="btn" data-cat="Pizza">Order now</button></div><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&auto=format&fit=crop&q=80" alt="Pizza"></div>
+</div></section>
+
+<div class="mh" id="menu"><div class="wrap">
+<div><h2>Full menu</h2><span style="color:var(--mute)">Dishes made fresh to order, delivered to your door</span></div>
+<form class="search" onsubmit="event.preventDefault()"><input id="q" placeholder="Search burgers, pizza, drinks…" aria-label="Search menu"><button>Search</button></form>
+</div></div>
+
+<section><div class="wrap layout">
+<aside>
+<h3>Filters <button id="clear">Clear all</button></h3>
+<h4>Category</h4><div id="catf"></div>
+<h4>Max price: <span id="pv">₹700</span></h4>
+<input type="range" id="price" min="100" max="700" value="700" step="25" aria-label="Max price">
+<h4>Rating</h4>
+<label><input type="checkbox" id="r4"> 4.5 stars &amp; up</label>
+<h4>Dietary</h4>
+<label><input type="checkbox" id="spicy"> Spicy</label>
+</aside>
+<div>
+<div class="bar"><strong id="count"></strong>
+<select id="sort" aria-label="Sort"><option value="pop">Sort by: Popular</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option><option value="rt">Top rated</option></select></div>
+<div class="grid" id="grid"></div>
+</div>
+</div></section>
+
+<section id="recent"><div class="wrap">
+<h2 style="font-size:30px;margin-bottom:14px">Recently viewed</h2>
+<div class="grid" id="rgrid"></div>
+</div></section>
+</main>
+
+<footer id="contact"><div class="wrap">
+<div class="fcols">
+<div><a class="logo" href="#top" style="display:inline">Foodly Kitchen</a><p style="color:var(--mute);font-size:13px">Fresh food, fast delivery, every single day.</p></div>
+<div><h4>Company</h4><a href="#top">About us</a><a href="#top">Careers</a><a href="#top">Blog</a></div>
+<div><h4>Explore</h4><a href="#menu">Menu</a><a href="#categories">Categories</a><a href="#menu">Best sellers</a></div>
+<div><h4>Support</h4><a href="#contact">Help center</a><a href="#contact">Track order</a><a href="#contact">Contact</a></div>
+<div><h4>Legal</h4><a href="#contact">Privacy policy</a><a href="#contact">Terms of service</a></div>
+</div>
+<div class="copy">© 2026 Foodly Kitchen. All rights reserved.</div>
+</div></footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const CATS=[["All","🍽️"],["Burgers","🍔"],["Pizza","🍕"],["Chicken","🍗"],["Pasta","🍝"],["Drinks","🥤"],["Desserts","🍰"],["Sides","🍟"]];
+const D=[
+["Cheesy Beef Burger","Burgers","🍔",399,4.7,86,"12–15 min","Double patty, cheddar, house sauce","New",0,"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&auto=format&fit=crop&q=80"],
+["Classic Cheeseburger","Burgers","🍔",329,4.8,412,"12–15 min","Beef patty, cheddar, pickles","Bestseller",0,"https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&auto=format&fit=crop&q=80"],
+["Spicy Chicken Sandwich","Burgers","🥪",349,4.7,133,"14–18 min","Crispy fillet, spicy mayo, slaw","",1,"https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=500&auto=format&fit=crop&q=80"],
+["Pepperoni Supreme","Pizza","🍕",599,4.8,64,"18–22 min","Loaded pepperoni, mozzarella, basil","New",0,"https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&auto=format&fit=crop&q=80"],
+["Four Cheese Pizza","Pizza","🍕",549,4.6,45,"20–25 min","Mozzarella, gouda, parmesan, blue","",0,"https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format&fit=crop&q=80"],
+["Crispy Wing Box","Chicken","🍗",449,4.6,102,"15–18 min","8pc spicy buffalo wings, ranch dip","",1,"https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=500&auto=format&fit=crop&q=80"],
+["Grilled Chicken Wrap","Chicken","🌯",299,4.7,68,"12–15 min","Grilled fillet, lettuce, garlic sauce","",0,"https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=500&auto=format&fit=crop&q=80"],
+["Creamy Penne Pasta","Pasta","🍝",399,4.5,77,"15–20 min","Cream sauce, garlic, parmesan","",0,"https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=500&auto=format&fit=crop&q=80"],
+["Spicy Arrabbiata","Pasta","🍝",379,4.6,52,"15–20 min","Tomato, chili, fresh basil","Trending",1,"https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=500&auto=format&fit=crop&q=80"],
+["Cold Brew Cooler","Drinks","🧋",229,4.9,41,"5–8 min","Iced cold brew, vanilla foam","",0,"https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500&auto=format&fit=crop&q=80"],
+["Mango Lassi","Drinks","🥭",199,4.9,58,"5–8 min","Fresh mango, yogurt, cardamom","",0,"https://images.unsplash.com/photo-1546173159-315724a31696?w=500&auto=format&fit=crop&q=80"],
+["Choco Lava Cake","Desserts","🍫",279,4.8,39,"10–12 min","Warm molten center, vanilla scoop","New",0,"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&auto=format&fit=crop&q=80"],
+["Garlic Bread Sticks","Sides","🥖",219,4.5,74,"8–10 min","Toasted, garlic butter, parmesan","Trending",0,"https://images.unsplash.com/photo-1573821663912-569905455b1c?w=500&auto=format&fit=crop&q=80"],
+["French Fries","Sides","🍟",149,4.4,210,"6–8 min","Golden, salted, crispy","Bestseller",0,"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500&auto=format&fit=crop&q=80"],
+["Onion Rings","Sides","🧅",179,4.5,45,"8–10 min","Crispy battered, chipotle dip","",1,"https://images.unsplash.com/photo-1639024471283-03518883512d?w=500&auto=format&fit=crop&q=80"]
+];
+const $=s=>document.querySelector(s);
+let cat="All",cart=0,favs=new Set();
+const tt=$("#toast");let tmr;
+function toast(m){tt.textContent=m;tt.classList.add("show");clearTimeout(tmr);tmr=setTimeout(()=>tt.classList.remove("show"),1800)}
+function setCat(c){cat=c;render();document.querySelectorAll("#catf input").forEach(i=>i.checked=i.value===c)}
+$("#cats").innerHTML=CATS.map(([n,e])=>`<button class="cat" data-cat="${n}"><i>${e}</i>${n}</button>`).join("");
+$("#catf").innerHTML=CATS.map(([n])=>`<label><input type="radio" name="cf" value="${n}" ${n==="All"?"checked":""}> ${n}</label>`).join("");
+document.addEventListener("click",e=>{
+ const c=e.target.closest("[data-cat]");if(c){setCat(c.dataset.cat);if(!c.classList.contains("cat")||true)document.getElementById("menu").scrollIntoView()}
+ const a=e.target.closest(".add");if(a){cart++;$("#cartN").textContent=cart;toast(a.dataset.n+" added to cart")}
+ const f=e.target.closest(".fav");if(f){const n=f.dataset.n;favs.has(n)?favs.delete(n):favs.add(n);render()}
+});
+$("#catf").addEventListener("change",e=>setCat(e.target.value));
+["q","price","r4","spicy","sort"].forEach(id=>$("#"+id).addEventListener("input",()=>{$("#pv").textContent="₹"+$("#price").value;render()}));
+$("#clear").onclick=()=>{$("#q").value="";$("#price").value=700;$("#r4").checked=$("#spicy").checked=false;$("#sort").value="pop";$("#pv").textContent="₹700";setCat("All")};
+$("#cartBtn").onclick=()=>toast(cart?cart+" item(s) in your cart":"Your cart is empty. Add a dish to start.");
+function card(d){const[n,c,e,p,r,rc,t,ds,tag,sp,img]=d;
+return `<article class="card">${tag?`<span class="tag">${tag}</span>`:""}<button class="fav ${favs.has(n)?"on":""}" data-n="${n}" aria-label="Favorite ${n}">${favs.has(n)?"♥":"♡"}</button>
+<div class="img" aria-hidden="true">${img?`<img src="${img}" alt="${n}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`:e}</div><h3>${n}</h3><p>${ds}</p>
+<div class="meta"><span>★ <b>${r}</b> (${rc})</span><span>${t}</span></div>
+<div class="row"><strong>₹${p}</strong><button class="add" data-n="${n}" aria-label="Add ${n}">+</button></div></article>`}
+function render(){
+ const q=$("#q").value.toLowerCase(),mx=+$("#price").value;
+ let l=D.filter(d=>(cat==="All"||d[1]===cat)&&d[3]<=mx&&(!$("#r4").checked||d[4]>=4.5)&&(!$("#spicy").checked||d[9])&&(d[0]+d[7]+d[1]).toLowerCase().includes(q));
+ const s=$("#sort").value;
+ l.sort((a,b)=>s==="lo"?a[3]-b[3]:s==="hi"?b[3]-a[3]:s==="rt"?b[4]-a[4]:b[5]-a[5]);
+ $("#count").textContent=l.length+" menu items";
+ $("#grid").innerHTML=l.length?l.map(card).join(""):'<div class="empty">No dishes match these filters. Try clearing some.</div>';
+ $("#rgrid").innerHTML=[1,9,3,5].map(i=>card(D[i])).join("");
+}
+render();
+</script>
+</body>
+</html>

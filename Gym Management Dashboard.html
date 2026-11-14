@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ironworks · Gym Management by CodiflyTech</title><style>:root{--bg:#f6f5f2;--card:#fff;--ink:#1b1a17;--mut:#7a766d;--line:#e6e3dc;--gold:#b8861b;--goldbg:#f7edd3;--ok:#2f8f5b;--bad:#c4452f;--warn:#c08a14;--r:10px;--sh:0 1px 2px rgba(20,18,10,.05)}
+[data-theme=dark]{--bg:#0f0f0e;--card:#181816;--ink:#f1eee6;--mut:#8f8a7e;--line:#2a2924;--gold:#e0b04a;--goldbg:#2b2411;--ok:#4cc08a;--bad:#ef6b55;--warn:#e0b04a;--sh:none}
+*{box-sizing:border-box;margin:0}body{font:14px/1.45 "Inter",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select{font:inherit;color:inherit}:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.app{display:flex;min-height:100vh}.side{width:232px;background:var(--card);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:14px 10px;position:sticky;top:0;height:100vh;transition:width .2s;z-index:5}
+.brand{display:flex;gap:10px;align-items:center;padding:4px 8px 16px;font-size:16px}.logo{width:28px;height:28px;border-radius:8px;background:var(--gold);color:#111;display:grid;place-items:center;font-weight:800}
+#nav{flex:1;overflow:auto;display:flex;flex-direction:column;gap:2px}
+#nav a{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;color:var(--mut);cursor:pointer;position:relative;white-space:nowrap}
+#nav a:hover{background:var(--bg);color:var(--ink)}#nav a.on{color:var(--ink);background:var(--goldbg)}#nav a.on:before{content:"";position:absolute;left:-10px;top:8px;bottom:8px;width:3px;border-radius:2px;background:var(--gold)}
+#nav svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.me{display:flex;gap:10px;align-items:center;padding:10px 6px;border-top:1px solid var(--line)}.me small{display:block;color:var(--mut)}.me div{flex:1;line-height:1.2}
+.av{width:30px;height:30px;border-radius:50%;background:var(--goldbg);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:12px;flex:none}
+.collapsed .side{width:66px}.collapsed .side span,.collapsed .brand b,.collapsed .me div,.collapsed #logout{display:none}.collapsed #nav a{justify-content:center}
+.main{flex:1;min-width:0}.top{display:flex;gap:10px;align-items:center;padding:12px 24px;border-bottom:1px solid var(--line);background:var(--card);position:sticky;top:0;z-index:4}
+.crumb{flex:1;min-width:0}.crumb small{color:var(--mut)}h1{font-size:18px;font-weight:650;letter-spacing:-.01em}
+.search,select,.f input,.f select{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 11px}.search{width:240px}
+.ico{background:none;border:1px solid var(--line);border-radius:8px;width:34px;height:34px;cursor:pointer;position:relative}.ico:hover{background:var(--bg)}
+.dot{position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--bad)}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 13px;cursor:pointer;transition:transform .1s}.btn:active{transform:scale(.97)}.btn:hover{border-color:var(--gold)}
+.pri{background:var(--gold);color:#16130a;border-color:var(--gold);font-weight:600}.danger{color:var(--bad)}
+#view{padding:22px 24px 40px;max-width:1500px}
+.grid{display:grid;gap:14px}.k4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.g2{grid-template-columns:2fr 1fr}.g3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--sh)}.card h3{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;justify-content:space-between}
+.kpi small{color:var(--mut)}.kpi b{display:block;font-size:24px;font-weight:650;letter-spacing:-.02em;margin:2px 0}.up{color:var(--ok)}.down{color:var(--bad)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}.tools .search{flex:1;min-width:180px}
+table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--mut);font-weight:500;font-size:12px;padding:9px 10px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap}
+td{padding:10px;border-bottom:1px solid var(--line)}tr:hover td{background:var(--bg)}.tw{overflow-x:auto}
+.b{padding:2px 9px;border-radius:99px;font-size:12px;background:var(--bg);border:1px solid var(--line)}.b.Active,.b.Paid,.b.Good,.b.Present,.b.Received,.b.Won{color:var(--ok)}.b.Expired,.b.Overdue,.b.Poor,.b.Low,.b.Lost{color:var(--bad)}.b.Suspended,.b.Pending,.b.Due,.b.Fair,.b.New,.b.Frozen{color:var(--warn)}
+.pg{display:flex;justify-content:space-between;align-items:center;margin-top:12px;color:var(--mut)}.pg div{display:flex;gap:6px}
+.empty{padding:40px;text-align:center;color:var(--mut)}.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:16px}
+.plan b{font-size:22px}.plan.vip{border-color:var(--gold)}.plan ul{padding-left:16px;color:var(--mut);margin:8px 0 12px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:grid;place-items:center;z-index:20;padding:16px}.modal[hidden]{display:none}
+.dlg{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;width:min(460px,100%);max-height:90vh;overflow:auto;animation:pop .15s}@keyframes pop{from{transform:scale(.96);opacity:0}}
+.dlg h2{font-size:16px;margin-bottom:14px}.f{display:grid;gap:4px;margin-bottom:10px}.f label{color:var(--mut);font-size:12px}.f input,.f select{width:100%}.f .err{color:var(--bad);font-size:12px}.acts{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+#toasts{position:fixed;right:16px;bottom:16px;display:grid;gap:8px;z-index:30}.toast{background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:8px;animation:pop .2s}
+.pos{display:grid;grid-template-columns:1fr 320px;gap:14px}.prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}.prod{cursor:pointer;text-align:left}.prod:hover{border-color:var(--gold)}.prod small{color:var(--mut)}
+.line{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line)}.tot{font-size:18px;font-weight:650}
+.sw{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}.sw input{accent-color:var(--gold);width:18px;height:18px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;color:var(--mut);font-size:12px;margin-top:8px}.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+@media(max-width:900px){.side{position:fixed;left:-250px;margin:0;height:100vh;border-radius:0 20px 20px 0;transition:left .25s ease;z-index:50}.open .side{left:0}.app.open::after{content:'';position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;backdrop-filter:blur(2px)}.g2,.pos,.g3{grid-template-columns:1fr}.search{display:none}#view{padding:16px 14px 40px}#quick{display:none}}
+@media(max-width:576px){.top{padding:10px 14px;gap:6px}.crumb h1{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}#branch{max-width:110px;padding:6px 8px;font-size:12px}.k4{grid-template-columns:repeat(2,1fr)}.card{padding:12px}.kpi b{font-size:18px}.tools{gap:6px}.tools .search,#tq{width:100%!important;flex:1 1 100%}.tools .btn{flex:1;justify-content:center}.modal{padding:10px;align-items:flex-end}.dlg{width:100%;border-radius:20px 20px 0 0;max-height:85vh;padding:16px}.prods{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}.donut-box{flex-direction:column;align-items:center;text-align:center}}
+@media(max-width:380px){.k4{grid-template-columns:1fr}.btn,.ico{padding:6px 10px;font-size:12px}.top{padding:8px 10px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== Liquid glass layer ===== */
+:root{--glass:rgba(255,255,255,.52);--glass2:rgba(255,255,255,.34);--edge:rgba(255,255,255,.75);--hi:inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 0 rgba(255,255,255,.25);--drop:0 8px 30px rgba(120,90,30,.12);--bg:rgba(255,255,255,.4);--line:rgba(120,100,60,.16);--card:rgba(255,255,255,.55);--ink:#1d1b16;--mut:#6f6a5c;--gold:#a8760f;--goldbg:rgba(224,176,74,.28);--blur:blur(22px) saturate(180%)}
+[data-theme=dark]{--glass:rgba(40,38,32,.5);--glass2:rgba(60,56,46,.35);--edge:rgba(255,255,255,.14);--hi:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 0 rgba(255,255,255,.04);--drop:0 10px 34px rgba(0,0,0,.45);--bg:rgba(255,255,255,.06);--line:rgba(255,255,255,.1);--card:rgba(34,32,27,.55);--ink:#f3efe5;--mut:#a29c8c;--gold:#e0b04a;--goldbg:rgba(224,176,74,.2)}
+body{background:#f3ede0;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(520px 420px at 8% 12%,rgba(240,196,92,.65),transparent 70%),radial-gradient(600px 480px at 92% 8%,rgba(130,180,240,.5),transparent 70%),radial-gradient(560px 460px at 78% 92%,rgba(244,150,130,.42),transparent 70%),radial-gradient(520px 420px at 14% 90%,rgba(150,220,190,.45),transparent 70%),linear-gradient(135deg,#f7f1e4,#efe7d6)}
+[data-theme=dark] body:before{background:radial-gradient(520px 420px at 8% 12%,rgba(200,150,40,.38),transparent 70%),radial-gradient(600px 480px at 92% 8%,rgba(60,100,180,.34),transparent 70%),radial-gradient(560px 460px at 78% 92%,rgba(170,70,60,.28),transparent 70%),linear-gradient(135deg,#0d0d0c,#16140f)}
+.side,.top,.card,.dlg,.toast,.btn,.ico,.search,select,.f input,.f select,.b{-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+.side,.top{background:var(--glass);border-color:var(--edge);box-shadow:var(--hi),var(--drop)}
+.top{border-width:0 0 1px}.side{margin:10px 0 10px 10px;height:calc(100vh - 20px);border-radius:20px;border-width:1px}
+.card{background:linear-gradient(160deg,var(--glass),var(--glass2));border:1px solid var(--edge);border-radius:18px;box-shadow:var(--hi),var(--drop);position:relative}
+.card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,.5),transparent 35%);opacity:.5}
+[data-theme=dark] .card:before{opacity:.12}
+.card>*{position:relative}
+.btn,.ico,.search,select,.f input,.f select{background:var(--glass2);border:1px solid var(--edge);box-shadow:var(--hi)}
+.btn:hover,.ico:hover{background:var(--glass);transform:translateY(-1px)}
+.pri{background:linear-gradient(180deg,rgba(240,200,100,.95),rgba(200,148,30,.95));border-color:rgba(255,255,255,.6);color:#2a1e03;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 6px 16px rgba(190,140,30,.35)}
+.pri:hover{background:linear-gradient(180deg,rgba(246,208,112,1),rgba(206,154,36,1))}
+#nav a.on{background:linear-gradient(160deg,rgba(255,255,255,.7),rgba(255,235,185,.5));border:1px solid var(--edge);box-shadow:var(--hi),0 4px 12px rgba(190,140,30,.15)}
+[data-theme=dark] #nav a.on{background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(224,176,74,.18))}
+#nav a.on:before{left:-11px}#nav a:hover{background:var(--glass2)}
+tr:hover td{background:rgba(255,255,255,.35)}[data-theme=dark] tr:hover td{background:rgba(255,255,255,.05)}
+.b{background:var(--glass2);border-color:var(--edge)}
+.modal{background:rgba(40,30,10,.25);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.dlg{background:linear-gradient(160deg,var(--glass),var(--glass2));border:1px solid var(--edge);border-radius:24px;box-shadow:var(--hi),0 24px 70px rgba(60,40,10,.3);-webkit-backdrop-filter:blur(30px) saturate(190%);backdrop-filter:blur(30px) saturate(190%)}
+[data-theme=light] .dlg{background:linear-gradient(160deg,rgba(255,255,255,.78),rgba(255,255,255,.55))}
+.toast{background:var(--glass);color:var(--ink);border:1px solid var(--edge);border-radius:14px;box-shadow:var(--hi),var(--drop)}
+.dot{box-shadow:0 0 0 2px rgba(255,255,255,.7)}.prod{background:linear-gradient(160deg,var(--glass),var(--glass2))}
+.ico,.btn,.search,select{border-radius:12px}.av{border:1px solid var(--edge)}
+@media(max-width:900px){.side{margin:0;height:100vh;border-radius:0 20px 20px 0;left:-250px}.open .side{left:0}}
+@supports not (backdrop-filter:blur(1px)){.side,.top,.card,.dlg{background:var(--card)}}
+</style></head><body>
+<div class="app" id="app">
+<aside class="side" id="side"><div class="brand"><span class="logo">I</span><b>Ironworks</b></div><nav id="nav"></nav>
+<div class="me"><span class="av">AR</span><div><b>Arjun Rao</b><small>Owner</small></div><button class="ico" id="logout" title="Log out">⎋</button></div></aside>
+<div class="main"><header class="top"><button class="ico" id="burger" title="Toggle sidebar">☰</button>
+<div class="crumb"><small id="crumb"></small><h1 id="title"></h1></div>
+<input id="gsearch" class="search" placeholder="Search members, products, staff…">
+<select id="branch"><option>Jorhat Central</option><option>Guwahati East</option><option>All branches</option></select>
+<button class="ico" id="bell" title="Notifications">🔔<i class="dot"></i></button><button class="ico" id="theme" title="Toggle theme">◐</button>
+<button class="btn pri" id="quick">+ Quick add</button></header>
+<main id="view" tabindex="-1"></main></div></div>
+<div id="modal" class="modal" hidden></div><div id="toasts"></div><script>const LS={getItem(k){try{return localStorage.getItem(k)}catch(e){return null}},setItem(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const R=n=>"₹"+Number(n).toLocaleString("en-IN"),pick=(a,i)=>a[i%a.length];
+const toast=m=>{const t=document.createElement("div");t.className="toast";t.textContent=m;$("#toasts").append(t);setTimeout(()=>t.remove(),2600)};
+const FN=["Aarav","Diya","Rohan","Meera","Kabir","Isha","Vikram","Ananya","Nikhil","Priya","Arnav","Sneha"],LN=["Bora","Sharma","Das","Gogoi","Singh","Saikia","Nair","Kalita"];
+const PL=["Monthly","Quarterly","Half-yearly","Yearly","VIP","Student"],ST=["Active","Active","Active","Expired","Suspended","Frozen"];
+function seed(){const d={};
+d.members=Array.from({length:32},(_,i)=>({name:pick(FN,i*5+1)+" "+pick(LN,i*3),phone:"98640"+String(10000+i*137).slice(0,5),plan:pick(PL,i),trainer:pick(["Rahul K.","Pooja S.","Dev M."],i),expiry:`2026-${String(11+(i%3)).padStart(2,"0")}-${String(1+(i*7)%28).padStart(2,"0")}`,status:pick(ST,i*2+i%4)}));
+d.leads=Array.from({length:10},(_,i)=>({name:pick(FN,i+3)+" "+pick(LN,i+1),phone:"70020"+(30000+i*911),source:pick(["Walk-in","Instagram","Referral","Website"],i),interest:pick(PL,i+2),status:pick(["New","Pending","Won","Lost"],i)}));
+d.memberships=PL.map((p,i)=>({plan:p,duration:[1,3,6,12,12,3][i]+" mo",price:[1800,4800,8500,15000,24000,3900][i],subscribers:[88,54,32,41,12,19][i],status:"Active"}));
+d.attendance=Array.from({length:12},(_,i)=>({member:d.members[i].name,checkin:`${6+i%12}:${i%2?"15":"40"}`,checkout:i<9?`${7+i%12}:${i%2?"50":"20"}`:"—",mode:pick(["QR","Manual"],i),status:i%5==4?"Expired":"Present"}));
+d.training=Array.from({length:8},(_,i)=>({trainer:pick(["Rahul K.","Pooja S.","Dev M.","Neha T."],i),member:d.members[i+4].name,slot:`${6+i} AM`,package:pick(["10 sessions","20 sessions","Monthly 1:1"],i),commission:R(600+i*90),status:pick(["Paid","Pending"],i)}));
+d.plans=[["Fat Loss 12wk","Push/Pull/Legs","Weight loss"],["Hypertrophy 8wk","Upper/Lower","Muscle gain"],["Beginner Strength","Full body 3x","Foundation"],["Keto Cut","1600 kcal","Weight loss"],["Lean Bulk","2900 kcal","Muscle gain"]].map((p,i)=>({plan:p[0],split:p[1],goal:p[2],assigned:6+i*3,kcal:[1800,2600,2200,1600,2900][i]}));
+d.employees=Array.from({length:10},(_,i)=>({name:pick(FN,i*2)+" "+pick(LN,i+4),role:pick(["Trainer","Receptionist","Manager","Cleaning","Trainer"],i),shift:pick(["Morning","Evening","General"],i),salary:15000+i*2500,joined:`202${2+i%4}-0${1+i%9}-10`,status:i==7?"Pending":"Present"}));
+d.shifts=d.employees.map(e=>({name:e.name,mon:e.shift,wed:e.shift,fri:e.shift,sun:"Off",leave:"—",status:"Active"}));
+d.payroll=d.employees.map((e,i)=>({name:e.name,base:e.salary,bonus:i%3*500,deduction:i%4*300,net:e.salary+i%3*500-i%4*300,status:pick(["Paid","Paid","Pending"],i)}));
+d.sales=Array.from({length:12},(_,i)=>({invoice:"INV-"+(2040+i),customer:pick(FN,i+2),items:pick(["Whey 2kg","Creatine","Shaker x2","PT 10 pack","Energy drink x4"],i),amount:700+i*430,method:pick(["UPI","Cash","Card"],i),status:i==5?"Refunded":"Paid"}));
+d.inventory=[["Whey Protein 2kg","Protein",3200,2400,14,10],["Creatine 300g","Creatine",1100,780,6,8],["Mass Gainer 3kg","Gainer",3600,2700,22,6],["Pre-workout 250g","Pre-workout",1800,1250,4,8],["Energy Drink","Drinks",120,80,96,40],["Protein Bar","Bars",90,55,120,50],["Lifting Straps","Accessories",450,260,18,6],["Shaker 700ml","Accessories",350,180,3,10]].map((p,i)=>({product:p[0],category:p[1],sku:"SKU-"+(100+i),price:p[2],cost:p[3],stock:p[4],min:p[5],status:p[4]<=p[5]?"Low":"Good"}));
+d.suppliers=["MuscleHub Distributors","NutriPure Foods","FitGear India","Assam Beverages"].map((s,i)=>({supplier:s,contact:"90000"+(11100+i*213),category:pick(["Supplements","Supplements","Accessories","Drinks"],i),outstanding:[42000,0,18500,6200][i],orders:[24,18,9,31][i],status:i==1?"Paid":"Due"}));
+d.expenses=["Rent","Electricity","Salaries","Marketing","Maintenance","Cleaning","Software","Insurance"].map((c,i)=>({category:c,date:`2026-11-0${1+i}`,amount:[85000,24000,210000,32000,15000,9000,6500,12000][i],method:pick(["Bank","UPI","Cash"],i),status:i%4==3?"Pending":"Paid"}));
+d.equipment=[["Treadmill T9","Cardio","2024-02-10","2027-02-10"],["Power Rack","Strength","2023-06-01","2026-06-01"],["Cable Crossover","Strength","2024-08-19","2027-08-19"],["Spin Bike x8","Cardio","2025-01-05","2028-01-05"],["Leg Press","Strength","2022-11-23","2025-11-23"]].map((e,i)=>({equipment:e[0],type:e[1],purchased:e[2],warranty:e[3],nextService:`2026-12-${10+i}`,status:pick(["Good","Good","Fair","Good","Poor"],i)}));
+d.reports=["Membership","Revenue","Expense","Attendance","Payroll","Trainer performance","Product sales","Retention","Outstanding payments","Branch comparison"].map((r,i)=>({report:r,period:"Nov 2026",generated:"12 Nov",rows:40+i*17,status:"Active"}));
+d.notifications=[["Membership expiry","6 memberships expire within 7 days"],["Low inventory","Shaker 700ml and Pre-workout below minimum"],["Payment reminder","₹18,500 due to FitGear India"],["Leave request","Neha T. requested 2 days leave"],["Birthday","Diya Das turns 26 today"],["New registration","Kabir Singh joined Quarterly plan"]].map((n,i)=>({type:n[0],message:n[1],time:i*2+1+"h ago",status:i<3?"New":"Read"}));
+d.branches=[["Jorhat Central",1240,"Ananya R."],["Guwahati East",980,"Vikram S."],["Dibrugarh",610,"Sneha N."]].map(b=>({branch:b[0],members:b[1],manager:b[2],revenue:b[1]*1650,status:"Active"}));
+d.roles=["Admin","Manager","Receptionist","Trainer"].map((r,i)=>({role:r,users:[1,3,4,12][i],members:"✓",billing:i<2?"✓":"—",payroll:i<2?"✓":"—",settings:i<1?"✓":"—"}));
+return d}
+let DB=JSON.parse(LS.getItem("ironworks")||"null")||seed();const save=()=>LS.setItem("ironworks",JSON.stringify(DB));
+const sum=(k,f)=>DB[k].reduce((a,r)=>a+Number(r[f]||0),0);
+// page configs: key -> [title, collection, columns [key,label,type?], kpis]
+const P={
+members:["Members","members",[["name","Name"],["phone","Phone"],["plan","Plan","sel:"+PL.join("|")],["trainer","Trainer"],["expiry","Expiry","date"],["status","Status","sel:Active|Expired|Suspended|Frozen"]],()=>[["Total",DB.members.length],["Active",DB.members.filter(m=>m.status=="Active").length],["Expired",DB.members.filter(m=>m.status=="Expired").length],["Frozen / suspended",DB.members.filter(m=>/Fro|Sus/.test(m.status)).length]]],
+leads:["Leads & Enquiries","leads",[["name","Name"],["phone","Phone"],["source","Source","sel:Walk-in|Instagram|Referral|Website"],["interest","Interested in","sel:"+PL.join("|")],["status","Status","sel:New|Pending|Won|Lost"]],()=>[["Open leads",DB.leads.filter(l=>/New|Pend/.test(l.status)).length],["Won",DB.leads.filter(l=>l.status=="Won").length],["Conversion","30%"]]],
+memberships:["Memberships","memberships",[["plan","Plan"],["duration","Duration"],["price","Price (₹)","num"],["subscribers","Subscribers","num"],["status","Status","sel:Active|Inactive"]],()=>[["Plans",DB.memberships.length],["Subscribers",sum("memberships","subscribers")],["Plan revenue",R(DB.memberships.reduce((a,p)=>a+p.price*p.subscribers,0))]]],
+attendance:["Attendance","attendance",[["member","Member"],["checkin","Check-in"],["checkout","Check-out"],["mode","Mode","sel:QR|Manual"],["status","Status","sel:Present|Expired"]],()=>[["Today",DB.attendance.length],["Inside now",DB.attendance.filter(a=>a.checkout=="—").length],["Expired alerts",DB.attendance.filter(a=>a.status=="Expired").length]]],
+training:["Personal Training","training",[["trainer","Trainer"],["member","Member"],["slot","Slot"],["package","Package","sel:10 sessions|20 sessions|Monthly 1:1"],["commission","Commission"],["status","Status","sel:Paid|Pending"]],()=>[["Sessions today",DB.training.length],["Trainers",4],["Pending commission",DB.training.filter(t=>t.status=="Pending").length]]],
+plans:["Workout & Diet Plans","plans",[["plan","Plan"],["split","Structure"],["goal","Goal"],["assigned","Assigned","num"],["kcal","Calories","num"]],()=>[["Plans",DB.plans.length],["Assigned members",sum("plans","assigned")],["Exercises in library",148]]],
+employees:["Employees & Trainers","employees",[["name","Name"],["role","Role","sel:Trainer|Receptionist|Manager|Cleaning"],["shift","Shift","sel:Morning|Evening|General"],["salary","Salary (₹)","num"],["joined","Joined","date"],["status","Today","sel:Present|Pending"]],()=>[["Staff",DB.employees.length],["Trainers",DB.employees.filter(e=>e.role=="Trainer").length],["Monthly salary",R(sum("employees","salary"))]]],
+shifts:["Shifts & Holidays","shifts",[["name","Employee"],["mon","Mon","sel:Morning|Evening|General|Off"],["wed","Wed","sel:Morning|Evening|General|Off"],["fri","Fri","sel:Morning|Evening|General|Off"],["sun","Sun","sel:Off|Morning"],["leave","Leave"]],()=>[["Next holiday","Diwali · 8 Nov"],["Leave requests",2]]],
+payroll:["Payroll & Salaries","payroll",[["name","Employee"],["base","Base (₹)","num"],["bonus","Bonus (₹)","num"],["deduction","Deductions (₹)","num"],["net","Net pay (₹)","num"],["status","Status","sel:Paid|Pending"]],()=>[["Payroll total",R(sum("payroll","net"))],["Paid",DB.payroll.filter(p=>p.status=="Paid").length],["Pending",DB.payroll.filter(p=>p.status=="Pending").length]]],
+sales:["POS & Sales","sales",[["invoice","Invoice"],["customer","Customer"],["items","Items"],["amount","Amount (₹)","num"],["method","Method","sel:UPI|Cash|Card"],["status","Status","sel:Paid|Refunded"]],()=>[["Sales today",R(sum("sales","amount"))],["Invoices",DB.sales.length]]],
+inventory:["Inventory & Supplements","inventory",[["product","Product"],["category","Category"],["sku","SKU"],["price","Price (₹)","num"],["cost","Cost (₹)","num"],["stock","Stock","num"],["min","Min","num"],["status","Status","sel:Good|Low"]],()=>[["Products",DB.inventory.length],["Low stock",DB.inventory.filter(i=>i.stock<=i.min).length],["Stock value",R(DB.inventory.reduce((a,i)=>a+i.cost*i.stock,0))]]],
+suppliers:["Suppliers & Purchases","suppliers",[["supplier","Supplier"],["contact","Contact"],["category","Category"],["outstanding","Outstanding (₹)","num"],["orders","Orders","num"],["status","Status","sel:Due|Paid"]],()=>[["Suppliers",DB.suppliers.length],["Outstanding",R(sum("suppliers","outstanding"))]]],
+expenses:["Expenses & Finance","expenses",[["category","Category"],["date","Date","date"],["amount","Amount (₹)","num"],["method","Method","sel:Bank|UPI|Cash"],["status","Status","sel:Paid|Pending"]],()=>[["Expenses",R(sum("expenses","amount"))],["Revenue","₹6,42,000"],["Net profit",R(642000-sum("expenses","amount"))]]],
+equipment:["Equipment & Maintenance","equipment",[["equipment","Equipment"],["type","Type"],["purchased","Purchased","date"],["warranty","Warranty till","date"],["nextService","Next service","date"],["status","Condition","sel:Good|Fair|Poor"]],()=>[["Items",DB.equipment.length],["Needs repair",DB.equipment.filter(e=>e.status=="Poor").length]]],
+reports:["Reports & Analytics","reports",[["report","Report"],["period","Period"],["generated","Generated"],["rows","Rows","num"]],()=>[["Reports",DB.reports.length]]],
+notifications:["Notifications","notifications",[["type","Type"],["message","Message"],["time","When"],["status","Status","sel:New|Read"]],()=>[["Unread",DB.notifications.filter(n=>n.status=="New").length]]],
+branches:["Branch Management","branches",[["branch","Branch"],["members","Members","num"],["manager","Manager"],["revenue","Revenue (₹)","num"],["status","Status","sel:Active|Inactive"]],()=>[["Branches",DB.branches.length],["Total members",sum("branches","members")]]],
+roles:["Roles & Permissions","roles",[["role","Role"],["users","Users","num"],["members","Members"],["billing","Billing"],["payroll","Payroll"],["settings","Settings"]],()=>[["Roles",4]]]};
+const IC={dashboard:"M3 12l9-8 9 8M5 10v10h14V10",members:"M16 11a4 4 0 10-8 0M4 20c0-4 4-6 8-6s8 2 8 6",leads:"M3 5h18l-7 8v6l-4-2v-4z",memberships:"M3 7h18v10H3zM3 11h18",attendance:"M5 4h14v16H5zM9 12l2 2 4-4",training:"M2 9v6M6 7v10M18 7v10M22 9v6M6 12h12",plans:"M4 4h16v16H4zM8 9h8M8 13h5",employees:"M12 8a3 3 0 100-.1M5 20c0-4 3-6 7-6s7 2 7 6",shifts:"M12 3a9 9 0 100 18 9 9 0 000-18zM12 7v5l3 2",payroll:"M3 6h18v12H3zM12 9v6M9.5 10.5h4a1 1 0 010 2h-3a1 1 0 000 2h4",sales:"M5 6h16l-2 9H7zM5 6L4 3H2M9 20h.1M17 20h.1",inventory:"M3 8l9-5 9 5v8l-9 5-9-5zM3 8l9 5 9-5M12 13v8",suppliers:"M2 7h12v9H2zM14 10h4l3 3v3h-7M6 19h.1M17 19h.1",expenses:"M4 18l5-6 4 3 7-9M16 6h4v4",equipment:"M14 6l4 4-8 8H6v-4zM13 7l4 4",reports:"M5 20V10M12 20V4M19 20v-7",notifications:"M6 16V11a6 6 0 0112 0v5l2 2H4zM10 21h4",branches:"M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11zM12 12h.1",settings:"M12 9a3 3 0 100 6 3 3 0 000-6zM12 2v3M12 19v3M2 12h3M19 12h3"};
+const NAV=[["dashboard","Dashboard"],...Object.entries(P).map(([k,v])=>[k,v[0]]),["settings","Settings"]];
+$("#nav").innerHTML=NAV.map(([k,l])=>`<a data-p="${k}" title="${l}"><svg viewBox="0 0 24 24"><path d="${IC[k]||IC.reports}"/></svg><span>${l}</span></a>`).join("");
+// charts (SVG)
+const line=(v,c="var(--gold)",h=150)=>{const w=400,m=Math.max(...v)*1.1,p=v.map((y,i)=>[i*w/(v.length-1),h-y/m*h]),d=p.map((q,i)=>(i?"L":"M")+q[0].toFixed(0)+" "+q[1].toFixed(0)).join("");return`<svg viewBox="0 0 ${w} ${h}" width="100%" preserveAspectRatio="none"><path d="${d}L${w} ${h}L0 ${h}Z" fill="${c}" opacity=".12"/><path d="${d}" fill="none" stroke="${c}" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg>`};
+const bars=(v,l)=>{const m=Math.max(...v);return`<svg viewBox="0 0 400 170" width="100%">${v.map((y,i)=>`<rect x="${i*400/v.length+8}" y="${150-y/m*140}" width="${400/v.length-16}" height="${y/m*140}" rx="4" fill="var(--gold)" opacity="${.5+.5*y/m}"><title>${l[i]}: ${y}</title></rect><text x="${i*400/v.length+400/v.length/2}" y="166" font-size="10" fill="var(--mut)" text-anchor="middle">${l[i]}</text>`).join("")}</svg>`};
+const COL=["#e0b04a","#9c7a2a","#6f6a5a","#c9c2ad"];
+const donut=(v,l)=>{const t=v.reduce((a,b)=>a+b),r=48,C=2*Math.PI*r;let o=0;return`<div style="display:flex;gap:16px;align-items:center" class="donut-box"><svg viewBox="0 0 120 120" width="130"><g transform="rotate(-90 60 60)">${v.map((x,i)=>{const s=`<circle cx="60" cy="60" r="${r}" fill="none" stroke="${COL[i]}" stroke-width="16" stroke-dasharray="${x/t*C} ${C}" stroke-dashoffset="${-o}"/>`;o+=x/t*C;return s}).join("")}</g><text x="60" y="65" text-anchor="middle" font-size="18" font-weight="700" fill="var(--ink)">${t}</text></svg><div class="legend" style="display:grid">${l.map((x,i)=>`<span><i style="background:${COL[i]}"></i>${x} · ${v[i]}</span>`).join("")}</div></div>`};
+const mini=(rows)=>`<table>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</table>`;
+// views
+function dashboard(){const act=DB.members.filter(m=>m.status=="Active").length;
+const k=[["Total members",DB.members.length*38,"+4.2%"],["Active members",act*38,"+2.1%"],["New this month",86,"+12%"],["Today's attendance",312,"+5%"],["Monthly revenue","₹6.42L","+8.4%"],["Outstanding","₹1.12L","-3%"],["Expiring soon",DB.members.filter(m=>m.expiry<"2026-11-20").length*5,"next 7 days"],["Monthly expenses",R(sum("expenses","amount")),"+1.8%"]];
+return`<div class="grid k4">${k.map(x=>`<div class="card kpi"><small>${x[0]}</small><b>${x[1]}</b><small class="${x[2][0]=="-"?"down":"up"}">${x[2]}</small></div>`).join("")}</div>
+<div class="grid g2" style="margin-top:14px"><div class="card"><h3>Revenue overview <small>last 12 months</small></h3>${line([310,340,330,390,420,410,470,500,520,560,610,642])}</div>
+<div class="card"><h3>Plan distribution</h3>${donut([88,54,41,32],["Monthly","Quarterly","Yearly","Half-yearly"])}</div></div>
+<div class="grid g3" style="margin-top:14px"><div class="card"><h3>Attendance by hour</h3>${bars([40,90,60,30,25,55,110,95],["6","8","10","12","2","4","6","8"])}</div>
+<div class="card"><h3>Membership growth</h3>${line([820,860,905,940,1010,1080,1150,1240],"#4cc08a")}</div>
+<div class="card"><h3>Revenue by category</h3>${donut([62,18,14,6],["Memberships","Products","Training","Other"])}</div></div>
+<div class="grid g3" style="margin-top:14px"><div class="card"><h3>Expiring soon</h3>${mini(DB.members.filter(m=>m.expiry<"2026-11-30").slice(0,5).map(m=>[m.name,m.expiry]))}</div>
+<div class="card"><h3>Low stock</h3>${mini(DB.inventory.filter(i=>i.stock<=i.min).map(i=>[i.product,`<span class="b Low">${i.stock} left</span>`]))}</div>
+<div class="card"><h3>Recent transactions</h3>${mini(DB.sales.slice(0,5).map(s=>[s.invoice,s.customer,R(s.amount)]))}</div>
+<div class="card"><h3>Upcoming sessions</h3>${mini(DB.training.slice(0,5).map(t=>[t.slot,t.trainer,t.member]))}</div>
+<div class="card"><h3>Pending payments</h3>${mini(DB.suppliers.filter(s=>s.outstanding).map(s=>[s.supplier,R(s.outstanding)]))}</div>
+<div class="card"><h3>Quick actions</h3><div class="tools"><button class="btn" data-go="members" data-add>Add member</button><button class="btn" data-go="attendance">Check-in</button><button class="btn" data-go="sales">Open POS</button></div></div></div>`}
+let S={q:"",sort:null,dir:1,pg:0,filter:""};const PS=8;
+function table(key){const[t,col,cols,kp]=P[key];let rows=DB[col].map((r,i)=>({...r,_i:i}));
+if(S.q)rows=rows.filter(r=>cols.some(c=>String(r[c[0]]).toLowerCase().includes(S.q.toLowerCase())));
+if(S.sort)rows.sort((a,b)=>(a[S.sort]>b[S.sort]?1:-1)*S.dir);
+const pages=Math.max(1,Math.ceil(rows.length/PS));S.pg=Math.min(S.pg,pages-1);const vis=rows.slice(S.pg*PS,S.pg*PS+PS);
+return`<div class="grid k4" style="margin-bottom:14px">${kp().map(k=>`<div class="card kpi"><small>${k[0]}</small><b>${k[1]}</b></div>`).join("")}</div>
+${key=="memberships"?`<div class="plans">${DB.memberships.map(p=>`<div class="card plan ${p.plan=="VIP"?"vip":""}"><small>${p.plan}</small><br><b>${R(p.price)}</b><ul><li>${p.duration}</li><li>${p.subscribers} members</li></ul><button class="btn" data-act="Renew">Sell plan</button></div>`).join("")}</div>`:""}
+${key=="sales"?`<div style="margin-bottom:14px"><button class="btn pri" data-go="pos">Open POS terminal</button></div>`:""}
+<div class="card"><div class="tools"><input class="search" id="tq" placeholder="Search ${t.toLowerCase()}…" value="${S.q}"><button class="btn" id="exp">Export CSV</button><button class="btn pri" id="add">+ Add</button></div>
+<div class="tw">${vis.length?`<table><tr>${cols.map(c=>`<th data-s="${c[0]}">${c[1]}${S.sort==c[0]?S.dir>0?" ▲":" ▼":""}</th>`).join("")}<th></th></tr>${vis.map(r=>`<tr>${cols.map(c=>`<td>${c[0]=="status"?`<span class="b ${r[c[0]]}">${r[c[0]]}</span>`:r[c[0]]}</td>`).join("")}<td style="white-space:nowrap"><button class="btn" data-e="${r._i}">Edit</button> <button class="btn danger" data-d="${r._i}">Delete</button></td></tr>`).join("")}</table>`:`<div class="empty"><b>No matches</b><br>Try a different search or add a new record.</div>`}</div>
+<div class="pg"><span>${rows.length} records</span><div><button class="btn" id="pv" ${S.pg?"":"disabled"}>Prev</button><span style="padding:8px">${S.pg+1} / ${pages}</span><button class="btn" id="nx" ${S.pg<pages-1?"":"disabled"}>Next</button></div></div></div>`}
+function modal(html){const m=$("#modal");m.innerHTML=`<div class="dlg">${html}</div>`;m.hidden=false;m.onclick=e=>{if(e.target==m)m.hidden=true}}
+const close=()=>$("#modal").hidden=true;
+function form(key,idx){const[t,col,cols]=P[key],r=idx==null?{}:DB[col][idx];
+modal(`<h2>${idx==null?"Add":"Edit"} ${t.replace(/s$/,"").toLowerCase()}</h2><form id="fm" novalidate>${cols.map(c=>{const ty=c[2]||"";return`<div class="f"><label>${c[1]}</label>${ty.startsWith("sel:")?`<select name="${c[0]}">${ty.slice(4).split("|").map(o=>`<option ${r[c[0]]==o?"selected":""}>${o}</option>`).join("")}</select>`:`<input name="${c[0]}" type="${ty||"text"}" value="${r[c[0]]??""}"><span class="err"></span>`}</div>`}).join("")}<div class="acts"><button type="button" class="btn" id="cx">Cancel</button><button class="btn pri">Save</button></div></form>`);
+$("#cx").onclick=close;$("#fm").onsubmit=e=>{e.preventDefault();let ok=true;const o={};cols.forEach(c=>{const el=$(`[name=${c[0]}]`),v=el.value.trim();const er=el.nextElementSibling;if(er&&er.className=="err")er.textContent="";if(!v){ok=false;if(er)er.textContent=c[1]+" is required"}o[c[0]]=c[2]=="num"?Number(v):v});
+if(!ok)return;if(idx==null)DB[col].unshift(o);else Object.assign(DB[col][idx],o);save();close();toast(idx==null?"Added":"Changes saved");go(cur)}}
+function confirmDel(key,i){modal(`<h2>Delete this record?</h2><p style="color:var(--mut)">This can't be undone.</p><div class="acts"><button class="btn" id="cx">Keep</button><button class="btn danger" id="ok">Delete</button></div>`);$("#cx").onclick=close;$("#ok").onclick=()=>{DB[P[key][1]].splice(i,1);save();close();toast("Deleted");go(cur)}}
+function csv(key){const[t,col,cols]=P[key],o=[cols.map(c=>c[1]).join(",")].concat(DB[col].map(r=>cols.map(c=>`"${r[c[0]]}"`).join(","))).join("\n"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([o],{type:"text/csv"}));a.download=col+".csv";a.click();toast("Exported "+col+".csv")}
+let cart=[];
+function pos(){const tot=cart.reduce((a,c)=>a+c.price*c.q,0),tax=Math.round(tot*.18);
+return`<div class="pos"><div class="card"><div class="tools"><input class="search" id="pq" placeholder="Search products…"></div><div class="prods">${DB.inventory.map((p,i)=>`<button class="card prod" data-pi="${i}"><b>${p.product}</b><br><small>${p.category} · ${p.stock} in stock</small><br>${R(p.price)}</button>`).join("")}</div></div>
+<div class="card"><h3>Cart</h3>${cart.length?cart.map((c,i)=>`<div class="line"><span>${c.product}<br><small>${R(c.price)} × ${c.q}</small></span><span><button class="btn" data-m="${i}">−</button> <button class="btn" data-p="${i}">+</button></span></div>`).join(""):`<div class="empty">Tap a product to add it.</div>`}
+<div class="line"><span>Subtotal</span><span>${R(tot)}</span></div><div class="line"><span>GST 18%</span><span>${R(tax)}</span></div><div class="line tot"><span>Total</span><span>${R(tot+tax)}</span></div>
+<div class="f" style="margin-top:10px"><label>Payment</label><select id="pm"><option>UPI</option><option>Cash</option><option>Card</option></select></div><button class="btn pri" id="pay" style="width:100%" ${cart.length?"":"disabled"}>Charge ${R(tot+tax)}</button></div></div>`}
+function settings(){return`<div class="grid g3"><div class="card"><h3>Gym profile</h3><div class="f"><label>Name</label><input value="Ironworks Fitness Club"></div><div class="f"><label>Currency</label><select><option>INR ₹</option></select></div><div class="f"><label>GST rate</label><input value="18%"></div><button class="btn pri" onclick="toast('Settings saved')">Save changes</button></div>
+<div class="card"><h3>Notification preferences</h3>${["Membership expiry","Payment reminders","Low stock","Birthdays"].map(n=>`<label class="sw">${n}<input type="checkbox" checked onchange="toast('Preference updated')"></label>`).join("")}</div>
+<div class="card"><h3>Activity log</h3>${mini([["Arjun","Edited plan Yearly","2h"],["Neha","Checked in member","3h"],["Arjun","Exported members","1d"]])}</div></div>`}
+let cur="dashboard";
+function go(k){cur=k;const v=$("#view");v.innerHTML=k=="dashboard"?dashboard():k=="settings"?settings():k=="pos"?pos():table(k);
+$("#title").textContent=k=="pos"?"POS Terminal":k=="dashboard"?"Dashboard":k=="settings"?"Settings":P[k][0];$("#crumb").textContent="Ironworks / "+$("#title").textContent;
+$$("#nav a").forEach(a=>a.classList.toggle("on",a.dataset.p==k||(k=="pos"&&a.dataset.p=="sales")));document.getElementById("app").classList.remove("open");wire(k)}
+function wire(k){const v=$("#view");$$("[data-go]",v).forEach(b=>b.onclick=()=>{S={q:"",sort:null,dir:1,pg:0};go(b.dataset.go);if(b.hasAttribute("data-add"))form(b.dataset.go)});$$("[data-act]",v).forEach(b=>b.onclick=()=>toast(b.dataset.act+" flow started"));
+if(k=="pos"){$$("[data-pi]").forEach(b=>b.onclick=()=>{const p=DB.inventory[b.dataset.pi],c=cart.find(x=>x.product==p.product);c?c.q++:cart.push({product:p.product,price:p.price,q:1});go("pos")});
+$$("[data-p]",v).forEach(b=>b.onclick=()=>{cart[b.dataset.p].q++;go("pos")});$$("[data-m]",v).forEach(b=>b.onclick=()=>{if(--cart[b.dataset.m].q<1)cart.splice(b.dataset.m,1);go("pos")});
+$("#pq").oninput=e=>$$(".prod").forEach(p=>p.style.display=p.textContent.toLowerCase().includes(e.target.value.toLowerCase())?"":"none");
+$("#pay").onclick=()=>{const tot=cart.reduce((a,c)=>a+c.price*c.q,0),amt=Math.round(tot*1.18),inv="INV-"+(2040+DB.sales.length);DB.sales.unshift({invoice:inv,customer:"Walk-in",items:cart.map(c=>c.product).join(", "),amount:amt,method:$("#pm").value,status:"Paid"});save();modal(`<h2>Receipt ${inv}</h2>${cart.map(c=>`<div class="line"><span>${c.product} × ${c.q}</span><span>${R(c.price*c.q)}</span></div>`).join("")}<div class="line tot"><span>Paid (${$("#pm").value})</span><span>${R(amt)}</span></div><div class="acts"><button class="btn pri" id="cx">Done</button></div>`);$("#cx").onclick=close;cart=[];go("pos");toast("Payment received")}}
+if(!P[k])return;const q=$("#tq");q.oninput=e=>{S.q=e.target.value;S.pg=0;const p=e.target.selectionStart;go(k);const n=$("#tq");n.focus();n.setSelectionRange(p,p)};
+$("#add").onclick=()=>form(k);$("#exp").onclick=()=>csv(k);$("#pv").onclick=()=>{S.pg--;go(k)};$("#nx").onclick=()=>{S.pg++;go(k)};
+$$("th[data-s]").forEach(h=>h.onclick=()=>{S.dir=S.sort==h.dataset.s?-S.dir:1;S.sort=h.dataset.s;go(k)});$$("[data-e]").forEach(b=>b.onclick=()=>form(k,+b.dataset.e));$$("[data-d]").forEach(b=>b.onclick=()=>confirmDel(k,+b.dataset.d))}
+$("#nav").onclick=e=>{const a=e.target.closest("a");if(a){S={q:"",sort:null,dir:1,pg:0};go(a.dataset.p)}};
+$("#burger").onclick=()=>{const a=$("#app");innerWidth<900?a.classList.toggle("open"):a.classList.toggle("collapsed")};
+$("#app").onclick=e=>{if($("#app").classList.contains("open")&&!e.target.closest("#side")&&!e.target.closest("#burger"))$("#app").classList.remove("open")};
+$("#theme").onclick=()=>{const h=document.documentElement,n=h.dataset.theme=="dark"?"light":"dark";h.dataset.theme=n;LS.setItem("ironworks-theme-v2",n)};
+document.documentElement.dataset.theme=LS.getItem("ironworks-theme-v2")||"light";
+$("#bell").onclick=()=>{S={q:"",sort:null,dir:1,pg:0};go("notifications")};$("#quick").onclick=()=>{go("members");form("members")};
+$("#logout").onclick=()=>toast("Signed out (demo)");$("#branch").onchange=e=>toast("Switched to "+e.target.value);
+$("#gsearch").onkeydown=e=>{if(e.key=="Enter"){S={q:e.target.value,sort:null,dir:1,pg:0};go("members")}};
+addEventListener("keydown",e=>{if(e.key=="Escape")close()});go("dashboard");
+</script></body></html>
